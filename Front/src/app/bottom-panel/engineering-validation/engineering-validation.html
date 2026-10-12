@@ -1,0 +1,50 @@
+<div class="validation-block">
+
+  <div class="block-header">
+    <span>ENGINEERING VALIDATION</span>
+  </div>
+
+  <div class="validation-content">
+
+    <div class="validation-status-row">
+      <span
+        class="validation-icon"
+        [class.not-checked]="validationStatus === 'not-checked'"
+        [class.success]="validationStatus === 'success'"
+        [class.warning]="validationStatus === 'warning'"
+        [class.error]="validationStatus === 'error'"
+      ></span>
+
+      <div class="status-text">
+        <span class="status-label">Overall Status</span>
+
+        @if (validationStatus === 'not-checked') {
+          <span class="status-value not-checked">NOT CHECKED</span>
+        }
+
+        @if (validationStatus === 'success') {
+          <span class="status-value success">SUCCESS</span>
+        }
+
+        @if (validationStatus === 'warning') {
+          <span class="status-value warning">WARNING</span>
+        }
+
+        @if (validationStatus === 'error') {
+          <span class="status-value error">ERROR</span>
+        }
+      </div>
+    </div>
+
+    <div class="validation-time">
+      <span class="time-label">Last checked:</span>
+      <span>{{ lastChecked }}</span>
+    </div>
+
+    <button class="details-button" type="button" (click)="viewDetails()">
+      View Details
+    </button>
+
+  </div>
+
+</div>

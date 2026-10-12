@@ -1,0 +1,40 @@
+<div class="quick-action-block">
+
+  <div class="block-header">
+    <span>QUICK ACTIONS</span>
+  </div>
+
+  <div class="quick-action-content">
+
+    <button class="quick-action-button delete" type="button" (click)="deleteSelected()">
+      <span class="quick-action-icon">⌫</span>
+      <span>Delete Selected</span>
+    </button>
+
+    <button class="quick-action-button" type="button" (click)="duplicateSelected()">
+      <span class="quick-action-icon">⧉</span>
+      <span>Duplicate</span>
+    </button>
+
+    <button class="quick-action-button" type="button" (click)="centerView()">
+      <span class="quick-action-icon">◎</span>
+      <span>Center View</span>
+    </button>
+
+    <button class="quick-action-button" type="button" (click)="mirrorHorizontal()">
+      <span class="quick-action-icon">↔</span>
+      <span>Flip Horizontal</span>
+    </button>
+
+    <button class="quick-action-button" type="button" (click)="mirrorVertical()">
+      <span class="quick-action-icon">↕</span>
+      <span>Flip Vertical</span>
+    </button>
+
+    <button class="quick-action-button" type="button" (click)="trim()">
+      <span class="quick-action-icon"> x </span>
+      <span>Trim</span>
+    </button>
+  </div>
+
+</div>

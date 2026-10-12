@@ -1,0 +1,103 @@
+.guide {
+  position: fixed;
+
+  /* Move it away from left sidebar and navbar */
+  right: 240px;
+  top: 75px;
+
+  width: 360px;
+  max-width: calc(100vw - 480px);
+
+  border: 1px solid rgba(129, 140, 248, 0.45);
+  border-left: 4px solid #818cf8;
+  border-radius: 8px;
+
+  background:  linear-gradient(135deg, rgba(99, 102, 241, 0.16), transparent 42%),
+    #111821;;
+  color: #cbd5e1;
+
+  padding: 0;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 12px 30px rgba(0, 0, 0, 0.42),
+    0 0 22px rgba(99, 102, 241, 0.22);
+
+  z-index: 920;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.guide-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background:
+    linear-gradient(90deg, rgba(99, 102, 241, 0.28), rgba(14, 165, 233, 0.08)),
+    #16202b;
+
+  color: #f8fafc;
+
+  font-weight: 700;
+  font-size: 12px;
+
+  padding: 10px 14px;
+
+  border-bottom: 1px solid rgba(129, 140, 248, 0.25);
+}
+
+.guide-header::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: #818cf8;
+
+  box-shadow: 0 0 10px rgba(129, 140, 248, 0.9);
+}
+
+.guide-content {
+  padding: 12px 14px;
+
+  color: #dbeafe;
+  line-height: 1.45;
+
+  background:
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 36%);
+}
+
+
+.guide-content ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.guide-content li {
+  margin-bottom: 6px;
+}
+
+.guide-content li:last-child {
+  margin-bottom: 0;
+}
+
+.guide-glow {
+  animation: guideGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes guideGlow {
+  from {
+    box-shadow:
+      0 0 8px rgba(99, 102, 241, 0.25),
+      0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  to {
+    box-shadow:
+      0 0 16px rgba(99, 102, 241, 0.55),
+      0 8px 28px rgba(0, 0, 0, 0.45);
+  }
+}

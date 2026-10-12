@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.bottom-panel-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 30px; /* because your small report/status bar is at the very bottom */
+
+  height: 120px;
+
+  display: grid;
+  grid-template-columns: 1fr 260px 220px;
+  gap: 12px;
+
+  padding: 12px;
+
+  background: #0f1720;
+  border-top: 1px solid #263241;
+
+  box-sizing: border-box;
+  z-index: 900;
+}
+
+.bottom-panel-section {
+  min-width: 0;
+  height: 100%;
+
+  background: #111821;
+  border: 1px solid #263241;
+  border-radius: 8px;
+
+  overflow: hidden;
+}

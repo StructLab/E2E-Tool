@@ -1,0 +1,304 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "areaId": "AREA_001",
+    "versionTimestamp": "2026-03-18T01:41:51.1427429+01:00",
+    "epsg": 3006
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          0,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "Name": "W1",
+        "NodeType": "Switch",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          67.813635,
+          -35.045791,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "Name": "B1",
+        "NodeType": "BufferStop",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          142.887675,
+          10.77598,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "Name": "W3",
+        "NodeType": "Switch",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "1bee0648-9195-4ec9-bea5-db9490120b0c",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          254.171318,
+          -24.591045,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "1bee0648-9195-4ec9-bea5-db9490120b0c",
+        "Name": "B2",
+        "NodeType": "BufferStop",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "6a5031b8-484a-4913-85eb-caa575d375a3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          203.86913,
+          0.009509,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "Name": "W4",
+        "NodeType": "Switch",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          162.97913,
+          0.009509,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "Name": "W2",
+        "NodeType": "Switch",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "3c233432-8d9a-479f-a3e4-b4d993f519c9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          132.856193,
+          -78.780735,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "3c233432-8d9a-479f-a3e4-b4d993f519c9",
+        "Name": "B3",
+        "NodeType": "BufferStop",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "7753b13b-98c0-4e28-8ee0-b48abdb9f040",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          82.591904,
+          -10.573668,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "7753b13b-98c0-4e28-8ee0-b48abdb9f040",
+        "Name": "B4",
+        "NodeType": "BufferStop",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ff6702ca-b715-44cb-aff2-8238f853dc4a",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -35.86806941999931,
+          -36.69405003000688,
+          0.87
+        ]
+      },
+      "properties": {
+        "ID": "ff6702ca-b715-44cb-aff2-8238f853dc4a",
+        "Name": "ff6702ca-b715-44cb-aff2-8238f853dc4a",
+        "NodeType": "unkown",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "6f6eefe6-57e5-45d4-85f6-44867c333a90",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -18.13309893648449,
+          -5.286586344412905,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "6f6eefe6-57e5-45d4-85f6-44867c333a90",
+        "Name": "6f6eefe6-57e5-45d4-85f6-44867c333a90",
+        "NodeType": "unkown",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "4dbf3b81-63dd-4b11-92ef-47e2ce088ace",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -18.14886092510878,
+          -68.12881428072643,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "4dbf3b81-63dd-4b11-92ef-47e2ce088ace",
+        "Name": "4dbf3b81-63dd-4b11-92ef-47e2ce088ace",
+        "NodeType": "unkown",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "0cc1c031-cd28-4ee4-8839-9c4a7b2130ab",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          240.5153639852024,
+          -36.69405003000688,
+          0.87
+        ]
+      },
+      "properties": {
+        "ID": "0cc1c031-cd28-4ee4-8839-9c4a7b2130ab",
+        "Name": "0cc1c031-cd28-4ee4-8839-9c4a7b2130ab",
+        "NodeType": "unkown",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "a9cccd7e-f7cd-42c8-99ed-6a5bcff3353d",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          222.7803935016875,
+          -5.286586344412905,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "a9cccd7e-f7cd-42c8-99ed-6a5bcff3353d",
+        "Name": "a9cccd7e-f7cd-42c8-99ed-6a5bcff3353d",
+        "NodeType": "unkown",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "5508d8d4-5d50-4f2c-a0d2-cc351beeda9a",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          222.6416003443434,
+          -69.81005651805658,
+          0
+        ]
+      },
+      "properties": {
+        "ID": "5508d8d4-5d50-4f2c-a0d2-cc351beeda9a",
+        "Name": "5508d8d4-5d50-4f2c-a0d2-cc351beeda9a",
+        "NodeType": "unkown",
+        "Description": null,
+        "PreviousNode": null,
+        "DestinationNode1": null,
+        "DestinationNode2": null
+      }
+    }
+  ]
+}

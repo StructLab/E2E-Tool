@@ -1,0 +1,47 @@
+<div class="overlay" *ngIf="isVisible">
+  <div class="popup">
+
+    <!-- Header -->
+    <div class="popup-header">
+      <span>RINF Query Tool</span>
+      <button class="close-btn" (click)="close()">✕</button>
+    </div>
+
+    <!-- Query Section -->
+    <div class="query">
+      <textarea
+        [(ngModel)]="searchText"
+        class="query-input code-editor"
+        spellcheck="false"
+        placeholder="Enter your query here..."
+      ></textarea>
+
+      <button (click)="query()" class="query-button">
+        Query RINF
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+
+      <!-- XML / JSON Output -->
+      <div class="json-container" data-title="RINF response / json">
+        <pre>{{ xmlContent }}</pre>
+      </div>
+
+      <!-- Telegram Output -->
+      <div class="telegram-container" data-title="Packet 65">
+        <pre>{{ telegramContent }}</pre>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="popup-footer">
+      <button class="close-button" (click)="close()">
+        Close
+      </button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,297 @@
+<div
+  #scrollWrapper
+  class="canvas-scroll-wrapper"
+>
+  <div #container class="canvas-container">
+    <canvas #canvasEl></canvas>
+
+    @if (switchPopupVisible) {
+    <div
+      class="switch-placement-popup"
+      [style.left.px]="switchPopupScreen.left"
+      [style.top.px]="switchPopupScreen.top"
+    >
+      <div class="switch-popup-title">
+        Create switch here?
+      </div>
+
+      <button
+        type="button"
+        (click)="confirmSwitchPlacement()"
+      >
+        Place Switch
+      </button>
+
+      <button
+        type="button"
+        (click)="cancelSwitchPlacement()"
+      >
+        Cancel
+      </button>
+    </div>
+  }
+
+    <!-- AutoCAD-style line length / angle box -->
+    <div
+      *ngIf="isLineLengthBoxVisible"
+      class="line-dynamic-box"
+      [style.left.px]="lineHudScreen.left"
+      [style.top.px]="lineHudScreen.top"
+    >
+      <div class="line-dynamic-values">
+        <span class="line-chip">{{ liveLineLength }}</span>
+        <span class="line-chip">{{ liveLineAngle }}°</span>
+      </div>
+
+      <div class="line-dynamic-inputs">
+        <input
+          type="text"
+          [(ngModel)]="lineLengthInput"
+          placeholder="Length"
+          (keydown.enter)="confirmDynamicLine(); $event.stopPropagation()"
+        />
+
+        <input
+          type="text"
+          [(ngModel)]="lineAngleInput"
+          placeholder="Angle"
+          (keydown.enter)="confirmDynamicLine(); $event.stopPropagation()"
+        />
+      </div>
+    </div>
+
+<!-- AutoCAD-style polyline length / angle box -->
+<div
+  *ngIf="isPolylineInputBoxVisible"
+  class="polyline-dynamic-box"
+  [style.left.px]="polylineHudScreen.left"
+  [style.top.px]="polylineHudScreen.top"
+  (click)="$event.stopPropagation()"
+>
+  <div class="polyline-input-label-row">
+    <span>Length</span>
+    <span>Angle</span>
+  </div>
+
+  <div class="polyline-input-row">
+    <input
+      type="text"
+      [(ngModel)]="polylineLengthInput"
+      placeholder="Length"
+      (keydown.enter)="confirmPolylineSegmentByInput(); $event.stopPropagation()"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="polylineAngleInput"
+      placeholder="Angle"
+      (keydown.enter)="confirmPolylineSegmentByInput(); $event.stopPropagation()"
+    />
+  </div>
+
+  <div class="polyline-mode-row">
+    <label>
+      Next
+      <select
+        [(ngModel)]="polylineSegmentMode"
+        (change)="onPolylineSegmentModeChange()"
+      >
+        <option value="line">Line</option>
+        <option value="transition">Transition Curve</option>
+        <option value="finish">Finish</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+    <div
+      *ngIf="isSnapLabelVisible"
+      class="snap-label"
+      [style.left.px]="snapLabelScreen.left"
+      [style.top.px]="snapLabelScreen.top"
+    >
+      {{ snapLabelText }}
+    </div>
+
+    <!-- Arc radius box -->
+    <div
+      *ngIf="isArcRadiusBoxVisible"
+      class="arc-radius-box"
+      [style.left.px]="arcRadiusBoxScreen.left"
+      [style.top.px]="arcRadiusBoxScreen.top"
+    >
+      <label>Radius</label>
+
+      <input
+        type="text"
+        [(ngModel)]="arcRadiusInput"
+        placeholder="50 / -50"
+        autofocus
+      />
+
+      <small>+ CCW / - CW</small>
+    </div>
+
+    <!-- Clothoid parameter box -->
+<div
+  *ngIf="isClothoidBoxVisible"
+  class="clothoid-box-fixed"
+  [style.left.px]="clothoidBoxScreen.left"
+  [style.top.px]="clothoidBoxScreen.top"
+  (mousemove)="onDraggingClothoidBox($event)"
+  (mouseup)="stopDraggingClothoidBox($event)"
+  (mouseleave)="stopDraggingClothoidBox($event)"
+  (click)="$event.stopPropagation()"
+>
+<div
+  class="clothoid-box-title"
+  (mousedown)="startDraggingClothoidBox($event)"
+>
+  Transition Curve Parameters
+</div>
+
+<label class="clothoid-box-label">
+  Curve Type
+  <select
+    [(ngModel)]="transitionCurveTypeInput"
+    (change)="updateClothoidPreview()"
+  >
+    <option value="clothoid">Clothoid</option>
+    <option value="cubicParabola">Cubic Parabola</option>
+    <option value="bloss">Bloss Curve</option>
+    <option value="cosine">Cosine Curve</option>
+    <option value="sine">Sine Curve</option>
+    <option value="biquadraticParabola">Biquadratic Parabola</option>
+    <option value="wienerBogen">Wiener Bogen</option>
+  </select>
+</label>
+
+<label class="clothoid-box-label">
+  Length L (m)
+    <input
+      type="number"
+      [(ngModel)]="clothoidLengthInput"
+      placeholder="80"
+      (pointerdown)="$event.stopPropagation()"
+      (click)="$event.stopPropagation()"
+    />
+  </label>
+
+  <label class="clothoid-box-label">
+    End Radius R (m)
+    <input
+      type="number"
+      [(ngModel)]="clothoidRadiusInput"
+      placeholder="300"
+      (input)="updateClothoidPreview()"
+      (keydown.enter)="confirmClothoid(); $event.stopPropagation()"
+    />
+  </label>
+
+  <label class="clothoid-box-label">
+    Direction
+    <select
+      [(ngModel)]="clothoidDirectionInput"
+      (change)="updateClothoidPreview()"
+    >
+      <option value="CCW">CCW</option>
+      <option value="CW">CW</option>
+    </select>
+  </label>
+
+  <div class="clothoid-box-actions">
+    <button
+      type="button"
+      (click)="confirmClothoid(); $event.stopPropagation()"
+    >
+      Create
+    </button>
+
+    <button
+      type="button"
+      (click)="cancelClothoid(); $event.stopPropagation()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+
+    <div
+  *ngIf="transitionPopupVisible"
+  class="transition-popup"
+  [style.left.px]="transitionPopupScreen.left"
+  [style.top.px]="transitionPopupScreen.top"
+  (pointerdown)="$event.stopPropagation()"
+  (click)="$event.stopPropagation()"
+>
+  <div
+  *ngIf="transitionPopupVisible"
+  class="transition-popup"
+  [style.left.px]="transitionPopupScreen.left"
+  [style.top.px]="transitionPopupScreen.top"
+  (pointerdown)="$event.stopPropagation()"
+  (click)="$event.stopPropagation()"
+>
+  <div class="transition-popup-title">
+    Add Transition
+  </div>
+
+  <label class="transition-popup-label">
+    Curve Type
+    <select
+      [(ngModel)]="transitionCurveTypeInput"
+      (pointerdown)="$event.stopPropagation()"
+      (click)="$event.stopPropagation()"
+    >
+      <option value="clothoid">Clothoid</option>
+      <option value="bloss">Bloss Curve</option>
+      <option value="cosine">Cosine Curve</option>
+      <option value="sine">Sine Curve</option>
+      <option value="cubicParabola">Cubic Parabola</option>
+      <option value="biquadraticParabola">Biquadratic Parabola</option>
+      <option value="wienerBogen">Wiener Bogen</option>
+    </select>
+  </label>
+
+  <label class="transition-popup-label">
+    Transition Length L (m)
+    <input
+      type="number"
+      [(ngModel)]="clothoidLengthInput"
+      placeholder="80"
+      (pointerdown)="$event.stopPropagation()"
+      (click)="$event.stopPropagation()"
+    />
+  </label>
+
+  <div class="transition-popup-actions">
+    <button
+      type="button"
+      class="transition-popup-button"
+      (pointerdown)="$event.stopPropagation()"
+      (click)="onAddTransitionClick(); $event.stopPropagation()"
+    >
+      Create
+    </button>
+
+    <button
+      type="button"
+      class="transition-popup-cancel"
+      (pointerdown)="$event.stopPropagation()"
+      (click)="hideTransitionPopup(); $event.stopPropagation()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+
+    <div
+      *ngIf="isBoxSelecting"
+      class="drag-selection-box"
+      [style.left.px]="selectionBoxScreen.left"
+      [style.top.px]="selectionBoxScreen.top"
+      [style.width.px]="selectionBoxScreen.width"
+      [style.height.px]="selectionBoxScreen.height"
+    ></div>
+  </div>
+</div>

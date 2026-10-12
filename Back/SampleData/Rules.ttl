@@ -1,0 +1,21 @@
+﻿@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix era: <http://data.europa.eu/949/> .
+
+era:TrainDetectorShape
+    a sh:NodeShape ;
+    sh:targetClass era:TrainDetector ;
+
+    sh:rule [
+        a sh:SPARQLRule ;
+        sh:construct """
+            CONSTRUCT {
+                $this era:computedOffsetFromOrigin ?offset ;
+                      era:computedOnLinearElement ?linearElement .
+            }
+            WHERE {
+                $this era:topologicalCoordinate ?topo .
+                ?topo era:offsetFromOrigin ?offset ;
+                      era:onLinearElement ?linearElement .
+            }
+        """ ;
+    ] .

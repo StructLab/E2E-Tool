@@ -1,0 +1,760 @@
+{
+  "type": null,
+  "metadata": {
+    "areaId": "AREA_001",
+    "versionTimestamp": "2026-03-18T01:41:51.1546041+01:00",
+    "epsg": 3006
+  },
+  "features": [
+    {
+      "type": null,
+      "id": "dff4fe49-bfdf-4e7f-8743-2b712863111b",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            -35.868068,
+            -36.69405,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "a6e9da9d-9759-4d3b-9196-42e2b1ce380d",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "SegmentType": "arc",
+        "LinearElement_ID": "9983f345f6",
+        "SegmentLength": 56.828,
+        "azimuth": 268.73506278992784,
+        "beginRadius": -36.67775845241537,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "7841ce1e-c097-49ad-ab4a-983517806a65",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -35.868069,
+            -36.69405,
+            0
+          ],
+          [
+            -2.917724,
+            -73.202817,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "920d6900-6f83-4c19-bb45-d8218c83e74e",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "SegmentType": "arc",
+        "LinearElement_ID": "9983f345f6",
+        "SegmentLength": 53.891,
+        "azimuth": 179.99386483971432,
+        "beginRadius": -36.70526518141145,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "a5bf088b-0fbb-4d12-9e0f-7cc323415d41",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -2.917724,
+            -73.202817,
+            0
+          ],
+          [
+            19.252157,
+            -73.39761,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "002f953c-4214-40be-9dd8-bc7d2ceeb08a",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "9983f345f6",
+        "SegmentLength": 22.170736,
+        "azimuth": 90.50340952103602,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "f8dc52f5-890b-4151-80a0-62200a7a3ab2",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            19.252157,
+            -73.39761,
+            0
+          ],
+          [
+            41.757885,
+            -66.986098,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "9c7ad2a9-6967-4703-8327-35e5dfed7b55",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "SegmentType": "arc",
+        "LinearElement_ID": "9983f345f6",
+        "SegmentLength": 23.794,
+        "azimuth": 92.18681590510488,
+        "beginRadius": -37.685412916953034,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "c7d5264b-db12-4462-bf6d-2219213da0b8",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            41.757885,
+            -66.986098,
+            0
+          ],
+          [
+            43.839058,
+            -65.634568,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "fa60f34a-3cf3-4520-9dc3-76e146d7600b",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "9983f345f6",
+        "SegmentLength": 2.481514,
+        "azimuth": 56.9999911409617,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "617ecd0b-a0db-4254-bca7-09a066dc7f3e",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            43.839057,
+            -65.634568,
+            0
+          ],
+          [
+            67.813635,
+            -35.045791,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "86a5a202-7cb0-484e-ba6d-42d293a191d2",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "SegmentType": "arc",
+        "LinearElement_ID": "9983f345f6",
+        "SegmentLength": 39.783,
+        "azimuth": 59.492884358100014,
+        "beginRadius": -53.246220396337236,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "25845a35-5855-447f-8c3e-01923a80d5d3",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -0,
+            0,
+            0
+          ],
+          [
+            18.873699,
+            2.096602,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "29876da6-e910-42d9-a1b1-4dd553004530",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "SegmentType": "arc",
+        "LinearElement_ID": "085552dfb",
+        "SegmentLength": 19.034,
+        "azimuth": 90.46742036802937,
+        "beginRadius": -80.11815890543849,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "b438b7f9-ea3f-4079-b068-60c1e88f757e",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            18.873699,
+            2.096601,
+            0
+          ],
+          [
+            38.156401,
+            7.223033,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "3c23da41-ed35-4b8b-aa34-df36461ac1dd",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "085552dfb",
+        "SegmentLength": 19.952515,
+        "azimuth": 75.11193065245408,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "4dd04740-5b81-4569-9a4d-6ffbf78553e3",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            38.156401,
+            7.223032,
+            0
+          ],
+          [
+            59.334613,
+            10.737001,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "c467bb64-8308-45ed-b53f-18eee86368a7",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "SegmentType": "arc",
+        "LinearElement_ID": "085552dfb",
+        "SegmentLength": 21.527,
+        "azimuth": 73.17133064543998,
+        "beginRadius": 83.25350260541886,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "23bf8bdf-46fe-450a-ae85-b2d7a46417d4",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            59.334614,
+            10.737001,
+            0
+          ],
+          [
+            142.887675,
+            10.77598,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "fcb0755d-ba75-4d80-9436-abe082597cdd",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "085552dfb",
+        "SegmentLength": 83.55307,
+        "azimuth": 89.97327049366294,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "70d79fae-5608-4151-bdb6-8f494a7dca81",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            142.887675,
+            10.77598,
+            0
+          ],
+          [
+            206.647291,
+            10.728993,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "6efccb70-19fb-45f1-898c-aa306f39e8e4",
+        "StartingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "EndingPointID": "1bee0648-9195-4ec9-bea5-db9490120b0c",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "794a39ba-4e1b-4a07-9e8a-2b6c187c7fa9",
+        "SegmentLength": 63.759633,
+        "azimuth": 90.04222353402781,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "2b0ac99f-8a92-4b02-8ca4-0e11b5a1f33f",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            206.647291,
+            10.728992,
+            0
+          ],
+          [
+            254.171318,
+            -24.591045,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "cce83c5e-c1de-4238-841f-ad25ba71b700",
+        "StartingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "EndingPointID": "1bee0648-9195-4ec9-bea5-db9490120b0c",
+        "SegmentType": "arc",
+        "LinearElement_ID": "794a39ba-4e1b-4a07-9e8a-2b6c187c7fa9",
+        "SegmentLength": 62.912,
+        "azimuth": 92.27382486247075,
+        "beginRadius": 52.47508005308837,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "8ee3e0c5-c6f5-4323-9e89-bca670ed7980",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            142.887675,
+            10.77598,
+            0
+          ],
+          [
+            163.734476,
+            7.976681,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "f1043025-19d6-42d7-bf7f-069af69c9fbc",
+        "StartingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "arc",
+        "LinearElement_ID": "ef85925268",
+        "SegmentLength": 21.095,
+        "azimuth": 90.04751171577254,
+        "beginRadius": 79.51535937048197,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "e4ad7e42-3bca-4e3d-8d25-5d2abc455294",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            163.734477,
+            7.976681,
+            0
+          ],
+          [
+            181.815818,
+            3.1318,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "5beaf7db-c6b4-4e9c-a865-7d95486434e5",
+        "StartingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "ef85925268",
+        "SegmentLength": 18.719181,
+        "azimuth": 105.00000088552832,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "0f040987-2e14-4ecc-b63a-7e53c15f5568",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            181.815818,
+            3.1318,
+            0
+          ],
+          [
+            203.86913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "6309c43d-e1df-4e2a-b963-ce7f9c64e87a",
+        "StartingPointID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "arc",
+        "LinearElement_ID": "ef85925268",
+        "SegmentLength": 22.341,
+        "azimuth": 105.83663116952278,
+        "beginRadius": -82.28609501498248,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "3d8d56bb-225a-4ab6-a107-a30415f30095",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0,
+            -0,
+            0
+          ],
+          [
+            162.97913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "6cb83dec-e7b5-4c3e-9fb7-ac437b6c059a",
+        "StartingPointID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndingPointID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "0c16ffd733",
+        "SegmentLength": 162.97913,
+        "azimuth": 89.99665708368462,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "e2c7fd26-2769-4c07-b4b7-5fad31b75ab5",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            132.856193,
+            -78.780735,
+            0
+          ],
+          [
+            192.871042,
+            -78.780735,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "9c4ffd79-4d51-4cd7-8931-0207e8b90c36",
+        "StartingPointID": "3c233432-8d9a-479f-a3e4-b4d993f519c9",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "c251ec3d0a",
+        "SegmentLength": 60.014848,
+        "azimuth": 90,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "c4512f8e-50f1-4f52-b969-21eedabf689e",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            192.871042,
+            -78.780735,
+            0
+          ],
+          [
+            224.419003,
+            -68.201896,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "3ba3e838-ef0f-4f97-ba61-651591601351",
+        "StartingPointID": "3c233432-8d9a-479f-a3e4-b4d993f519c9",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "arc",
+        "LinearElement_ID": "c251ec3d0a",
+        "SegmentLength": 33.997,
+        "azimuth": 91.99777870611734,
+        "beginRadius": -47.4283427061171,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "67712fcc-0bb4-4fe9-9bfe-85df4f8631dd",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            224.419003,
+            -68.201896,
+            0
+          ],
+          [
+            240.283003,
+            -32.11075,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "1e487d77-480b-4bfb-bbb0-48578a9c651f",
+        "StartingPointID": "3c233432-8d9a-479f-a3e4-b4d993f519c9",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "arc",
+        "LinearElement_ID": "c251ec3d0a",
+        "SegmentLength": 41.38,
+        "azimuth": 54.46784403485691,
+        "beginRadius": -38.564623076399805,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "b6886d50-98b0-4bd9-9993-c329ed853056",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            240.283003,
+            -32.11075,
+            0
+          ],
+          [
+            203.86913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "6191f110-a282-4c47-934b-6b2556fa51d4",
+        "StartingPointID": "3c233432-8d9a-479f-a3e4-b4d993f519c9",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "arc",
+        "LinearElement_ID": "c251ec3d0a",
+        "SegmentLength": 53.059,
+        "azimuth": 352.8415411913961,
+        "beginRadius": -36.6926767691063,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "cea40bc4-9148-4287-a748-35d779050b29",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            162.97913,
+            0.009509,
+            0
+          ],
+          [
+            203.86913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "074d58e9-4b82-40df-8119-f32816194e75",
+        "StartingPointID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "EndingPointID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "9daf4a37-57f5-40b6-9c90-066a5dddda9b",
+        "SegmentLength": 40.89,
+        "azimuth": 90,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "a2ca65bd-2e79-4912-8f2b-591cf07cef45",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            82.591904,
+            -10.573668,
+            0
+          ],
+          [
+            98.497208,
+            -10.573668,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "5b809494-3c72-46e3-a656-9ed74302f4f3",
+        "StartingPointID": "7753b13b-98c0-4e28-8ee0-b48abdb9f040",
+        "EndingPointID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "dba737d6-4606-4316-a964-29f9dcf21373",
+        "SegmentLength": 15.905304,
+        "azimuth": 90,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "7490ab7b-644e-41ba-a067-c2f7a3f8182f",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            98.497208,
+            -10.573667,
+            0
+          ],
+          [
+            122.327671,
+            -8.091945,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "29c2c2b2-23a9-4e8a-908c-57f5b70c144a",
+        "StartingPointID": "7753b13b-98c0-4e28-8ee0-b48abdb9f040",
+        "EndingPointID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "SegmentType": "arc",
+        "LinearElement_ID": "dba737d6-4606-4316-a964-29f9dcf21373",
+        "SegmentLength": 24.046,
+        "azimuth": 92.49974872454715,
+        "beginRadius": -81.57069819490181,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "a32b4110-b69f-4141-962a-b33daf6f89a9",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            122.327671,
+            -8.091946,
+            0
+          ],
+          [
+            134.448166,
+            -4.848753,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "c22b3f60-39b9-473e-9579-1a959d121eb6",
+        "StartingPointID": "7753b13b-98c0-4e28-8ee0-b48abdb9f040",
+        "EndingPointID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "SegmentType": "straightLine",
+        "LinearElement_ID": "dba737d6-4606-4316-a964-29f9dcf21373",
+        "SegmentLength": 12.5469,
+        "azimuth": 75.01977868423302,
+        "beginRadius": 0,
+        "endRadius": 0
+      }
+    },
+    {
+      "type": null,
+      "id": "9095e2cc-e0bc-4a95-ade2-a1754afd9098",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            134.448166,
+            -4.848753,
+            0
+          ],
+          [
+            162.97913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "fd0e207b-262d-496a-9c65-d045ba8052b4",
+        "StartingPointID": "7753b13b-98c0-4e28-8ee0-b48abdb9f040",
+        "EndingPointID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "SegmentType": "arc",
+        "LinearElement_ID": "dba737d6-4606-4316-a964-29f9dcf21373",
+        "SegmentLength": 29.053,
+        "azimuth": 71.61971165903378,
+        "beginRadius": 95.48684843727543,
+        "endRadius": 0
+      }
+    }
+  ]
+}

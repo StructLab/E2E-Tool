@@ -1,0 +1,51 @@
+<div class="layer-list-panel">
+
+  <div class="panel-header">
+    <span>LAYERS</span>
+  </div>
+
+  <div class="layer-list">
+
+    @for (layer of layers; track $index) {
+      <div
+        class="layer-row"
+        [class.selected]="selectedLayers.has(layer.name)"
+        (click)="highlightLayer(layer.name)"
+      >
+
+        <button
+          class="layer-icon-button"
+          type="button"
+          title="Toggle visibility"
+          (click)="toggleVisibility(layer); $event.stopPropagation()"
+        >
+          @if (layer.visible) {
+            <span>👁</span>
+          } @else {
+            <span>○</span>
+          }
+        </button>
+
+        <span class="layer-name">
+          {{ layer.name }}
+        </span>
+
+        <button
+          class="layer-icon-button"
+          type="button"
+          title="Lock layer"
+          (click)="toggleLock(layer); $event.stopPropagation()"
+        >
+          @if (layer.locked) {
+            <span>🔒</span>
+          } @else {
+            <span>◇</span>
+          }
+        </button>
+
+      </div>
+    }
+
+  </div>
+
+</div>

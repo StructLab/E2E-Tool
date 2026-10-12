@@ -1,0 +1,6 @@
+@RailTool_HostAddress = http://localhost:5114
+
+GET {{RailTool_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

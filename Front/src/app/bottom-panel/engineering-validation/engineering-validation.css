@@ -1,0 +1,157 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.validation-block {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #111821;
+  color: #cbd5e1;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 11px;
+
+  box-sizing: border-box;
+}
+
+/* Header */
+.block-header {
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 12px;
+
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 700;
+
+  border-bottom: 1px solid #263241;
+}
+
+/* Content */
+.validation-content {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 12px;
+
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Status row */
+.validation-status-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Circle icon */
+.validation-icon {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+  display: inline-block;
+
+  border: 1px solid currentColor;
+}
+
+/* Icon colors */
+.validation-icon.not-checked {
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.15);
+}
+
+.validation-icon.success {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.45);
+}
+
+.validation-icon.warning {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.45);
+}
+
+.validation-icon.error {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.45);
+}
+
+/* Text */
+.status-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.status-label,
+.time-label {
+  color: #94a3b8;
+}
+
+.status-value {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-value.not-checked {
+  color: #94a3b8;
+}
+
+.status-value.success {
+  color: #22c55e;
+}
+
+.status-value.warning {
+  color: #f59e0b;
+}
+
+.status-value.error {
+  color: #ef4444;
+}
+
+/* Last checked */
+.validation-time {
+  display: flex;
+  gap: 5px;
+
+  color: #cbd5e1;
+}
+
+/* Button */
+.details-button {
+  width: 100%;
+
+  padding: 8px 10px;
+
+  border: 1px solid #263241;
+  border-radius: 6px;
+
+  background: #1a2430;
+  color: #cbd5e1;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 11px;
+
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.details-button:hover {
+  background: rgba(99, 102, 241, 0.18);
+  color: #ffffff;
+  border-color: rgba(135, 136, 220, 0.55);
+}

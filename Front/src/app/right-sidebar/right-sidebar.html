@@ -1,0 +1,46 @@
+<aside class="right-sidebar">
+
+  <!-- Properties block -->
+  <div class="sidebar-section properties-section">
+    <div class="section-title">PROPERTIES</div>
+
+    @if (!selectedObject) {
+      <div class="empty-properties">
+        <div class="empty-main-text">No object selected</div>
+        <div class="empty-sub-text">
+          Select an object on the canvas to see its properties.
+        </div>
+
+        <div class="empty-icon-box">
+          <span class="empty-icon">⌖</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- General block -->
+  <div class="sidebar-section general-section">
+    <div class="section-title">GENERAL</div>
+
+    <div class="field-group">
+      <label class="field-label">Project Name</label>
+      <div class="field-box">{{ projectName }}</div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Coordinate System</label>
+      <div class="field-box">{{ coordinateSystem }}</div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Scale</label>
+      <div class="field-box">{{ scale }}</div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Grid Size</label>
+      <div class="field-box">{{ gridSize }}</div>
+    </div>
+  </div>
+
+</aside>

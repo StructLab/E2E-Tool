@@ -1,0 +1,20 @@
+<div class="status-bar">
+  <div class="status-left">
+    <span class="status-dot"></span>
+    <span>Ready</span>
+  </div>
+
+  <div class="status-center">
+    <span>Mode: {{ mode }}</span>
+    <span>X: {{ x | number:'1.2-2' }} m</span>
+    <span>Y: {{ y | number:'1.2-2' }} m</span>
+    <span>Z: {{ z | number:'1.2-2' }}</span>
+    <span>Grid: {{ grid }} m</span>
+  </div>
+
+  <div class="status-right">
+    <span>Last Save: --:--</span>
+    <span class="status-disconnected-dot"></span>
+    <span>Disconnected</span>
+  </div>
+</div>

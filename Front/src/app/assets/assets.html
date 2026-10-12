@@ -1,0 +1,77 @@
+<section class="assets-panel">
+  <div class="assets-header">
+    <span class="section-title">ASSETS</span>
+  </div>
+
+  <div class="asset-search">
+    <input
+      type="text"
+      placeholder="Search assets..."
+      [(ngModel)]="searchText"
+    />
+  </div>
+
+  <div class="asset-section">
+    <div class="asset-section-header">
+      <span class="section-chevron">▾</span>
+      <span>Railway Objects</span>
+    </div>
+
+    <div class="asset-grid">
+      <div
+        class="asset-tile"
+        *ngFor="let asset of filteredAssets"
+        draggable="true"
+        (dragstart)="onDragStart($event, asset)"
+        (click)="selectAsset(asset)"
+        [title]="asset.name"
+        [ngClass]="getAssetClass(asset)"
+      >
+        <img [src]="asset.file" [alt]="asset.name" />
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="filteredAssets.length === 0">
+      No assets found.
+    </div>
+  </div>
+
+  <div class="asset-section">
+    <div class="asset-section-header">
+      <span class="section-chevron">▾</span>
+      <span>Drawing Tools</span>
+    </div>
+
+<div class="tool-grid">
+  <button class="tool-tile" (click)="enableLineMode()" title="Draw Line">
+    <span class="tool-icon">╱</span>
+    <span class="tool-label">Line</span>
+  </button>
+
+  <!-- <button class="tool-tile" (click)="enablePolylineMode()" title="Draw Polyline">
+    <span class="tool-icon">⌁</span>
+    <span class="tool-label">Polyline</span>
+  </button>
+
+  <button class="tool-tile" (click)="enableCircleMode()" title="Draw Circle">
+    <span class="tool-icon">○</span>
+    <span class="tool-label">Circle</span>
+  </button>
+
+  <button class="tool-tile" (click)="enableCurveMode()" title="Draw Curve">
+    <span class="tool-icon">⌒</span>
+    <span class="tool-label">Curve</span>
+  </button>
+
+  <button class="tool-tile" (click)="enableArcMode()" title="Draw Arc">
+    <span class="tool-icon">⌒</span>
+    <span class="tool-label">Arc</span>
+  </button>
+
+  <button class="tool-tile" (click)="enableClothoidMode()" title="Draw Clothoid">
+    <span class="tool-icon">∿</span>
+    <span class="tool-label">Transition</span>
+  </button> -->
+</div>
+  </div>
+</section>

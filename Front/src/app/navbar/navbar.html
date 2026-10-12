@@ -1,0 +1,41 @@
+<div class="navbar-container">
+    
+   <app-navbar-brand></app-navbar-brand>
+      <!--  <div> <button class="nav-item" (click)="toggle()">
+                {{ isOpen ? 'Assets' : 'Assets' }}
+            </button>
+
+            <div class="assets-container" [class.open]="isOpen"> 
+                <div *ngFor="let file of svgFiles" class="draggable-svg" draggable="true" 
+                    (dragstart)="onDragStart($event, file)"> 
+                    <img [src]="file" [alt]="file">
+                </div>
+            </div>
+        </div>  -->
+    <div class="navbar-menu">
+
+        <div class="nav-item" (click)="triggerImport()">Import</div>
+        <input type="file" #fileInput hidden (change)="handleFileSelected($event)" multiple />
+
+        <div class="nav-item" (click)="plan()">Plan</div>
+
+     <!--
+        <div class="nav-item" [class.active]="state.timingPointActive" (click)="timingPoint()">
+            Timing Point
+        </div>
+
+        <div class="nav-item" [class.active]="state.segmentProfileActive" (click)="segmentProfile()">
+            Segment Profile
+        </div>
+    -->
+
+        <div class="nav-item" (click)="exportFile()">Export</div>
+    </div>
+     <app-navbar-actions></app-navbar-actions>
+</div>
+
+<!--1. User clicks button → toggle() runs
+2. isOpen becomes true → panel opens
+3. Panel shows list of images
+4. User drags an image
+5. onDragStart() runs-->

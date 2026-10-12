@@ -1,0 +1,33 @@
+<div class="report-status-block">
+
+  <div class="block-header">
+    <span>REPORT / STATUS</span>
+  </div>
+
+  <div class="report-list">
+    @if (reports.length === 0) {
+      <div class="empty-state">
+        No reports available.
+      </div>
+    }
+
+    @for (report of reports; track $index) {
+      <div class="report-row">
+        <span class="status-icon" [class]="report.type"></span>
+
+        <span class="report-time">
+          {{ report.time }}
+        </span>
+
+        <span class="report-operation">
+          {{ report.operation }}
+        </span>
+
+        <span class="report-message">
+          {{ report.message }}
+        </span>
+      </div>
+    }
+  </div>
+
+</div>

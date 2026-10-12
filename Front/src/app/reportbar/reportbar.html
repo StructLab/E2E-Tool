@@ -1,0 +1,9 @@
+<div class="report-container">
+    <div>
+        @for (msg of messages; track $index) {
+        <div class="report" [ngClass]="msg.type">
+            {{ msg.text }}
+        </div>
+        }
+    </div>
+</div>

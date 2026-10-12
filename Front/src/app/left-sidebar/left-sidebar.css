@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+.left-sidebar {
+  position: fixed;
+
+  top: 55px;
+  left: 0;
+  bottom: 150px;
+
+  width: 217px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #111821;
+  border-right: 1px solid #263241;
+
+  color: #cbd5e1;
+  font-family: "Inter", Arial, sans-serif;
+
+  z-index: 850;
+  box-sizing: border-box;
+
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Shared block style */
+.sidebar-block {
+  min-height: 0;
+
+  background: #111821;
+  border-bottom: 1px solid #263241;
+
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Top area for assets */
+.assets-block {
+  flex: 0 0 48%;
+}
+
+/* Bottom area for layers */
+.layers-block {
+  flex: 1;
+}

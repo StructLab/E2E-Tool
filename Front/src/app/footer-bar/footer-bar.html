@@ -1,0 +1,57 @@
+<div class="footer-container">
+
+  <!-- Left: general status area -->
+  <div class="footer-left">
+    <div class="footer-ready">
+      <span class="status-dot ready"></span>
+      <span>Ready</span>
+    </div>
+  </div>
+
+  <!-- Center: canvas/editor information -->
+  <div class="footer-center">
+    <div class="footer-section">
+      <span class="footer-label">Mode:</span>
+      <span>{{ mode }}</span>
+    </div>
+
+    <div class="footer-section">
+      <span class="footer-label">X:</span>
+      <span>{{ cursorX.toFixed(2) }} m</span>
+    </div>
+
+    <div class="footer-section">
+      <span class="footer-label">Y:</span>
+      <span>{{ cursorY.toFixed(2) }} m</span>
+    </div>
+
+    <div class="footer-section">
+      <span class="footer-label">Z:</span>
+      <span>{{ cursorZ.toFixed(2) }} m</span>
+    </div>
+
+    <div class="footer-section">
+      <span class="footer-label">Grid:</span>
+      <span>{{ gridSize }} m</span>
+    </div>
+  </div>
+
+  <!-- Right: save / backend area -->
+  <div class="footer-right">
+    <div class="footer-section">
+      <span class="footer-label">Last Save:</span>
+      <span>{{ lastSave }}</span>
+    </div>
+
+    <div class="footer-section footer-connection">
+      <span
+        class="status-dot"
+        [class.connected]="isConnected"
+        [class.disconnected]="!isConnected"
+      ></span>
+
+      <span>{{ isConnected ? 'Connected' : 'Disconnected' }}</span>
+    </div>
+  </div>
+
+</div>

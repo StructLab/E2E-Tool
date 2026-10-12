@@ -1,0 +1,356 @@
+{
+  "type": null,
+  "metadata": {
+    "areaId": "AREA_001",
+    "versionTimestamp": "2026-03-18T01:41:51.1545603+01:00",
+    "epsg": 3006
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "9983f345f6",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            -35.868068,
+            -36.69405,
+            0
+          ],
+          [
+            -35.868069,
+            -36.69405,
+            0
+          ],
+          [
+            -2.917724,
+            -73.202817,
+            0
+          ],
+          [
+            19.252157,
+            -73.39761,
+            0
+          ],
+          [
+            41.757885,
+            -66.986098,
+            0
+          ],
+          [
+            43.839058,
+            -65.634568,
+            0
+          ],
+          [
+            43.839057,
+            -65.634568,
+            0
+          ],
+          [
+            67.813635,
+            -35.045791,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "9983f345f6",
+        "Name": "1",
+        "LinearElementLength": 198.94825000000003,
+        "StartID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndID": "8fc46ae9-c0c4-492d-b30d-0f2f67433f1d",
+        "Description": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "085552dfb",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -0,
+            0,
+            0
+          ],
+          [
+            18.873699,
+            2.096602,
+            0
+          ],
+          [
+            18.873699,
+            2.096601,
+            0
+          ],
+          [
+            38.156401,
+            7.223033,
+            0
+          ],
+          [
+            38.156401,
+            7.223032,
+            0
+          ],
+          [
+            59.334613,
+            10.737001,
+            0
+          ],
+          [
+            59.334614,
+            10.737001,
+            0
+          ],
+          [
+            142.887675,
+            10.77598,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "085552dfb",
+        "Name": "3",
+        "LinearElementLength": 144.066585,
+        "StartID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "Description": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "794a39ba-4e1b-4a07-9e8a-2b6c187c7fa9",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            142.887675,
+            10.77598,
+            0
+          ],
+          [
+            206.647291,
+            10.728993,
+            0
+          ],
+          [
+            206.647291,
+            10.728992,
+            0
+          ],
+          [
+            254.171318,
+            -24.591045,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "794a39ba-4e1b-4a07-9e8a-2b6c187c7fa9",
+        "Name": "7",
+        "LinearElementLength": 126.671633,
+        "StartID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "EndID": "1bee0648-9195-4ec9-bea5-db9490120b0c",
+        "Description": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ef85925268",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            142.887675,
+            10.77598,
+            0
+          ],
+          [
+            163.734476,
+            7.976681,
+            0
+          ],
+          [
+            163.734477,
+            7.976681,
+            0
+          ],
+          [
+            181.815818,
+            3.1318,
+            0
+          ],
+          [
+            203.86913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "ef85925268",
+        "Name": "6",
+        "LinearElementLength": 62.155181,
+        "StartID": "90845049-5a52-41b6-bc75-0fe55baa68ab",
+        "EndID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "Description": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "0c16ffd733",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            0,
+            -0,
+            0
+          ],
+          [
+            162.97913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "0c16ffd733",
+        "Name": "2",
+        "LinearElementLength": 162.97913,
+        "StartID": "9fecd2c1-1a71-476a-8c15-c2ca6677491a",
+        "EndID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "Description": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "c251ec3d0a",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            132.856193,
+            -78.780735,
+            0
+          ],
+          [
+            192.871042,
+            -78.780735,
+            0
+          ],
+          [
+            224.419003,
+            -68.201896,
+            0
+          ],
+          [
+            240.283003,
+            -32.11075,
+            0
+          ],
+          [
+            203.86913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "c251ec3d0a",
+        "Name": "8",
+        "LinearElementLength": 188.450848,
+        "StartID": "3c233432-8d9a-479f-a3e4-b4d993f519c9",
+        "EndID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "Description": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "9daf4a37-57f5-40b6-9c90-066a5dddda9b",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            162.97913,
+            0.009509,
+            0
+          ],
+          [
+            203.86913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "9daf4a37-57f5-40b6-9c90-066a5dddda9b",
+        "Name": "5",
+        "LinearElementLength": 40.89,
+        "StartID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "EndID": "6a5031b8-484a-4913-85eb-caa575d375a3",
+        "Description": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "dba737d6-4606-4316-a964-29f9dcf21373",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            82.591904,
+            -10.573668,
+            0
+          ],
+          [
+            98.497208,
+            -10.573668,
+            0
+          ],
+          [
+            98.497208,
+            -10.573667,
+            0
+          ],
+          [
+            122.327671,
+            -8.091945,
+            0
+          ],
+          [
+            122.327671,
+            -8.091946,
+            0
+          ],
+          [
+            134.448166,
+            -4.848753,
+            0
+          ],
+          [
+            162.97913,
+            0.009509,
+            0
+          ]
+        ]
+      },
+      "properties": {
+        "ID": "dba737d6-4606-4316-a964-29f9dcf21373",
+        "Name": "4",
+        "LinearElementLength": 81.551204,
+        "StartID": "7753b13b-98c0-4e28-8ee0-b48abdb9f040",
+        "EndID": "4e0eb374-a115-4d5a-8b95-8350268ebbac",
+        "Description": null
+      }
+    }
+  ]
+}

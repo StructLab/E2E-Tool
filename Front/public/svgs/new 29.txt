@@ -1,0 +1,10 @@
+1 - put the assets  button inside the menu.
+2 - put more assets in the assets menu.
+3 - check the orientation of the assets.
+4 - adjust the guide.
+5 - add a loading to importing data and for validation.
+6 - add a welcoming page.
+7 - add restart button.
+8 - check backend for any errors.
+9 - triggering the validation on moving an axle counter is not workin.
+10 - export is not working. check if the problem is from validation, try to export anyway.

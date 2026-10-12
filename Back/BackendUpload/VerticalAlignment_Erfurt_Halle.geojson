@@ -1,0 +1,10 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "areaId": "ERFURT_HALLE",
+    "versionTimestamp": "2026-07-22T00:00:00Z",
+    "epsg": 4326,
+    "note": "Empty VerticalAlignment placeholder. No vertical alignment data available from OSM."
+  },
+  "features": []
+}
