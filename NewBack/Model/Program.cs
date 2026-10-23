@@ -81,5 +81,19 @@ Switch @switch = new Model.Rail.TrackObjects.Switch(p4);
 var path1 = graph.ShortestPathBFS(axleCounter, axleCounter2);
 var path2 = graph.ShortestPathBFS(axleCounter,axleCounter2);
 
+// ---- Transition curve test (clothoid): create the object, call the functions ----
+var transition = new ClothoidCurve3D(
+    start: new Point3d(0, 0, 100),
+    end: new Point3d(1.666369, 99.975003, 101),
+    length: 100,
+    azimuth: 0,
+    radius: 0,            // 0 = straight at the start
+    nextRadius: 1000);    // radius of the next segment
+
+Point3d position = transition.PointAt(50);
+Point3d tangent = transition.TangentAt(50);
+
+Console.WriteLine("position: x = " + position.X + ", y = " + position.Y + ", z = " + position.Z);
+Console.WriteLine("tangent:  x = " + tangent.X + ", y = " + tangent.Y + ", z = " + tangent.Z);
 
 Console.WriteLine("Hello, World!");

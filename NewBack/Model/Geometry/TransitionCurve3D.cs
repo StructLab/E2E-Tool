@@ -6,14 +6,19 @@ namespace GeoModel.Geometry
     /// <summary>
     /// Base class for transition curves: the bend changes smoothly from the start curvature to the end curvature.
     ///
-    /// What the model gives us (see the comments on the constructor):
-    ///   start, end      : the points where the transition begins and ends
-    ///   length          : next segment's elementGeometryPos minus this segment's elementGeometryPos
-    ///   startAzimuth    : this segment's azimuth (degrees, 0 = north, clockwise)
-    ///   startRadius     : this segment's radius (negative = left, positive = right, straight = 0 / Infinity)
-    ///   endRadius       : the NEXT segment's radius
+    /// The inputs use the names of the data model (see the comments on the constructor):
+    ///   start, end   : the points where the transition begins and ends (x, y, z)
+    ///   length       : the LENGTH of the whole transition: next segment's elementGeometryPos minus this segment's elementGeometryPos
+    ///   azimuth      : this segment's azimuth (degrees, 0 = north, clockwise)
+    ///   radius       : this segment's radius (negative = left, positive = right, straight = 0 / Infinity)
+    ///   nextRadius   : the NEXT segment's radius (the radius where this transition ends)
     ///
-    /// Idea in one sentence: work out how far the direction has turned after s metres (tau),
+    /// "length" and "distance" are two different things:
+    ///   length   = how long the whole transition is (one fixed number, given to the constructor)
+    ///   distance = how far we have travelled along the transition, counted from its start (0 ... length).
+    ///              PointAt(distance) and TangentAt(distance) ask about one such place on the curve.
+    ///
+    /// Idea in one sentence: work out how far the direction has turned after distance metres (tau),
     /// add up the tiny moves to get "forward" and "sideways", then turn that picture onto the map.
     ///
     /// Each kind of transition (clothoid, cosine, sine, ...) only has to say HOW the curvature moves
@@ -31,19 +36,19 @@ namespace GeoModel.Geometry
         private readonly Point3d _start;
         private readonly Point3d _end;
         private readonly double _length;
-        private readonly double _startAzimuthRad;   // clockwise from north, in radians
-        private readonly double _startRadius;
-        private readonly double _endRadius;
+        private readonly double _azimuthRad;   // clockwise from north, in radians
+        private readonly double _radius;            // this segment's radius (start of the transition)
+        private readonly double _nextRadius;        // next segment's radius (end of the transition)
         private readonly double _startCurvature;    // 1 / radius, signed (right = +, left = -), 0 = straight
         private readonly double _endCurvature;
 
         /// <param name="start">Start point of the transition (position at this segment's elementGeometryPos).</param>
         /// <param name="end">End point (the next segment's start point).</param>
         /// <param name="length">Next elementGeometryPos minus this elementGeometryPos, in metres.</param>
-        /// <param name="startAzimuthDegrees">This segment's azimuth, in degrees.</param>
-        /// <param name="startRadius">This segment's radius. Negative = left, positive = right.</param>
-        /// <param name="endRadius">The next segment's radius. Negative = left, positive = right.</param>
-        protected TransitionCurve3D(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius)
+        /// <param name="azimuth">This segment's azimuth, in degrees (0 = north, clockwise).</param>
+        /// <param name="radius">This segment's radius (at the start). Negative = left, positive = right.</param>
+        /// <param name="nextRadius">The next segment's radius (at the end). Negative = left, positive = right.</param>
+        protected TransitionCurve3D(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius)
         {
             if (start == null)
             {
@@ -61,11 +66,11 @@ namespace GeoModel.Geometry
             _start = start;
             _end = end;
             _length = length;
-            _startAzimuthRad = startAzimuthDegrees * Math.PI / 180.0;
-            _startRadius = startRadius;
-            _endRadius = endRadius;
-            _startCurvature = RadiusToCurvature(startRadius);
-            _endCurvature = RadiusToCurvature(endRadius);
+            _azimuthRad = azimuth * Math.PI / 180.0;
+            _radius = radius;
+            _nextRadius = nextRadius;
+            _startCurvature = RadiusToCurvature(radius);
+            _endCurvature = RadiusToCurvature(nextRadius);
         }
 
         public override Point3d Start
@@ -100,13 +105,13 @@ namespace GeoModel.Geometry
         {
             get
             {
-                double degrees = (_startAzimuthRad + TurnedAngle(_length)) * 180.0 / Math.PI;
+                double degrees = (_azimuthRad + TurnedAngle(_length)) * 180.0 / Math.PI;
                 return NormalizeDegrees(degrees);
             }
         }
 
         /// <summary>
-        /// Distance on the map between the end point we were given and the end point the formula gives.
+        /// Distance in the x/y plane between the end point we were given and the end point the formula gives.
         /// It should be (almost) zero. If it is large, the data or the inputs do not fit together.
         /// </summary>
         public double EndGapMeters
@@ -136,54 +141,54 @@ namespace GeoModel.Geometry
         protected abstract double ShapeIntegral(double t);
 
         /// <summary>Makes a new curve of the same kind (used by Reverse).</summary>
-        protected abstract TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius);
+        protected abstract TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius);
 
         // =====================================================================
         // PointAt: where am I after "distance" metres?
         // =====================================================================
         public override Point3d PointAt(double distance)
         {
-            double s = ClampDistance(distance);
+            distance = ClampDistance(distance);   // stay between 0 (start) and length (end)
 
             double along;   // forward, in the start direction
             double side;    // sideways, positive = to the right
 
-            if (s <= 0)
+            if (distance <= 0)
             {
                 along = 0;
                 side = 0;
             }
             else
             {
-                ComputeAlongAndSide(s, out along, out side);
+                ComputeAlongAndSide(distance, out along, out side);
             }
 
             // Turn the little "forward / sideways" picture onto the map and move it to the start point.
-            double east = _start.X + along * Math.Sin(_startAzimuthRad) + side * Math.Cos(_startAzimuthRad);
-            double north = _start.Y + along * Math.Cos(_startAzimuthRad) - side * Math.Sin(_startAzimuthRad);
+            double x = _start.X + along * Math.Sin(_azimuthRad) + side * Math.Cos(_azimuthRad);
+            double y = _start.Y + along * Math.Cos(_azimuthRad) - side * Math.Sin(_azimuthRad);
 
             // Height goes up or down evenly from start to end.
-            double height = _start.Z + (_end.Z - _start.Z) * (s / _length);
+            double z = _start.Z + (_end.Z - _start.Z) * (distance / _length);
 
-            return new Point3d(east, north, height);
+            return new Point3d(x, y, z);
         }
 
         // =====================================================================
         // TangentAt: which way am I facing after "distance" metres?
-        // Returned as a unit vector (east part, north part, height part).
+        // Returned as a unit vector (x part, y part, z part).
         // =====================================================================
         public override Point3d TangentAt(double distance)
         {
-            double s = ClampDistance(distance);
+            distance = ClampDistance(distance);   // stay between 0 (start) and length (end)
 
-            double heading = _startAzimuthRad + TurnedAngle(s);
+            double heading = _azimuthRad + TurnedAngle(distance);
 
-            double east = Math.Sin(heading);
-            double north = Math.Cos(heading);
-            double up = (_end.Z - _start.Z) / _length;
+            double x = Math.Sin(heading);
+            double y = Math.Cos(heading);
+            double z = (_end.Z - _start.Z) / _length;
 
-            double size = Math.Sqrt(east * east + north * north + up * up);
-            return new Point3d(east / size, north / size, up / size);
+            double size = Math.Sqrt(x * x + y * y + z * z);
+            return new Point3d(x / size, y / size, z / size);
         }
 
         // =====================================================================
@@ -263,7 +268,7 @@ namespace GeoModel.Geometry
         public override Curve3D Reverse()
         {
             double reversedAzimuth = NormalizeDegrees(EndAzimuthDegrees + 180.0);
-            return CreateSameKind(_end, _start, _length, reversedAzimuth, -_endRadius, -_startRadius);
+            return CreateSameKind(_end, _start, _length, reversedAzimuth, -_nextRadius, -_radius);
         }
 
         // =====================================================================
@@ -271,37 +276,37 @@ namespace GeoModel.Geometry
         // =====================================================================
 
         /// <summary>
-        /// How far has the direction turned after s metres? (radians, right = +, left = -)
+        /// How far has the direction turned after distance metres? (radians, right = +, left = -)
         /// A kind of transition that is not described by a curvature shape (for example the cubic parabola)
         /// replaces this function with its own.
         /// </summary>
-        protected virtual double TurnedAngle(double s)
+        protected virtual double TurnedAngle(double distance)
         {
-            // tau(s) = s * k1 + (k2 - k1) * L * ShapeIntegral(s / L)
-            double t = s / _length;
+            // tau(distance) = distance * k1 + (k2 - k1) * L * ShapeIntegral(distance / L)
+            double t = distance / _length;
             double change = _endCurvature - _startCurvature;
-            return s * _startCurvature + change * _length * ShapeIntegral(t);
+            return distance * _startCurvature + change * _length * ShapeIntegral(t);
         }
 
         /// <summary>
-        /// Works out "forward" and "sideways" after s metres. The default adds up cos(tau) and sin(tau)
+        /// Works out "forward" and "sideways" after distance metres. The default adds up cos(tau) and sin(tau)
         /// with Simpson's rule. A kind of transition may override this with a faster formula.
         /// </summary>
-        protected virtual void ComputeAlongAndSide(double s, out double along, out double side)
+        protected virtual void ComputeAlongAndSide(double distance, out double along, out double side)
         {
-            ComputeBySimpson(s, out along, out side);
+            ComputeBySimpson(distance, out along, out side);
         }
 
         /// <summary>
         /// Add up cos(tau) and sin(tau) along the way with Simpson's rule.
         /// Weights: 1, 4, 2, 4, 2, ... 4, 1  times  h / 3.
         /// </summary>
-        protected void ComputeBySimpson(double s, out double along, out double side)
+        protected void ComputeBySimpson(double distance, out double along, out double side)
         {
-            double h = s / SimpsonSteps;
+            double h = distance / SimpsonSteps;
 
-            double sumAlong = Math.Cos(TurnedAngle(0.0)) + Math.Cos(TurnedAngle(s));
-            double sumSide = Math.Sin(TurnedAngle(0.0)) + Math.Sin(TurnedAngle(s));
+            double sumAlong = Math.Cos(TurnedAngle(0.0)) + Math.Cos(TurnedAngle(distance));
+            double sumSide = Math.Sin(TurnedAngle(0.0)) + Math.Sin(TurnedAngle(distance));
 
             for (int i = 1; i < SimpsonSteps; i++)
             {

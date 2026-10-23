@@ -16,8 +16,8 @@ namespace GeoModel.Geometry
     /// </summary>
     public class BiquadraticParabolaCurve3D : TransitionCurve3D
     {
-        public BiquadraticParabolaCurve3D(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius)
-            : base(start, end, length, startAzimuthDegrees, startRadius, endRadius)
+        public BiquadraticParabolaCurve3D(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius)
+            : base(start, end, length, azimuth, radius, nextRadius)
         {
         }
 
@@ -39,9 +39,9 @@ namespace GeoModel.Geometry
             return 1.0 / 12.0 + (t - 0.5) + (2.0 / 3.0) * (rest * rest * rest - 0.125);
         }
 
-        protected override TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius)
+        protected override TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius)
         {
-            return new BiquadraticParabolaCurve3D(start, end, length, startAzimuthDegrees, startRadius, endRadius);
+            return new BiquadraticParabolaCurve3D(start, end, length, azimuth, radius, nextRadius);
         }
     }
 }

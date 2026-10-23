@@ -9,8 +9,8 @@ namespace GeoModel.Geometry
     /// </summary>
     public class SineCurve3D : TransitionCurve3D
     {
-        public SineCurve3D(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius)
-            : base(start, end, length, startAzimuthDegrees, startRadius, endRadius)
+        public SineCurve3D(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius)
+            : base(start, end, length, azimuth, radius, nextRadius)
         {
         }
 
@@ -21,9 +21,9 @@ namespace GeoModel.Geometry
             return t * t / 2.0 + (Math.Cos(twoPi * t) - 1.0) / (twoPi * twoPi);
         }
 
-        protected override TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius)
+        protected override TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius)
         {
-            return new SineCurve3D(start, end, length, startAzimuthDegrees, startRadius, endRadius);
+            return new SineCurve3D(start, end, length, azimuth, radius, nextRadius);
         }
     }
 }

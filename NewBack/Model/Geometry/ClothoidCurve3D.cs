@@ -15,8 +15,8 @@ namespace GeoModel.Geometry
         // The short formula is only used while the turned angle is small (radians).
         private const double SmallAngleLimit = 0.3;
 
-        public ClothoidCurve3D(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius)
-            : base(start, end, length, startAzimuthDegrees, startRadius, endRadius)
+        public ClothoidCurve3D(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius)
+            : base(start, end, length, azimuth, radius, nextRadius)
         {
         }
 
@@ -26,48 +26,48 @@ namespace GeoModel.Geometry
             return t * t / 2.0;
         }
 
-        protected override TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double startAzimuthDegrees, double startRadius, double endRadius)
+        protected override TransitionCurve3D CreateSameKind(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius)
         {
-            return new ClothoidCurve3D(start, end, length, startAzimuthDegrees, startRadius, endRadius);
+            return new ClothoidCurve3D(start, end, length, azimuth, radius, nextRadius);
         }
 
-        protected override void ComputeAlongAndSide(double s, out double along, out double side)
+        protected override void ComputeAlongAndSide(double distance, out double along, out double side)
         {
-            if (CanUseShortFormula(s))
+            if (CanUseShortFormula(distance))
             {
-                ComputeByShortFormula(s, out along, out side);
+                ComputeByShortFormula(distance, out along, out side);
             }
             else
             {
-                ComputeBySimpson(s, out along, out side);
+                ComputeBySimpson(distance, out along, out side);
             }
         }
 
         /// <summary>The short formula only works when the road starts straight and the turn is still small.</summary>
-        private bool CanUseShortFormula(double s)
+        private bool CanUseShortFormula(double distance)
         {
             if (StartCurvature != 0.0)
             {
                 return false;
             }
-            if (Math.Abs(TurnedAngle(s)) > SmallAngleLimit)
+            if (Math.Abs(TurnedAngle(distance)) > SmallAngleLimit)
             {
                 return false;
             }
             return true;
         }
 
-        /// <summary>Entry from a straight: along = s(1 - t^2/10 + t^4/216), side = s(t/3 - t^3/42 + t^5/1320).</summary>
-        private void ComputeByShortFormula(double s, out double along, out double side)
+        /// <summary>Entry from a straight: along = distance * (1 - tau^2/10 + tau^4/216), side = distance * (tau/3 - tau^3/42 + tau^5/1320).</summary>
+        private void ComputeByShortFormula(double distance, out double along, out double side)
         {
-            double tau = TurnedAngle(s);   // already has the sign: negative for a left curve
+            double tau = TurnedAngle(distance);   // already has the sign: negative for a left curve
             double tau2 = tau * tau;
             double tau3 = tau2 * tau;
             double tau4 = tau2 * tau2;
             double tau5 = tau4 * tau;
 
-            along = s * (1.0 - tau2 / 10.0 + tau4 / 216.0);
-            side = s * (tau / 3.0 - tau3 / 42.0 + tau5 / 1320.0);
+            along = distance * (1.0 - tau2 / 10.0 + tau4 / 216.0);
+            side = distance * (tau / 3.0 - tau3 / 42.0 + tau5 / 1320.0);
         }
     }
 }
