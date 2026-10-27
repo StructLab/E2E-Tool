@@ -18,8 +18,8 @@ namespace GeoModel.Geometry
     ///
     /// ASSUMPTIONS that Khaled still has to confirm (they are the only two places that need to change):
     ///   1. f(t) is the usual 7th-degree polynomial 35 t^4 - 84 t^5 + 70 t^6 - 20 t^7  (see Shape, ShapeSlope).
-    ///   2. h is a parameter of the constructor. If the caller leaves it out, the predefined value
-    ///      DefaultCentreOfGravityHeight (1.8 m) is used. That value is a placeholder until it is confirmed.
+    ///   2. h is a required parameter of the constructor. There is no predefined value, because the data model
+    ///      does not have one and none has been agreed.
     ///
     /// Cant, like in the data model (appliedCant), is a size in millimetres, always zero or positive.
     /// Which side it leans to follows the curve: right curve = tilted right, left curve = tilted left.
@@ -28,18 +28,12 @@ namespace GeoModel.Geometry
     /// The inputs have the same names as in TransitionCurve3D. New ones:
     ///   cant                  : this segment's appliedCant (mm), the tilt at the start
     ///   nextCant              : the next cant point's appliedCant (mm), the tilt at the end
-    ///   centreOfGravityHeight : h, in metres (optional: left out = DefaultCentreOfGravityHeight)
+    ///   centreOfGravityHeight : h, in metres
     /// </summary>
     public class WienerBogenCurve3D : TransitionCurve3D
     {
         // Distance between the middle of the two rail heads: 1500 mm (for the standard gauge 1435 mm).
         private const double GaugeMillimetres = 1500.0;
-
-        /// <summary>
-        /// The predefined centre of gravity height (metres), used when the caller does not give one.
-        /// The data model has no such value, so this is a placeholder until it is confirmed.
-        /// </summary>
-        public const double DefaultCentreOfGravityHeight = 1.8;
 
         private readonly double _cant;
         private readonly double _nextCant;
@@ -50,7 +44,7 @@ namespace GeoModel.Geometry
         private readonly double _endRoll;
 
         public WienerBogenCurve3D(Point3d start, Point3d end, double length, double azimuth, double radius, double nextRadius,
-            double cant, double nextCant, double centreOfGravityHeight = DefaultCentreOfGravityHeight)
+            double cant, double nextCant, double centreOfGravityHeight)
             : base(start, end, length, azimuth, radius, nextRadius)
         {
             if (cant < 0 || nextCant < 0)

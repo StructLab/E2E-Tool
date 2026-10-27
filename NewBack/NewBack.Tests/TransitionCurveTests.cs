@@ -1095,7 +1095,7 @@ namespace TransitionCurves.Tests
         }
 
         [Fact]
-        public void Wiener_LeavingOutTheHeight_UsesThePredefinedValue()
+        public void Wiener_TheHeightChangesTheCurve()
         {
             Point3d start = new Point3d(0.0, 0.0, 0.0);
             Point3d end = new Point3d(0.0, 0.0, 0.0);
@@ -1104,14 +1104,13 @@ namespace TransitionCurves.Tests
             double radius = double.PositiveInfinity;
             double nextRadius = 1000.0;
 
-            WienerBogenCurve3D withoutHeight = new WienerBogenCurve3D(start, end, length, azimuth, radius, nextRadius, 0.0, 150.0);
-            WienerBogenCurve3D withDefaultHeight = new WienerBogenCurve3D(start, end, length, azimuth, radius, nextRadius, 0.0, 150.0, WienerBogenCurve3D.DefaultCentreOfGravityHeight);
-            WienerBogenCurve3D withOtherHeight = new WienerBogenCurve3D(start, end, length, azimuth, radius, nextRadius, 0.0, 150.0, 2.5);
+            WienerBogenCurve3D lowCentre = new WienerBogenCurve3D(start, end, length, azimuth, radius, nextRadius, 0.0, 150.0, 1.8);
+            WienerBogenCurve3D highCentre = new WienerBogenCurve3D(start, end, length, azimuth, radius, nextRadius, 0.0, 150.0, 2.5);
 
-            AssertNear(WienerBogenCurve3D.DefaultCentreOfGravityHeight, 1.8, 1e-12);
-            AssertPoint(withoutHeight.PointAt(50.0), withDefaultHeight.PointAt(50.0).X, withDefaultHeight.PointAt(50.0).Y, 1e-12);
-            // A different height gives a different curve (the cant part changes).
-            Assert.InRange(Math.Abs(withOtherHeight.PointAt(50.0).X - withDefaultHeight.PointAt(50.0).X), 1e-4, 10.0);
+            // A different height gives a different curve (only the cant part changes) ...
+            Assert.InRange(Math.Abs(highCentre.PointAt(50.0).X - lowCentre.PointAt(50.0).X), 1e-4, 10.0);
+            // ... but not the direction at the end, where the cant part has vanished.
+            AssertNear(highCentre.EndAzimuthDegrees, lowCentre.EndAzimuthDegrees, 1e-9);
         }
 
         [Fact]
