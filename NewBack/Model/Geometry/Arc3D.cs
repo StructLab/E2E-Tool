@@ -2,21 +2,58 @@
 
 namespace GeoModel.Geometry
 {
+    /// <summary>
+    /// Represents a circular arc in three-dimensional space.
+    /// </summary>
     public class Arc3D : Curve3D
     {
+        /// <summary>
+        /// Gets the starting point of the arc.
+        /// </summary>
         public override Point3d Start { get; }
+
+        /// <summary>
+        /// Gets the ending point of the arc.
+        /// </summary>
         public override Point3d End { get; }
 
+        /// <summary>
+        /// Gets the signed radius of the arc.
+        /// The sign determines the direction of the arc.
+        /// </summary>
         public double Radius { get; }
 
+        /// <summary>
+        /// Gets the centre point of the arc.
+        /// </summary>
         public Point3d Center { get; private set; } = new Point3d(0, 0, 0);
 
+        /// <summary>
+        /// Gets the starting angle of the arc in radians.
+        /// </summary>
         public double StartAngle { get; private set; }
+
+        /// <summary>
+        /// Gets the angular sweep of the arc in radians.
+        /// </summary>
         public double SweepAngle { get; private set; }
 
+        /// <summary>
+        /// Gets the length of the arc, calculated from its radius and sweep angle.
+        /// </summary>
         public override double Length =>
             Math.Abs(Radius * SweepAngle);
 
+        /// <summary>
+        /// Initializes a circular arc using its start point, end point and signed radius.
+        /// Calculates the centre and angular properties of the arc.
+        /// </summary>
+        /// <param name="start">The starting point of the arc.</param>
+        /// <param name="end">The ending point of the arc.</param>
+        /// <param name="radius">The signed radius used to determine the arc direction.</param>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the radius is too small for the distance between the endpoints.
+        /// </exception>
         public Arc3D(Point3d start, Point3d end, double radius)
         {
             Start = start;
@@ -25,6 +62,11 @@ namespace GeoModel.Geometry
 
             Calculate();
         }
+
+        /// <summary>
+        /// Calculates the centre, starting angle and sweep angle of the arc
+        /// using its start point, end point and radius.
+        /// </summary>
 
         private void Calculate()
         {
@@ -82,6 +124,14 @@ namespace GeoModel.Geometry
             }
         }
 
+        /// <summary>
+        /// Calculates a point on the arc at the specified distance from its start.
+        /// </summary>
+        /// <param name="distance">The distance measured along the arc.</param>
+        /// <returns>The calculated point on the arc.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown when the distance is negative or greater than the arc length.
+        /// </exception>
         public override Point3d PointAt(double distance)
         {
             if (distance < 0 || distance > Length)
@@ -102,6 +152,15 @@ namespace GeoModel.Geometry
                 Start.Z + (End.Z - Start.Z) * t
             );
         }
+
+        /// <summary>
+        /// Calculates the tangent direction of the arc at the specified distance.
+        /// </summary>
+        /// <param name="distance">The distance measured along the arc.</param>
+        /// <returns>The tangent direction vector at the specified position.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown when the distance is negative or greater than the arc length.
+        /// </exception>
         public override Point3d TangentAt(double distance)
         {
             if (distance < 0 || distance > Length)
@@ -124,6 +183,17 @@ namespace GeoModel.Geometry
                 0
             );
         }
+
+        /// <summary>
+        /// Finds the closest point on the arc to the specified input point.
+        /// Uses radial projection when the projected point lies within the arc;
+        /// otherwise, compares the two endpoints.
+        /// </summary>
+        /// <param name="point">The input point used for the closest-point calculation.</param>
+        /// <returns>
+        /// The closest point, its distance from the input point,
+        /// and its distance along the arc.
+        /// </returns>
         public override ClosestPointResult FindClosestPoint(Point3d point)
         {
             double radius = Math.Abs(Radius);
@@ -196,6 +266,13 @@ namespace GeoModel.Geometry
             // Check both endpoints.
             return ClosestEndpoint(point);
         }
+
+        /// <summary>
+        /// Determines which endpoint of the arc is closer to the specified point
+        /// and returns the corresponding closest-point result.
+        /// </summary>
+        /// <param name="point">The input point to compare with the endpoints.</param>
+        /// <returns>The closest endpoint and its distance information.</returns>
         private ClosestPointResult ClosestEndpoint(Point3d point)
         {
             double startDistance = Distance(point, Start);
@@ -219,6 +296,12 @@ namespace GeoModel.Geometry
             };
         }
 
+        /// <summary>
+        /// Normalizes an angle to the range from zero to 2π radians.
+        /// </summary>
+        /// <param name="angle">The angle in radians.</param>
+        /// <returns>The normalized angle.</returns>
+
         private static double NormalizeAngle(double angle)
         {
             angle %= 2 * Math.PI;
@@ -228,6 +311,14 @@ namespace GeoModel.Geometry
 
             return angle;
         }
+
+        /// <summary>
+        /// Calculates the Euclidean distance between two points
+        /// in three-dimensional space.
+        /// </summary>
+        /// <param name="a">The first point.</param>
+        /// <param name="b">The second point.</param>
+        /// <returns>The distance between the two points.</returns>
 
         private static double Distance(Point3d a, Point3d b)
         {
@@ -240,6 +331,12 @@ namespace GeoModel.Geometry
                 dy * dy +
                 dz * dz);
         }
+
+        /// <summary>
+        /// Creates a new arc with the start and end points swapped
+        /// and the radius sign reversed to change the arc direction.
+        /// </summary>
+        /// <returns>A new arc representing the reversed direction.</returns>
         public override Curve3D Reverse()
         {
             return new Arc3D(
