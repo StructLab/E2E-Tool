@@ -2,6 +2,33 @@
   #scrollWrapper
   class="canvas-scroll-wrapper"
 >
+
+<div class="icon-scale-control">
+  <div class="icon-scale-header">
+    <label for="iconScaleSlider">Icon Size</label>
+    <span>{{ iconScalePercent }}%</span>
+  </div>
+
+  <input
+    id="iconScaleSlider"
+    type="range"
+    min="50"
+    max="200"
+    step="10"
+    [(ngModel)]="iconScalePercent"
+    (ngModelChange)="onIconScaleChange()"
+    (pointerdown)="$event.stopPropagation()"
+    (mousedown)="$event.stopPropagation()"
+  />
+
+  <button
+    type="button"
+    (click)="resetIconScale()"
+  >
+    Reset
+  </button>
+</div>
+
   <div #container class="canvas-container">
     <canvas #canvasEl></canvas>
 
@@ -30,6 +57,7 @@
       </button>
     </div>
   }
+
 
     <!-- AutoCAD-style line length / angle box -->
     <div

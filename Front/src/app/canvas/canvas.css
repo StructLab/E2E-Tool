@@ -460,3 +460,56 @@ canvas {
 .switch-placement-popup button:hover {
   background: #334155;
 }
+
+
+/* Icon Scale Adjustment Panel */
+
+.icon-scale-control {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  width: 190px;
+  padding: 12px;
+
+  background: #111827;
+  border: 1px solid #38bdf8;
+  border-radius: 8px;
+
+  color: white;
+  z-index: 1000;
+
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.icon-scale-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.icon-scale-control input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #38bdf8;
+}
+
+.icon-scale-control button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 6px;
+
+  background: #1e293b;
+  color: white;
+  border: 1px solid #475569;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.icon-scale-control button:hover {
+  background: #334155;
+}

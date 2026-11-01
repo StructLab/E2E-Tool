@@ -1,5 +1,9 @@
+
 import { Component } from '@angular/core';
 import { EventService } from '../../event.service';
+
+import { IconScaleService } from '../../canvas/canvasServices/icon-scale.service';
+import { CanvasSceneService } from '../../canvas/canvasServices/canvas-scene.service';
 
 interface LayerItem {
   name: string;
@@ -16,7 +20,48 @@ interface LayerItem {
 })
 export class LayerList {
 
-  constructor(private eventService: EventService) {}
+  constructor(
+    private eventService: EventService,
+    private iconScaleService: IconScaleService,
+    private canvasSceneService: CanvasSceneService
+  ) {}
+
+  // ================================
+  // ICON SCALE ADJUSTMENT
+  // ================================
+
+  iconScalePercent = 100;
+
+  onIconScaleChange(value: number): void {
+    this.iconScalePercent = value;
+
+    const scene = this.canvasSceneService.scene;
+
+    if (!scene) {
+      return;
+    }
+
+    this.iconScaleService.setScale(
+      value / 100,
+      scene
+    );
+  }
+
+  resetIconScale(): void {
+    this.iconScalePercent = 100;
+
+    const scene = this.canvasSceneService.scene;
+
+    if (!scene) {
+      return;
+    }
+
+    this.iconScaleService.resetScale(scene);
+  }
+
+  // ================================
+  // EXISTING LAYERS
+  // ================================
 
   layers: LayerItem[] = [
     {
@@ -58,11 +103,9 @@ export class LayerList {
 
   highlightLayer(layerName: string): void {
 
-    // If already selected -> deselect it
     if (this.selectedLayers.has(layerName)) {
       this.selectedLayers.delete(layerName);
     } else {
-      // Otherwise select it
       this.selectedLayers.add(layerName);
     }
 
@@ -83,5 +126,4 @@ export class LayerList {
   toggleLock(layer: LayerItem): void {
     layer.locked = !layer.locked;
   }
-
 }

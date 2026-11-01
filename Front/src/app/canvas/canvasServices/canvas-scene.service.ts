@@ -13,6 +13,7 @@ import { DrawingItem, SwitchItem } from '../../generic/canvas-item';
 import { LoadItems } from '../../api/end_points';
 import { SegmentProfileService } from '../../assets/assetsServices/segment-profile.service';
 
+
 @Injectable({ providedIn: 'root' })
 export class CanvasSceneService {
     scene!: THREE.Scene; /*the world containing all objects*/
@@ -63,8 +64,8 @@ export class CanvasSceneService {
         // add grid 
 
         // --- Grid ---
-        const gridSize = 200000; // 200 km
-        const divisions = 200;   // 200 divisions
+        const gridSize = 2000;
+        const divisions = 200;
 
         this.gridHelper = new THREE.GridHelper(
         gridSize,
@@ -131,10 +132,13 @@ export class CanvasSceneService {
         return;
       }
 
+      // Restore the grid after clearing railway data
+      if (this.gridHelper.parent !== this.scene) {
+        this.scene.add(this.gridHelper);
+      }
+
       console.log('Loading imported railway data...');
-      await this.tracksService.cleanData(
-        this.scene
-      );
+
       await this.tracksService.createTracks(
         this.scene
       );
@@ -149,8 +153,17 @@ export class CanvasSceneService {
 
       setTimeout(() => {
         this.fitCameraToScene();
-      }, 100);
-    }
+
+      console.log('GRID DEBUG:', {
+        gridExists: this.gridHelper.parent === this.scene,
+        gridVisible: this.gridHelper.visible,
+        gridPosition: this.gridHelper.position.toArray(),
+        cameraPosition: this.camera.position.toArray(),
+        cameraZoom: this.camera.zoom
+      });
+    }, 0);
+
+  }
 
     moveCameraByScroll(scrollX: number, scrollY: number): void {
     if (!this.camera) return;
@@ -207,43 +220,131 @@ export class CanvasSceneService {
       if (!objectBox.isEmpty()) {
         box.union(objectBox);
       }
-    }
-  });
+      }
+    });
 
-  if (box.isEmpty()) {
-    console.warn('No imported objects found to fit camera');
-    return;
+    if (box.isEmpty()) {
+      console.warn('No imported objects found to fit camera');
+      return;
+    }
+
+    const center = new THREE.Vector3();
+    const size = new THREE.Vector3();
+
+    box.getCenter(center);
+    box.getSize(size);
+
+    this.camera.position.x = center.x;
+    this.camera.position.y = center.y;
+
+    const canvas = this.renderer.domElement;
+    const aspect = canvas.clientWidth / canvas.clientHeight;
+
+    const frustumHeight = this.camera.top - this.camera.bottom;
+    const frustumWidth = frustumHeight * aspect;
+
+    const zoomX = frustumWidth / size.x;
+    const zoomY = frustumHeight / size.y;
+
+    const padding = 0.9;
+    const newZoom = Math.min(zoomX, zoomY) * padding;
+
+    this.camera.zoom = Math.max(0.001, Math.min(newZoom, 10));
+    this.camera.updateProjectionMatrix();
+
+    console.log('Camera fitted to imported layout:', {
+      center,
+      size,
+      zoom: this.camera.zoom
+    });
   }
 
-  const center = new THREE.Vector3();
-  const size = new THREE.Vector3();
+  
+private createCurveHandle(
+    position: THREE.Vector3,
+    kind: 'start' | 'control' | 'end',
+    curve: THREE.Line
+  ): THREE.Mesh {
 
-  box.getCenter(center);
-  box.getSize(size);
+    // Create a circular editing handle
+    const geometry = new THREE.CircleGeometry(2, 24);
 
-  this.camera.position.x = center.x;
-  this.camera.position.y = center.y;
+    const material = new THREE.MeshBasicMaterial({
+      color: kind === 'control' ? 0xffa500 : 0x38bdf8,
+      depthTest: false,
+      depthWrite: false
+    });
 
-  const canvas = this.renderer.domElement;
-  const aspect = canvas.clientWidth / canvas.clientHeight;
+    const handle = new THREE.Mesh(geometry, material);
 
-  const frustumHeight = this.camera.top - this.camera.bottom;
-  const frustumWidth = frustumHeight * aspect;
+    // Position the handle at the corresponding curve point
+    handle.position.copy(position);
+    handle.position.z += 1;
 
-  const zoomX = frustumWidth / size.x;
-  const zoomY = frustumHeight / size.y;
+    // Store information required for dragging
+    handle.userData['type'] = 'CurveHandle';
+    handle.userData['handleKind'] = kind;
+    handle.userData['curve'] = curve;
 
-  const padding = 0.9;
-  const newZoom = Math.min(zoomX, zoomY) * padding;
+    handle.renderOrder = 1000;
 
-  this.camera.zoom = Math.max(0.001, Math.min(newZoom, 10));
-  this.camera.updateProjectionMatrix();
+    return handle;
+  }
 
-  console.log('Camera fitted to imported layout:', {
-    center,
-    size,
-    zoom: this.camera.zoom
-  });
-}
+
+  public showCurveHandles(
+    curve: THREE.Line,
+    scene: THREE.Scene
+  ): THREE.Group | null {
+
+    const startPoint =
+      curve.userData['startPoint'] as THREE.Vector3;
+
+    const controlPoint =
+      curve.userData['controlPoint'] as THREE.Vector3;
+
+    const endPoint =
+      curve.userData['endPoint'] as THREE.Vector3;
+
+    if (!startPoint || !controlPoint || !endPoint) {
+      return null;
+    }
+
+    // Create the handle group
+    const curveHandleGroup = new THREE.Group();
+
+    curveHandleGroup.userData['type'] = 'CurveHandleGroup';
+
+    // Create the three editing handles
+    const startHandle = this.createCurveHandle(
+      startPoint,
+      'start',
+      curve
+    );
+
+    const controlHandle = this.createCurveHandle(
+      controlPoint,
+      'control',
+      curve
+    );
+
+    const endHandle = this.createCurveHandle(
+      endPoint,
+      'end',
+      curve
+    );
+
+    // Add handles to the group
+    curveHandleGroup.add(
+      startHandle,
+      controlHandle,
+      endHandle
+    );
+
+    // Add the group to the Three.js scene
+    scene.add(curveHandleGroup);
+
+    return curveHandleGroup;
+  }
 
 }

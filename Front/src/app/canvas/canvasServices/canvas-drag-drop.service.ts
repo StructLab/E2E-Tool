@@ -11,6 +11,12 @@ export class CanvasDragDropService {
     private raycaster = new THREE.Raycaster(); /* detects what object the mouse is pointing at*/
     private pointer = new THREE.Vector2(); /* stores mouse position*/
     private draggedMesh: THREE.Mesh | THREE.Line | THREE.Group | null = null; /* stores the object currently being dragged*/
+
+    // Label being dragged independently
+    private draggedLabel: THREE.Sprite | null = null;
+
+    // Offset between the mouse and label position in world coordinates
+    private labelDragOffset = new THREE.Vector3();
     private offset = new THREE.Vector3(); /*stores distance between mouse click point and object center*/
 
     constructor(private notificationService: NotificationService, private state: ButtonStateService) {
@@ -88,10 +94,23 @@ export class CanvasDragDropService {
 
         // Mouse up → release object
         canvas.addEventListener('pointerup', (event) => this.pointerup(event, scene, camera));
-        canvas.addEventListener('pointerleave', () => (this.draggedMesh = null));
+        canvas.addEventListener('pointerleave', () => {
+            this.draggedMesh = null;
+            this.draggedLabel = null;
+            });
     }
 
     private pointerup(event: PointerEvent, scene: THREE.Scene, camera: THREE.OrthographicCamera) {
+        // Finish independent label dragging
+        if (this.draggedLabel) {
+        console.log(
+            'LABEL MOVED:',
+            this.draggedLabel.userData['displayId']
+        );
+
+        this.draggedLabel = null;
+        return;
+        }
         if (!this.draggedMesh) return;
 
         console.log('Object moved locally:', this.draggedMesh.position);;
@@ -111,6 +130,45 @@ export class CanvasDragDropService {
         this.raycaster.setFromCamera(this.pointer, camera);
         // Intersect objects in the scene
         const intersects = this.raycaster.intersectObjects(scene.children, true);
+
+        
+        // Check whether the user clicked an ID label
+        const labelHit = intersects.find(
+        hit =>
+            hit.object instanceof THREE.Sprite &&
+            hit.object.userData['isAssetLabel'] === true
+        );
+
+        if (labelHit) {
+        const label = labelHit.object as THREE.Sprite;
+
+        this.draggedLabel = label;
+        this.draggedMesh = null;
+
+        const labelWorldPosition = new THREE.Vector3();
+        label.getWorldPosition(labelWorldPosition);
+
+        // Find the pointer position at the label's depth
+        const plane = new THREE.Plane(
+            new THREE.Vector3(0, 0, 1),
+            -labelWorldPosition.z
+        );
+
+        const pointerWorld = new THREE.Vector3();
+
+        if (this.raycaster.ray.intersectPlane(plane, pointerWorld)) {
+            this.labelDragOffset.copy(pointerWorld)
+            .sub(labelWorldPosition);
+        }
+
+        console.log(
+            'LABEL SELECTED:',
+            label.userData['displayId']
+        );
+
+        return;
+        }
+
 
         this.pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
         this.pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -260,6 +318,51 @@ export class CanvasDragDropService {
         mesh.userData["outline"] = line;
     }
     private onPointerMove(event: PointerEvent, camera: THREE.OrthographicCamera) {
+        
+        // Move an ID label independently
+        if (this.draggedLabel) {
+        const canvas = event.currentTarget as HTMLCanvasElement;
+        const rect = canvas.getBoundingClientRect();
+
+        this.pointer.x =
+            ((event.clientX - rect.left) / rect.width) * 2 - 1;
+
+        this.pointer.y =
+            -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        this.raycaster.setFromCamera(this.pointer, camera);
+
+        const label = this.draggedLabel;
+
+        const worldPosition = new THREE.Vector3();
+        label.getWorldPosition(worldPosition);
+
+        const plane = new THREE.Plane(
+            new THREE.Vector3(0, 0, 1),
+            -worldPosition.z
+        );
+
+        const pointerWorld = new THREE.Vector3();
+
+        if (this.raycaster.ray.intersectPlane(plane, pointerWorld)) {
+
+            // Calculate the new position in world coordinates
+            const newWorldPosition = pointerWorld
+            .sub(this.labelDragOffset);
+
+            // Convert to local coordinates of the parent icon
+            if (label.parent) {
+            label.parent.updateMatrixWorld(true);
+
+            label.position.copy(
+                label.parent.worldToLocal(newWorldPosition)
+            );
+            }
+        }
+
+        return;
+        }
+
         if (!this.draggedMesh) return;
 
         const canvas = event.target as HTMLCanvasElement;

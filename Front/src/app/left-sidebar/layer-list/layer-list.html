@@ -1,3 +1,4 @@
+
 <div class="layer-list-panel">
 
   <div class="panel-header">
@@ -48,4 +49,31 @@
 
   </div>
 
+
+<!-- Icon Size Adjustment -->
+<div class="icon-scale-control">
+
+  <div class="icon-scale-header">
+    <label for="iconScaleSlider">Icon Size</label>
+    <span>{{ iconScalePercent }}%</span>
+  </div>
+
+  <input
+    id="iconScaleSlider"
+    type="range"
+    min="50"
+    max="200"
+    step="10"
+    [value]="iconScalePercent"
+    (input)="onIconScaleChange(+$any($event.target).value)"
+  />
+
+  <button
+    type="button"
+    (click)="resetIconScale()"
+  >
+    Reset
+  </button>
+
 </div>
+

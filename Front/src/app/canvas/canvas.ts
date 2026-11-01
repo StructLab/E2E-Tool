@@ -8,25 +8,21 @@ import {
 
 import * as THREE from 'three';
 import { CanvasSceneService } from './canvasServices/canvas-scene.service';
+import { SwitchesDawingService } from './canvasServices/switches-drawing.service';
+import { RailwayGeometryService,type GeometryEndInfo } from './canvasServices/railway-geometry.service';
 import { Subscription } from 'rxjs';
 import { EventService } from '../event.service';
 import { Guide } from "../guide/guide";
 import { NotificationService } from '../services/notification.service';
 import { AfterViewInit } from '@angular/core';
 //import { SVGLoader } from 'three/examples/jsm/loaders/SVGLoader.js';
-import { addIcon } from '../generic/canvas-item';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CreateLine, CreateSwitch, MoveObject, ValidateEngineering } from '../api/end_points';
-
-type GeometryEndInfo = {
-  object: THREE.Line;
-  point: THREE.Vector3;
-  endKind: 'start' | 'end';
-  tangentAngle: number;
-  curvature: number;
-  direction: 'CW' | 'CCW';
-};
+import { CreateLine, MoveObject, ValidateEngineering } from '../api/end_points';
+import { CanvasSelectionService } from './canvasServices/canvas-selection';
+import { PolylineDrawingService } from './canvasServices/polyline-drawing.service';
+import { CanvasAssetService } from './canvasServices/canvas-asset.service';
+import { IconScaleService } from './canvasServices/icon-scale.service';
 
 @Component({
   selector: 'app-canvas',
@@ -333,11 +329,17 @@ export class Canvas implements OnDestroy, AfterViewInit {
   }
 
   constructor(
-    private canvasSceneService: CanvasSceneService,
-    private eventService: EventService,
-    private notificationService: NotificationService,
-    private cdr: ChangeDetectorRef
-  ) {
+  private canvasSceneService: CanvasSceneService,
+  private switchesDrawingService: SwitchesDawingService,
+  private railwayGeometryService: RailwayGeometryService,
+  private canvasSelectionService: CanvasSelectionService,
+  private polylineDrawingService: PolylineDrawingService,
+  private canvasAssetService: CanvasAssetService,
+  private eventService: EventService,
+  private notificationService: NotificationService,
+  private cdr: ChangeDetectorRef,
+  private iconScaleService: IconScaleService,
+) {
     // Subscribe to the event immediately
     this.sub = this.eventService.triggerCanvas$.subscribe(async () => {
       console.log('Canvas triggered!');
@@ -353,6 +355,36 @@ export class Canvas implements OnDestroy, AfterViewInit {
     });
   }
 
+  // Current icon size displayed in the slider
+public iconScalePercent = 100;
+
+  // Called whenever the slider changes
+  onIconScaleChange(): void {
+    if (!this.initialized) {
+      return;
+    }
+
+    const scale = this.iconScalePercent / 100;
+
+    this.iconScaleService.setScale(
+      scale,
+      this.canvasSceneService.scene
+    );
+  }
+
+  // Restore default icon size
+  resetIconScale(): void {
+    this.iconScalePercent = 100;
+
+    if (!this.initialized) {
+      return;
+    }
+
+    this.iconScaleService.resetScale(
+      this.canvasSceneService.scene
+    );
+  }
+
   initializeCanvas() {
     const width = this.container.nativeElement.clientWidth;
     const height = this.container.nativeElement.clientHeight;
@@ -362,9 +394,6 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
     // Start rendering
     this.canvasSceneService.render(this.container.nativeElement);
-
-    //const testClothoid = this.createTestClothoid();
-    //this.canvasSceneService.scene.add(testClothoid);
 
     const canvas = this.canvasRef.nativeElement;
 
@@ -489,7 +518,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
           return;
         }
 
-        const finalCircle = this.createCircle(this.circleCenterPoint, point);
+        const finalCircle = this.railwayGeometryService.createCircle(this.circleCenterPoint, point);
         this.canvasSceneService.scene.add(finalCircle);
 
         if (this.previewCircle) {
@@ -557,7 +586,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
         const direction: 'CW' | 'CCW' = signedRadius < 0 ? 'CW' : 'CCW';
 
-        const finalArc = this.createRailwayArc(
+        const finalArc = this.railwayGeometryService.createRailwayArc(
           this.arcStartPoint,
           point,
           Math.abs(signedRadius),
@@ -666,18 +695,9 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
         if (this.previewPolylineSegment) {
           this.canvasSceneService.scene.remove(this.previewPolylineSegment);
-          this.previewPolylineSegment.geometry.dispose();
-
-          const material = this.previewPolylineSegment.material;
-          if (Array.isArray(material)) {
-            material.forEach(m => m.dispose());
-          } else {
-            material.dispose();
-          }
-
+          this.canvasSelectionService.disposeObject(this.previewPolylineSegment);
           this.previewPolylineSegment = null;
         }
-
         this.updateActivePolyline();
 
         console.log('POLYLINE POINT ADDED:', {
@@ -707,7 +727,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
           return;
         }
 
-        const finalCurve = this.createCurve(
+        const finalCurve = this.railwayGeometryService.createCurve(
           this.curveStartPoint,
           this.curveControlPoint,
           point
@@ -755,6 +775,43 @@ export class Canvas implements OnDestroy, AfterViewInit {
         const asset = this.getAssetUnderMouse(event);
 
         if (asset) {
+
+          
+          // Independent ID label selection
+          if (
+            asset instanceof THREE.Sprite &&
+            asset.userData['isAssetLabel'] === true
+          ) {
+            this.clearSelectionBox();
+            this.clearCurveHandles();
+
+            this.selectedCurve = null;
+
+            this.selectedAsset = asset;
+            this.selectedAssets = [];
+
+            // Begin dragging only the label
+            this.isDraggingAsset = true;
+
+            this.dragStartMousePoint =
+              this.getWorldPoint(event).clone();
+
+            this.dragStartAssetPosition =
+              asset.position.clone();
+
+            // Do not create the usual asset selection box
+            canvas.setPointerCapture(event.pointerId);
+            canvas.style.cursor = 'grabbing';
+
+            console.log(
+              'LABEL SELECTED:',
+              asset.userData['displayId']
+            );
+
+            event.preventDefault();
+            return;
+          }
+
           // Ctrl-click or Shift-click = add/remove item from multi-selection
           const assetType = asset.userData?.['type'];
 
@@ -763,7 +820,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
             assetType === 'Switch';
 
           if (isImportedElement) {
-            this.highlightSelectedImportedElement(asset);
+            this.canvasSelectionService.highlightSelectedImportedElement(asset);
 
             this.selectedAsset = null;
             this.selectedAssets = [];
@@ -873,7 +930,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
         // Empty canvas click clears selection
         this.selectedAsset = null;
-        this.clearSelectedImportedElementHighlight();
+        this.canvasSelectionService.clearSelectedImportedElementHighlight();
         this.selectedAssets = [];
         this.clearSelectionBox();
 
@@ -1001,16 +1058,13 @@ export class Canvas implements OnDestroy, AfterViewInit {
         }
 
         const lastPoint = this.polylinePoints[this.polylinePoints.length - 1];
-        const delta = new THREE.Vector3().subVectors(point, lastPoint);
 
-        const lengthWorld = delta.length();
-        const lengthMeters = this.worldUnitsToMeters(lengthWorld);
-
-        let angleDeg = THREE.MathUtils.radToDeg(Math.atan2(delta.y, delta.x));
-
-        if (angleDeg < 0) {
-          angleDeg += 360;
-        }
+        const { lengthMeters, angleDeg } =
+          this.polylineDrawingService.calculateSegmentInfo(
+            lastPoint,
+            point,
+            this.WORLD_UNITS_PER_METER
+          );
 
         this.livePolylineLength = lengthMeters.toFixed(2);
         this.livePolylineAngle = angleDeg.toFixed(1);
@@ -1178,7 +1232,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
       // 2. Resize line end if Shift + dragging line
       if (this.isDraggingAsset && this.selectedAsset instanceof THREE.Line && event.shiftKey) {
         const point = this.getWorldPoint(event);
-        this.resizeLineEnd(this.selectedAsset, point);
+        this.canvasSelectionService.resizeLineEnd(this.selectedAsset, point);
         event.preventDefault();
         return;
       }
@@ -1213,10 +1267,64 @@ export class Canvas implements OnDestroy, AfterViewInit {
         return;
       }
 
-
-      // 3. Move asset if asset drag mode is active
       // 3. Move asset if asset drag mode is active
       if (this.isDraggingAsset && this.selectedAsset) {
+
+        
+        // Independently drag ID labels
+        if (
+          this.selectedAsset instanceof THREE.Sprite &&
+          this.selectedAsset.userData['isAssetLabel'] === true
+        ) {
+          const label = this.selectedAsset;
+          const currentPoint = this.getWorldPoint(event);
+
+          const worldDelta = currentPoint
+            .clone()
+            .sub(this.dragStartMousePoint);
+
+          worldDelta.z = 0;
+
+          // Convert world-space movement into the icon's local space
+          if (label.parent) {
+            label.parent.updateMatrixWorld(true);
+
+            const parentWorldRotation =
+              new THREE.Quaternion();
+
+            const parentWorldScale =
+              new THREE.Vector3();
+
+            const parentWorldPosition =
+              new THREE.Vector3();
+
+            label.parent.matrixWorld.decompose(
+              parentWorldPosition,
+              parentWorldRotation,
+              parentWorldScale
+            );
+
+            const localDelta = worldDelta
+              .clone()
+              .applyQuaternion(parentWorldRotation.invert());
+
+            localDelta.set(
+              localDelta.x / (parentWorldScale.x || 1),
+              localDelta.y / (parentWorldScale.y || 1),
+              0
+            );
+
+            label.position.copy(
+              this.dragStartAssetPosition
+                .clone()
+                .add(localDelta)
+            );
+          }
+
+          event.preventDefault();
+          return;
+        }
+
 
         const currentMousePoint = this.getWorldPoint(event);
 
@@ -1328,7 +1436,16 @@ export class Canvas implements OnDestroy, AfterViewInit {
           this.selectedCurve = this.selectedAsset as THREE.Line;
           this.updateCurveHandlePositions();
         } else if (this.selectedAsset) {
-          this.showSelectionBox(this.selectedAsset);
+
+          const isLabel =
+            this.selectedAsset instanceof THREE.Sprite &&
+            this.selectedAsset.userData['isAssetLabel'] === true;
+
+          if (isLabel) {
+            this.clearSelectionBox();
+          } else {
+            this.showSelectionBox(this.selectedAsset);
+          }
         }
 
         if (canvas.hasPointerCapture(event.pointerId)) {
@@ -1385,6 +1502,21 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
     window.addEventListener('keydown', (event) => {
 
+      // Rotate selected ID label by 90° when R is pressed
+      if (
+        this.selectedAsset instanceof THREE.Sprite &&
+        this.selectedAsset.userData['isAssetLabel'] === true &&
+        event.key.toLowerCase() === 'r' &&
+        !event.ctrlKey &&
+        !event.altKey &&
+        !event.metaKey &&
+        !(event.target instanceof HTMLInputElement)
+      ) {
+        this.rotateSelectedLabel(90);
+        event.preventDefault();
+        return;
+      }
+
       if (this.isDrawingPolyline) {
         if (event.key === 'Enter') {
           this.finishPolyline();
@@ -1421,13 +1553,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
   }
 
   startLineDrawing(): void {
-    this.isDrawingLine = true;
-
-    this.isDrawingCircle = false;
-    this.isDrawingCurve = false;
-    this.isDrawingArc = false;
-    this.isDrawingClothoid = false;
-    this.isDrawingPolyline = false;
+    this.setDrawingMode('Line');
 
     this.lineStartPoint = null;
     this.lineDirectionPoint = null;
@@ -1442,106 +1568,47 @@ export class Canvas implements OnDestroy, AfterViewInit {
     this.isLineLengthBoxVisible = false;
     this.isLineDirectionLocked = false;
 
-    this.eventService.updateCanvasStatus({
-      mode: 'Line'
-    });
-
     console.log('LINE DRAWING MODE ON');
   }
 
   startCircleDrawing(): void {
-    this.isDrawingCircle = true;
-    this.isDrawingLine = false;
-    this.isDrawingCurve = false;
-    this.isDrawingClothoid = false;
-    this.isDrawingPolyline = false;
+    this.setDrawingMode('Circle');
 
     this.circleCenterPoint = null;
-
-    this.eventService.updateCanvasStatus({
-      mode: 'Circle'
-    });
 
     console.log('CIRCLE DRAWING MODE ON');
   }
 
   startCurveDrawing(): void {
-    this.isDrawingCurve = true;
-
-    this.isDrawingArc = false;
-    this.isDrawingLine = false;
-    this.isDrawingCircle = false;
-    this.isDrawingClothoid = false;
-    this.isDrawingPolyline = false;
+    this.setDrawingMode('Curve');
 
     this.curveStartPoint = null;
     this.curveControlPoint = null;
-
-    this.eventService.updateCanvasStatus({
-      mode: 'Curve'
-    });
 
     console.log('CURVE DRAWING MODE ON');
   }
 
   startArcDrawing(): void {
-    this.isDrawingArc = true;
-
-    this.isDrawingCurve = false;
-    this.isDrawingLine = false;
-    this.isDrawingCircle = false;
-    this.isDrawingClothoid = false;
-    this.isDrawingPolyline = false;
+    this.setDrawingMode('Arc');
 
     this.arcStartPoint = null;
-
-    this.eventService.updateCanvasStatus({
-      mode: 'Arc'
-    });
 
     console.log('ARC DRAWING MODE ON');
   }
 
   startClothoidDrawing(): void {
-    this.isDrawingClothoid = true;
-
-    this.isDrawingLine = false;
-    this.isDrawingCircle = false;
-    this.isDrawingCurve = false;
-    this.isDrawingArc = false;
-    this.isDrawingPolyline = false;
+    this.setDrawingMode('Clothoid');
 
     this.clothoidStartPoint = null;
 
-    if (this.previewClothoid) {
-      this.canvasSceneService.scene.remove(this.previewClothoid);
-      this.previewClothoid.geometry.dispose();
-
-      const material = this.previewClothoid.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.previewClothoid = null;
-    }
-
-    this.eventService.updateCanvasStatus({
-      mode: 'Clothoid'
-    });
+    this.disposePreviewObject(this.previewClothoid);
+    this.previewClothoid = null;
 
     console.log('CLOTHOID DRAWING MODE ON');
   }
 
   startPolylineDrawing(): void {
-    this.isDrawingPolyline = true;
-
-    this.isDrawingLine = false;
-    this.isDrawingCircle = false;
-    this.isDrawingCurve = false;
-    this.isDrawingArc = false;
-    this.isDrawingClothoid = false;
+    this.setDrawingMode('Polyline');
 
     this.polylinePoints = [];
 
@@ -1552,42 +1619,13 @@ export class Canvas implements OnDestroy, AfterViewInit {
     this.isPolylineInputBoxVisible = false;
     this.polylineLengthInput = '';
     this.polylineAngleInput = '';
+
     this.livePolylineLength = '0';
     this.livePolylineAngle = '0';
 
     this.polylineSegmentMode = 'line';
 
-    if (this.activePolyline) {
-      this.canvasSceneService.scene.remove(this.activePolyline);
-      this.activePolyline.geometry.dispose();
-
-      const material = this.activePolyline.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.activePolyline = null;
-    }
-
-    if (this.previewPolylineSegment) {
-      this.canvasSceneService.scene.remove(this.previewPolylineSegment);
-      this.previewPolylineSegment.geometry.dispose();
-
-      const material = this.previewPolylineSegment.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.previewPolylineSegment = null;
-    }
-
-    this.eventService.updateCanvasStatus({
-      mode: 'Polyline'
-    });
+    this.clearPolylinePreviews();
 
     console.log('POLYLINE DRAWING MODE ON');
   }
@@ -1598,37 +1636,9 @@ export class Canvas implements OnDestroy, AfterViewInit {
       return;
     }
 
-    // Remove preview/full active polyline
-    if (this.activePolyline) {
-      this.canvasSceneService.scene.remove(this.activePolyline);
-      this.activePolyline.geometry.dispose();
+   this.clearPolylinePreviews();
 
-      const material = this.activePolyline.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.activePolyline = null;
-    }
-
-    // Remove live preview segment
-    if (this.previewPolylineSegment) {
-      this.canvasSceneService.scene.remove(this.previewPolylineSegment);
-      this.previewPolylineSegment.geometry.dispose();
-
-      const material = this.previewPolylineSegment.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.previewPolylineSegment = null;
-    }
-
-    // Create separate line objects for each polyline segment
+    // Create separate permanent line segments
     for (let i = 0; i < this.polylinePoints.length - 1; i++) {
       const startPoint = this.polylinePoints[i].clone();
       const endPoint = this.polylinePoints[i + 1].clone();
@@ -1637,7 +1647,12 @@ export class Canvas implements OnDestroy, AfterViewInit {
         continue;
       }
 
-      const segmentLine = this.createPolylineSegmentLine(startPoint, endPoint, i);
+      const segmentLine =
+        this.railwayGeometryService.createPolylineSegmentLine(
+          startPoint,
+          endPoint,
+          i
+        );
 
       segmentLine.userData['type'] = 'DrawnLine';
       segmentLine.userData['draggable'] = true;
@@ -1664,6 +1679,22 @@ export class Canvas implements OnDestroy, AfterViewInit {
     this.cdr.detectChanges();
 
     console.log('POLYLINE FINISHED AS SEPARATE LINE SEGMENTS');
+}
+
+
+
+  private clearPolylinePreviews(): void {
+    if (this.activePolyline) {
+      this.canvasSceneService.scene.remove(this.activePolyline);
+      this.canvasSelectionService.disposeObject(this.activePolyline);
+      this.activePolyline = null;
+    }
+
+    if (this.previewPolylineSegment) {
+      this.canvasSceneService.scene.remove(this.previewPolylineSegment);
+      this.canvasSelectionService.disposeObject(this.previewPolylineSegment);
+      this.previewPolylineSegment = null;
+    }
   }
 
   private updateActivePolyline(): void {
@@ -1671,66 +1702,24 @@ export class Canvas implements OnDestroy, AfterViewInit {
       return;
     }
 
+    // Remove the previous active polyline
     if (this.activePolyline) {
       this.canvasSceneService.scene.remove(this.activePolyline);
-      this.activePolyline.geometry.dispose();
-
-      const material = this.activePolyline.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
+      this.canvasSelectionService.disposeObject(this.activePolyline);
       this.activePolyline = null;
     }
 
-    const geometry = new THREE.BufferGeometry().setFromPoints(this.polylinePoints);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0x00ffff
-    });
-
-    this.activePolyline = new THREE.Line(geometry, material);
-
-    this.activePolyline.userData = {
-      type: 'PolylinePreview',
-      isPolyline: true,
-      isPreview: true,
-      points: this.polylinePoints.map(p => p.clone())
-    };
+    // Create the updated polyline
+    this.activePolyline =
+      this.railwayGeometryService.createActivePolyline(
+        this.polylinePoints
+      );
 
     this.canvasSceneService.scene.add(this.activePolyline);
   }
 
   private cancelPolyline(): void {
-    if (this.activePolyline) {
-      this.canvasSceneService.scene.remove(this.activePolyline);
-      this.activePolyline.geometry.dispose();
-
-      const material = this.activePolyline.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.activePolyline = null;
-    }
-
-    if (this.previewPolylineSegment) {
-      this.canvasSceneService.scene.remove(this.previewPolylineSegment);
-      this.previewPolylineSegment.geometry.dispose();
-
-      const material = this.previewPolylineSegment.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.previewPolylineSegment = null;
-    }
+    this.clearPolylinePreviews();
 
     this.polylinePoints = [];
     this.isDrawingPolyline = false;
@@ -1746,47 +1735,33 @@ export class Canvas implements OnDestroy, AfterViewInit {
     });
 
     this.cdr.detectChanges();
+
     console.log('POLYLINE CANCELLED');
   }
 
-  private updatePolylinePreviewSegment(currentPoint: THREE.Vector3): void {
+  private updatePolylinePreviewSegment(
+    currentPoint: THREE.Vector3
+  ): void {
     if (!this.isDrawingPolyline || this.polylinePoints.length === 0) {
       return;
     }
 
-    const lastPoint = this.polylinePoints[this.polylinePoints.length - 1];
+    const lastPoint =
+      this.polylinePoints[this.polylinePoints.length - 1];
 
+    // Remove previous preview
     if (this.previewPolylineSegment) {
       this.canvasSceneService.scene.remove(this.previewPolylineSegment);
-      this.previewPolylineSegment.geometry.dispose();
-
-      const material = this.previewPolylineSegment.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
+      this.canvasSelectionService.disposeObject(this.previewPolylineSegment);
       this.previewPolylineSegment = null;
     }
 
-    const geometry = new THREE.BufferGeometry().setFromPoints([
-      lastPoint,
-      currentPoint
-    ]);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0x00ffff,
-      transparent: true,
-      opacity: 0.45
-    });
-
-    this.previewPolylineSegment = new THREE.Line(geometry, material);
-
-    this.previewPolylineSegment.userData = {
-      type: 'PolylinePreviewSegment',
-      isPreview: true
-    };
+    // Generate updated preview geometry
+    this.previewPolylineSegment =
+      this.railwayGeometryService.createPolylinePreviewSegment(
+        lastPoint,
+        currentPoint
+      );
 
     this.canvasSceneService.scene.add(this.previewPolylineSegment);
   }
@@ -1886,160 +1861,32 @@ export class Canvas implements OnDestroy, AfterViewInit {
     return line;
   }
 
-  private createPolylineSegmentLine(
-    startPoint: THREE.Vector3,
-    endPoint: THREE.Vector3,
-    segmentIndex: number
-  ): THREE.Line {
-    const start = startPoint.clone();
-    const end = endPoint.clone();
+  private updatePreviewCircle(
+      center: THREE.Vector3,
+      radiusPoint: THREE.Vector3
+    ): void {
 
-    const direction = new THREE.Vector3().subVectors(end, start);
-    direction.z = 0;
+      this.disposePreviewObject(this.previewCircle);
 
-    if (direction.length() > 0.001) {
-      direction.normalize();
+      this.previewCircle = this.railwayGeometryService.createCircle(
+        center,
+        radiusPoint
+      );
 
-      // Tiny visual overlap to hide small gaps between separate line objects
-      const overlap = 0.04;
+      this.previewCircle.userData['draggable'] = false;
+      this.previewCircle.userData['type'] = 'PreviewCircle';
 
-      start.add(direction.clone().multiplyScalar(-overlap));
-      end.add(direction.clone().multiplyScalar(overlap));
+      this.canvasSceneService.scene.add(this.previewCircle);
     }
-
-    const geometry = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(start.x, start.y, 0.2),
-      new THREE.Vector3(end.x, end.y, 0.2)
-    ]);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0xffffff,
-      depthTest: false
-    });
-
-    const line = new THREE.Line(geometry, material);
-
-    line.renderOrder = 50;
-
-    line.userData['draggable'] = true;
-    line.userData['type'] = 'DrawnLine';
-
-    // Important: keep the real mathematical endpoints, not the overlapped display points
-    line.userData['startPoint'] = startPoint.clone();
-    line.userData['endPoint'] = endPoint.clone();
-
-    line.userData['createdFromPolyline'] = true;
-    line.userData['polylineSegmentIndex'] = segmentIndex;
-
-    return line;
-  }
-
-  private createCircle(center: THREE.Vector3, radiusPoint: THREE.Vector3): THREE.Line {
-    const radius = center.distanceTo(radiusPoint);
-
-    const curve = new THREE.EllipseCurve(
-      center.x,
-      center.y,
-      radius,
-      radius,
-      0,
-      Math.PI * 2,
-      false,
-      0
-    );
-
-    const points = curve.getPoints(96).map(
-      point => new THREE.Vector3(point.x, point.y, 0)
-    );
-
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0xffffff
-    });
-
-    const circle = new THREE.LineLoop(geometry, material);
-
-    circle.userData['draggable'] = true;
-    circle.userData['type'] = 'DrawnCircle';
-    circle.userData['centerPoint'] = center.clone();
-    circle.userData['radius'] = radius;
-
-    return circle;
-  }
-
-  private updatePreviewCircle(center: THREE.Vector3, radiusPoint: THREE.Vector3): void {
-    if (this.previewCircle) {
-      this.canvasSceneService.scene.remove(this.previewCircle);
-      this.previewCircle.geometry.dispose();
-
-      const material = this.previewCircle.material;
-
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.previewCircle = null;
-    }
-
-    this.previewCircle = this.createCircle(center, radiusPoint);
-    this.previewCircle.userData['draggable'] = false;
-    this.previewCircle.userData['type'] = 'PreviewCircle';
-
-    this.canvasSceneService.scene.add(this.previewCircle);
-  }
-
-  private createCurve(
-    startPoint: THREE.Vector3,
-    controlPoint: THREE.Vector3,
-    endPoint: THREE.Vector3
-  ): THREE.Line {
-    const curve = new THREE.QuadraticBezierCurve3(
-      startPoint,
-      controlPoint,
-      endPoint
-    );
-
-    const points = curve.getPoints(64);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0xffffff
-    });
-
-    const line = new THREE.Line(geometry, material);
-
-    line.userData['draggable'] = true;
-    line.userData['type'] = 'DrawnCurve';
-    line.userData['startPoint'] = startPoint.clone();
-    line.userData['controlPoint'] = controlPoint.clone();
-    line.userData['endPoint'] = endPoint.clone();
-
-    return line;
-  }
 
   private updateSelectedCurveGeometry(): void {
     if (!this.selectedCurve) {
       return;
     }
 
-    const startPoint = this.selectedCurve.userData['startPoint'] as THREE.Vector3;
-    const controlPoint = this.selectedCurve.userData['controlPoint'] as THREE.Vector3;
-    const endPoint = this.selectedCurve.userData['endPoint'] as THREE.Vector3;
-
-    const curve = new THREE.QuadraticBezierCurve3(
-      startPoint,
-      controlPoint,
-      endPoint
+    this.railwayGeometryService.updateCurveGeometry(
+      this.selectedCurve
     );
-
-    const points = curve.getPoints(64);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-
-    this.selectedCurve.geometry.dispose();
-    this.selectedCurve.geometry = geometry;
   }
 
   private updateCurveHandlePositions(): void {
@@ -2047,28 +1894,10 @@ export class Canvas implements OnDestroy, AfterViewInit {
       return;
     }
 
-    const startPoint = this.selectedCurve.userData['startPoint'] as THREE.Vector3;
-    const controlPoint = this.selectedCurve.userData['controlPoint'] as THREE.Vector3;
-    const endPoint = this.selectedCurve.userData['endPoint'] as THREE.Vector3;
-
-    this.curveHandleGroup.children.forEach((child) => {
-      const handle = child as THREE.Mesh;
-      const kind = handle.userData['handleKind'];
-
-      if (kind === 'start') {
-        handle.position.copy(startPoint);
-      }
-
-      if (kind === 'control') {
-        handle.position.copy(controlPoint);
-      }
-
-      if (kind === 'end') {
-        handle.position.copy(endPoint);
-      }
-
-      handle.position.z = 2;
-    });
+    this.canvasSelectionService.updateCurveHandlePositions(
+      this.selectedCurve,
+      this.curveHandleGroup
+    );
   }
 
   private updatePreviewCurve(
@@ -2076,81 +1905,33 @@ export class Canvas implements OnDestroy, AfterViewInit {
     controlPoint: THREE.Vector3,
     endPoint: THREE.Vector3
   ): void {
-    if (this.previewCurve) {
-      this.canvasSceneService.scene.remove(this.previewCurve);
-      this.previewCurve.geometry.dispose();
 
-      const material = this.previewCurve.material;
+    this.disposePreviewObject(this.previewCurve);
 
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
+    this.previewCurve = this.railwayGeometryService.createCurve(
+      startPoint,
+      controlPoint,
+      endPoint
+    );
 
-      this.previewCurve = null;
-    }
-
-    this.previewCurve = this.createCurve(startPoint, controlPoint, endPoint);
     this.previewCurve.userData['draggable'] = false;
     this.previewCurve.userData['type'] = 'PreviewCurve';
 
     this.canvasSceneService.scene.add(this.previewCurve);
   }
 
-  private createCurveHandle(
-    position: THREE.Vector3,
-    kind: 'start' | 'control' | 'end',
-    curve: THREE.Line
-  ): THREE.Mesh {
-    const geometry = new THREE.CircleGeometry(0.8, 32);
-
-    const color =
-      kind === 'control'
-        ? 0x22c55e
-        : 0x38bdf8;
-
-    const material = new THREE.MeshBasicMaterial({
-      color,
-      depthTest: false,
-      depthWrite: false
-    });
-
-    const handle = new THREE.Mesh(geometry, material);
-
-    handle.position.copy(position);
-    handle.position.z = 2;
-
-    handle.userData['type'] = 'CurveHandle';
-    handle.userData['handleKind'] = kind;
-    handle.userData['curve'] = curve;
-
-    return handle;
-  }
-
   private showCurveHandles(curve: THREE.Line): void {
+
+    // Remove any existing curve handles
     this.clearCurveHandles();
 
-    const startPoint = curve.userData['startPoint'] as THREE.Vector3;
-    const controlPoint = curve.userData['controlPoint'] as THREE.Vector3;
-    const endPoint = curve.userData['endPoint'] as THREE.Vector3;
+    // Create and display the new handles
+    this.curveHandleGroup =
+      this.canvasSelectionService.showCurveHandles(
+        curve,
+        this.canvasSceneService.scene
+      );
 
-    if (!startPoint || !controlPoint || !endPoint) {
-      return;
-    }
-
-    this.curveHandleGroup = new THREE.Group();
-    this.curveHandleGroup.userData['type'] = 'CurveHandleGroup';
-
-    const startHandle = this.createCurveHandle(startPoint, 'start', curve);
-    const controlHandle = this.createCurveHandle(controlPoint, 'control', curve);
-    const endHandle = this.createCurveHandle(endPoint, 'end', curve);
-
-    this.curveHandleGroup.add(startHandle);
-    this.curveHandleGroup.add(controlHandle);
-    this.curveHandleGroup.add(endHandle);
-
-    this.canvasSceneService.scene.add(this.curveHandleGroup);
   }
 
   private stopCanvasPanning(): void {
@@ -2168,753 +1949,12 @@ export class Canvas implements OnDestroy, AfterViewInit {
       return;
     }
 
-    this.curveHandleGroup.children.forEach((child) => {
-      if (child instanceof THREE.Mesh) {
-        child.geometry.dispose();
+    this.canvasSelectionService.clearCurveHandles(
+      this.curveHandleGroup,
+      this.canvasSceneService.scene
+    );
 
-        const material = child.material;
-
-        if (Array.isArray(material)) {
-          material.forEach((m) => m.dispose());
-        } else {
-          material.dispose();
-        }
-      }
-    });
-
-    this.canvasSceneService.scene.remove(this.curveHandleGroup);
     this.curveHandleGroup = null;
-  }
-
-  private createRailwayArc(
-    startPoint: THREE.Vector3,
-    endPoint: THREE.Vector3,
-    radius: number,
-    direction: 'CW' | 'CCW'
-  ): THREE.Line | null {
-    const radiusAbs = Math.abs(radius);
-
-    const start = new THREE.Vector3(startPoint.x, startPoint.y, 0);
-    const end = new THREE.Vector3(endPoint.x, endPoint.y, 0);
-
-    const chord = new THREE.Vector3().subVectors(end, start);
-    const chordLength = chord.length();
-
-    if (chordLength === 0) {
-      console.warn('Arc start and end point cannot be the same');
-      return null;
-    }
-
-    if (radiusAbs < chordLength / 2) {
-      console.warn('Radius is too small for this start/end distance');
-      alert('Radius is too small. Radius must be at least half the distance between start and end.');
-      return null;
-    }
-
-    const midpoint = new THREE.Vector3()
-      .addVectors(start, end)
-      .multiplyScalar(0.5);
-
-    const halfChord = chordLength / 2;
-
-    const centerOffsetDistance = Math.sqrt(
-      radiusAbs * radiusAbs - halfChord * halfChord
-    );
-
-    const chordDirection = chord.clone().normalize();
-
-    const perpendicular = new THREE.Vector3(
-      -chordDirection.y,
-      chordDirection.x,
-      0
-    );
-
-    const centerCandidateA = midpoint
-      .clone()
-      .add(perpendicular.clone().multiplyScalar(centerOffsetDistance));
-
-    const centerCandidateB = midpoint
-      .clone()
-      .add(perpendicular.clone().multiplyScalar(-centerOffsetDistance));
-
-    const candidateA = this.buildArcFromCenter(
-      start,
-      end,
-      centerCandidateA,
-      direction
-    );
-
-    const candidateB = this.buildArcFromCenter(
-      start,
-      end,
-      centerCandidateB,
-      direction
-    );
-
-    // Choose the smaller arc, not the huge arc around the other side
-    const chosen =
-      Math.abs(candidateA.sweepAngle) <= Math.abs(candidateB.sweepAngle)
-        ? candidateA
-        : candidateB;
-
-    const geometry = new THREE.BufferGeometry().setFromPoints(chosen.points);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0xffffff,
-      depthTest: false
-    });
-
-    const arc = new THREE.Line(geometry, material);
-
-    arc.renderOrder = 50;
-    arc.userData['draggable'] = true;
-    arc.userData['type'] = 'DrawnArc';
-
-    arc.userData['startPoint'] = start.clone();
-    arc.userData['endPoint'] = end.clone();
-    arc.userData['radius'] = radiusAbs;
-    arc.userData['direction'] = direction;
-    arc.userData['centerPoint'] = chosen.center.clone();
-
-    return arc;
-  }
-
-  private generateClothoidPoints(
-    startPoint: THREE.Vector3,
-    startAngle: number,
-    length: number,
-    endRadius: number,
-    direction: 'CW' | 'CCW',
-    segments: number = 80
-  ): THREE.Vector3[] {
-    const points: THREE.Vector3[] = [];
-
-    if (length <= 0 || endRadius <= 0 || segments < 2) {
-      console.warn('Invalid clothoid parameters', {
-        startPoint,
-        startAngle,
-        length,
-        endRadius,
-        direction,
-        segments
-      });
-
-      return points;
-    }
-
-    const sign = direction === 'CCW' ? 1 : -1;
-
-    let x = startPoint.x;
-    let y = startPoint.y;
-    let theta = startAngle;
-
-    const ds = length / segments;
-
-    for (let i = 0; i <= segments; i++) {
-      points.push(new THREE.Vector3(x, y, startPoint.z));
-
-      const s = i * ds;
-
-      // Clothoid curvature increases linearly from 0 to 1 / endRadius
-      const curvature = s / (endRadius * length);
-
-      theta += sign * curvature * ds;
-
-      x += Math.cos(theta) * ds;
-      y += Math.sin(theta) * ds;
-    }
-
-    return points;
-  }
-
-  private getTransitionCurvatureFactor(
-    u: number,
-    curveType:
-      | 'clothoid'
-      | 'cubicParabola'
-      | 'bloss'
-      | 'cosine'
-      | 'sine'
-      | 'biquadraticParabola'
-      | 'wienerBogen'
-  ): number {
-    const clampedU = Math.max(0, Math.min(1, u));
-
-    switch (curveType) {
-      case 'clothoid':
-        return clampedU;
-
-      case 'cubicParabola':
-        // In the generalized curvature model, cubic parabola behaves as
-        // a simple transition approximation.
-        return clampedU;
-
-      case 'bloss':
-        return 3 * clampedU * clampedU - 2 * clampedU * clampedU * clampedU;
-
-      case 'cosine':
-        return (1 - Math.cos(Math.PI * clampedU)) / 2;
-
-      case 'sine':
-        return clampedU - Math.sin(2 * Math.PI * clampedU) / (2 * Math.PI);
-
-      case 'biquadraticParabola':
-        // Temporary fallback until we implement exact version.
-        return clampedU;
-
-      case 'wienerBogen':
-        // Temporary fallback until we implement exact version.
-        return clampedU;
-
-      default:
-        return clampedU;
-    }
-  }
-
-  private generateTransitionBetweenCurvatures(
-    startPoint: THREE.Vector3,
-    startAngle: number,
-    length: number,
-    startCurvature: number,
-    endCurvature: number,
-    direction: 'CW' | 'CCW',
-    curveType:
-      | 'clothoid'
-      | 'cubicParabola'
-      | 'bloss'
-      | 'cosine'
-      | 'sine'
-      | 'biquadraticParabola'
-      | 'wienerBogen',
-    segments: number = 120
-  ): THREE.Vector3[] {
-    const points: THREE.Vector3[] = [];
-
-    if (length <= 0 || segments < 2) {
-      console.warn('Invalid generalized transition parameters', {
-        startPoint,
-        startAngle,
-        length,
-        startCurvature,
-        endCurvature,
-        direction,
-        curveType,
-        segments
-      });
-
-      return points;
-    }
-
-    const sign = direction === 'CCW' ? 1 : -1;
-
-    let x = startPoint.x;
-    let y = startPoint.y;
-    let theta = startAngle;
-
-    const ds = length / segments;
-
-    for (let i = 0; i <= segments; i++) {
-      points.push(new THREE.Vector3(x, y, startPoint.z));
-
-      const s = i * ds;
-      const u = s / length;
-
-      const factor = this.getTransitionCurvatureFactor(u, curveType);
-
-      const curvature =
-        startCurvature + (endCurvature - startCurvature) * factor;
-
-      theta += sign * curvature * ds;
-
-      x += Math.cos(theta) * ds;
-      y += Math.sin(theta) * ds;
-    }
-
-    return points;
-  }
-
-  private generateTransitionCurvePoints(
-    startPoint: THREE.Vector3,
-    startAngle: number,
-    length: number,
-    endRadius: number,
-    direction: 'CW' | 'CCW',
-    curveType:
-      | 'clothoid'
-      | 'cubicParabola'
-      | 'bloss'
-      | 'cosine'
-      | 'sine'
-      | 'biquadraticParabola'
-      | 'wienerBogen',
-    segments: number = 120
-  ): THREE.Vector3[] {
-    const startCurvature = 0;
-    const endCurvature = 1 / endRadius;
-
-    return this.generateTransitionBetweenCurvatures(
-      startPoint,
-      startAngle,
-      length,
-      startCurvature,
-      endCurvature,
-      direction,
-      curveType,
-      segments
-    );
-  }
-
-  private fitTransitionPointsBetweenArcEnds(
-    arcInfoA: GeometryEndInfo,
-    arcInfoB: GeometryEndInfo,
-    curveType:
-      | 'clothoid'
-      | 'cubicParabola'
-      | 'bloss'
-      | 'cosine'
-      | 'sine'
-      | 'biquadraticParabola'
-      | 'wienerBogen'
-  ): {
-    points: THREE.Vector3[];
-    length: number;
-    lengthMeters: number;
-    direction: 'CW' | 'CCW';
-    endTangentMismatchDeg: number;
-  } | null {
-    const chordLength = arcInfoA.point.distanceTo(arcInfoB.point);
-
-    if (chordLength < 0.001) {
-      return null;
-    }
-
-    const requestedLengthMeters = Number(this.clothoidLengthInput);
-    const requestedLength = Number.isFinite(requestedLengthMeters) && requestedLengthMeters > 0
-      ? this.metersToWorldUnits(requestedLengthMeters)
-      : chordLength;
-
-    const baseLength = Math.max(chordLength, requestedLength);
-
-    const targetEndDirection = new THREE.Vector3(
-      Math.cos(arcInfoB.tangentAngle),
-      Math.sin(arcInfoB.tangentAngle),
-      0
-    ).normalize();
-
-    const directionsToTry: ('CW' | 'CCW')[] = [
-      arcInfoA.direction,
-      arcInfoA.direction === 'CW' ? 'CCW' : 'CW'
-    ];
-
-    let bestResult: {
-      points: THREE.Vector3[];
-      length: number;
-      lengthMeters: number;
-      direction: 'CW' | 'CCW';
-      endTangentMismatchDeg: number;
-      score: number;
-    } | null = null;
-
-    for (const direction of directionsToTry) {
-      for (let scale = 1; scale <= 4; scale += 0.05) {
-        const length = baseLength * scale;
-
-        const rawPoints = this.generateTransitionBetweenCurvatures(
-          arcInfoA.point,
-          arcInfoA.tangentAngle,
-          length,
-          arcInfoA.curvature,
-          arcInfoB.curvature,
-          direction,
-          curveType,
-          120
-        );
-
-        if (rawPoints.length < 2) {
-          continue;
-        }
-
-        const fittedPoints = this.smoothlyMoveTransitionEnd(
-          rawPoints,
-          arcInfoB.point
-        );
-
-        this.forceEndTangentDirection(
-          fittedPoints,
-          arcInfoB.point,
-          targetEndDirection
-        );
-
-        const endDirection = this.getEndDirectionFromPoints(fittedPoints);
-
-        if (!endDirection) {
-          continue;
-        }
-
-        const endTangentMismatchDeg = this.getSmallestAngleBetweenVectorsDeg(
-          endDirection,
-          targetEndDirection
-        );
-
-        const endGap = fittedPoints[fittedPoints.length - 1].distanceTo(arcInfoB.point);
-
-        const score =
-          endTangentMismatchDeg +
-          endGap * 1000 +
-          scale * 0.05;
-
-        if (!bestResult || score < bestResult.score) {
-          bestResult = {
-            points: fittedPoints,
-            length,
-            lengthMeters: this.worldUnitsToMeters(length),
-            direction,
-            endTangentMismatchDeg,
-            score
-          };
-        }
-      }
-    }
-
-    if (!bestResult) {
-      return null;
-    }
-
-    return {
-      points: bestResult.points,
-      length: bestResult.length,
-      lengthMeters: bestResult.lengthMeters,
-      direction: bestResult.direction,
-      endTangentMismatchDeg: bestResult.endTangentMismatchDeg
-    };
-  }
-
-  private smoothlyMoveTransitionEnd(
-    points: THREE.Vector3[],
-    targetEndPoint: THREE.Vector3
-  ): THREE.Vector3[] {
-    if (points.length < 2) {
-      return points.map(p => p.clone());
-    }
-
-    const rawEndPoint = points[points.length - 1];
-    const correction = targetEndPoint.clone().sub(rawEndPoint);
-
-    return points.map((point, index) => {
-      const u = index / (points.length - 1);
-
-      // Smooth correction: start unchanged, end fully moved.
-      const smoothFactor = u * u * (3 - 2 * u);
-
-      return point
-        .clone()
-        .add(correction.clone().multiplyScalar(smoothFactor));
-    });
-  }
-
-  private forceEndTangentDirection(
-    points: THREE.Vector3[],
-    targetEndPoint: THREE.Vector3,
-    targetEndDirection: THREE.Vector3
-  ): void {
-    if (points.length < 3) {
-      return;
-    }
-
-    const lastIndex = points.length - 1;
-    points[lastIndex] = targetEndPoint.clone();
-
-    const averageStep =
-      points[lastIndex].distanceTo(points[lastIndex - 2]) / 2 || 0.1;
-
-    const influenceCount = Math.min(8, points.length - 2);
-
-    for (let offset = 1; offset <= influenceCount; offset++) {
-      const index = lastIndex - offset;
-
-      const desiredPoint = targetEndPoint
-        .clone()
-        .sub(
-          targetEndDirection
-            .clone()
-            .multiplyScalar(averageStep * offset)
-        );
-
-      if (offset === 1) {
-        points[index] = desiredPoint;
-      } else {
-        const blend = Math.pow(1 - offset / (influenceCount + 1), 2);
-        points[index] = points[index].clone().lerp(desiredPoint, blend);
-      }
-    }
-  }
-
-
-
-  private generateCubicParabolaPoints(
-    startPoint: THREE.Vector3,
-    startAngle: number,
-    length: number,
-    endRadius: number,
-    direction: 'CW' | 'CCW',
-    segments: number = 120
-  ): THREE.Vector3[] {
-    const points: THREE.Vector3[] = [];
-
-    if (length <= 0 || endRadius <= 0 || segments < 2) {
-      console.warn('Invalid cubic parabola parameters', {
-        startPoint,
-        startAngle,
-        length,
-        endRadius,
-        direction,
-        segments
-      });
-
-      return points;
-    }
-
-    const sign = direction === 'CCW' ? 1 : -1;
-
-    const cosA = Math.cos(startAngle);
-    const sinA = Math.sin(startAngle);
-
-    for (let i = 0; i <= segments; i++) {
-      const xLocal = (length * i) / segments;
-
-      /**
-       * Cubic parabola transition approximation:
-       *
-       * y = x³ / (6 R L)
-       *
-       * where:
-       * x = distance along tangent
-       * R = final circular radius
-       * L = transition length
-       */
-      const yLocal = sign * (Math.pow(xLocal, 3) / (6 * endRadius * length));
-
-      /**
-       * Rotate local point by startAngle,
-       * then translate to startPoint.
-       */
-      const xWorld = startPoint.x + xLocal * cosA - yLocal * sinA;
-      const yWorld = startPoint.y + xLocal * sinA + yLocal * cosA;
-
-      points.push(new THREE.Vector3(xWorld, yWorld, startPoint.z));
-    }
-
-    return points;
-  }
-
-  private generateBlossPoints(
-    startPoint: THREE.Vector3,
-    startAngle: number,
-    length: number,
-    endRadius: number,
-    direction: 'CW' | 'CCW',
-    segments: number = 120
-  ): THREE.Vector3[] {
-    const points: THREE.Vector3[] = [];
-
-    if (length <= 0 || endRadius <= 0 || segments < 2) {
-      console.warn('Invalid Bloss parameters', {
-        startPoint,
-        startAngle,
-        length,
-        endRadius,
-        direction,
-        segments
-      });
-
-      return points;
-    }
-
-    const sign = direction === 'CCW' ? 1 : -1;
-
-    let x = startPoint.x;
-    let y = startPoint.y;
-    let theta = startAngle;
-
-    const ds = length / segments;
-
-    for (let i = 0; i <= segments; i++) {
-      points.push(new THREE.Vector3(x, y, startPoint.z));
-
-      const s = i * ds;
-      const u = s / length;
-
-      /**
-       * Bloss transition curvature function:
-       *
-       * k(u) = (3u² - 2u³) / R
-       *
-       * This starts and ends more smoothly than a linear clothoid.
-       */
-      const curvatureFactor = 3 * u * u - 2 * u * u * u;
-      const curvature = curvatureFactor / endRadius;
-
-      theta += sign * curvature * ds;
-
-      x += Math.cos(theta) * ds;
-      y += Math.sin(theta) * ds;
-    }
-
-    return points;
-  }
-
-  private generateCosinePoints(
-    startPoint: THREE.Vector3,
-    startAngle: number,
-    length: number,
-    endRadius: number,
-    direction: 'CW' | 'CCW',
-    segments: number = 120
-  ): THREE.Vector3[] {
-    const points: THREE.Vector3[] = [];
-
-    if (length <= 0 || endRadius <= 0 || segments < 2) {
-      console.warn('Invalid cosine transition parameters', {
-        startPoint,
-        startAngle,
-        length,
-        endRadius,
-        direction,
-        segments
-      });
-
-      return points;
-    }
-
-    const sign = direction === 'CCW' ? 1 : -1;
-
-    let x = startPoint.x;
-    let y = startPoint.y;
-    let theta = startAngle;
-
-    const ds = length / segments;
-
-    for (let i = 0; i <= segments; i++) {
-      points.push(new THREE.Vector3(x, y, startPoint.z));
-
-      const s = i * ds;
-      const u = s / length;
-
-      /**
-       * Cosine transition curvature:
-       *
-       * k(u) = [1 - cos(pi * u)] / (2R)
-       *
-       * Starts gently, increases smoothly, and reaches 1/R.
-       */
-      const curvatureFactor = (1 - Math.cos(Math.PI * u)) / 2;
-      const curvature = curvatureFactor / endRadius;
-
-      theta += sign * curvature * ds;
-
-      x += Math.cos(theta) * ds;
-      y += Math.sin(theta) * ds;
-    }
-
-    return points;
-  }
-
-  private generateSinePoints(
-    startPoint: THREE.Vector3,
-    startAngle: number,
-    length: number,
-    endRadius: number,
-    direction: 'CW' | 'CCW',
-    segments: number = 120
-  ): THREE.Vector3[] {
-    const points: THREE.Vector3[] = [];
-
-    if (length <= 0 || endRadius <= 0 || segments < 2) {
-      console.warn('Invalid sine transition parameters', {
-        startPoint,
-        startAngle,
-        length,
-        endRadius,
-        direction,
-        segments
-      });
-
-      return points;
-    }
-
-    const sign = direction === 'CCW' ? 1 : -1;
-
-    let x = startPoint.x;
-    let y = startPoint.y;
-    let theta = startAngle;
-
-    const ds = length / segments;
-
-    for (let i = 0; i <= segments; i++) {
-      points.push(new THREE.Vector3(x, y, startPoint.z));
-
-      const s = i * ds;
-      const u = s / length;
-
-      /**
-       * Sine transition curvature:
-       *
-       * k(u) = [u - sin(2πu) / (2π)] / R
-       *
-       * Smooth at the start and end.
-       */
-      const curvatureFactor =
-        u - Math.sin(2 * Math.PI * u) / (2 * Math.PI);
-
-      const curvature = curvatureFactor / endRadius;
-
-      theta += sign * curvature * ds;
-
-      x += Math.cos(theta) * ds;
-      y += Math.sin(theta) * ds;
-    }
-
-    return points;
-  }
-
-  private createTestClothoid(): THREE.Line {
-    const startPoint = new THREE.Vector3(0, 0, 0);
-
-    // 0 means the clothoid starts toward the right side of the canvas
-    const startAngle = 0;
-
-    // Temporary test values
-    const length = 20;
-    const endRadius = 12;
-    const direction: 'CW' | 'CCW' = 'CCW';
-
-    const points = this.generateClothoidPoints(
-      startPoint,
-      startAngle,
-      length,
-      endRadius,
-      direction,
-      100
-    );
-
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-
-    const material = new THREE.LineBasicMaterial({
-      color: 0xff00ff,
-      linewidth: 2
-    });
-
-    const clothoidLine = new THREE.Line(geometry, material);
-
-    clothoidLine.userData = {
-      type: 'clothoid',
-      isClothoid: true,
-      length,
-      endRadius,
-      direction
-    };
-
-    return clothoidLine;
   }
 
   confirmClothoid(): void {
@@ -2946,7 +1986,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
     const length = this.metersToWorldUnits(lengthMeters);
     const endRadius = this.metersToWorldUnits(radiusMeters);
 
-    const points = this.generateTransitionCurvePoints(
+    const points = this.railwayGeometryService.generateTransitionCurvePoints(
       this.clothoidStartPoint,
       this.clothoidStartAngle,
       length,
@@ -3116,19 +2156,8 @@ export class Canvas implements OnDestroy, AfterViewInit {
     this.clothoidDirectionPoint = null;
     this.isDrawingClothoid = false;
 
-    if (this.previewClothoid) {
-      this.canvasSceneService.scene.remove(this.previewClothoid);
-      this.previewClothoid.geometry.dispose();
-
-      const material = this.previewClothoid.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.previewClothoid = null;
-    }
+    this.disposePreviewObject(this.previewClothoid);
+    this.previewClothoid = null;
 
     this.eventService.updateCanvasStatus({
       mode: 'Select'
@@ -3155,24 +2184,13 @@ export class Canvas implements OnDestroy, AfterViewInit {
     }
 
     // Remove old preview
-    if (this.previewClothoid) {
-      this.canvasSceneService.scene.remove(this.previewClothoid);
-      this.previewClothoid.geometry.dispose();
-
-      const material = this.previewClothoid.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.previewClothoid = null;
-    }
+    this.disposePreviewObject(this.previewClothoid);
+    this.previewClothoid = null;
 
     const length = this.metersToWorldUnits(lengthMeters);
     const endRadius = this.metersToWorldUnits(radiusMeters);
 
-    const points = this.generateTransitionCurvePoints(
+    const points = this.railwayGeometryService.generateTransitionCurvePoints(
       this.clothoidStartPoint,
       this.clothoidStartAngle,
       length,
@@ -3232,28 +2250,18 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
     const lastPoint = this.polylinePoints[this.polylinePoints.length - 1];
 
-    const lengthWorld = this.metersToWorldUnits(lengthMeters);
-    const angleRad = THREE.MathUtils.degToRad(angleDeg);
-
-    const nextPoint = new THREE.Vector3(
-      lastPoint.x + Math.cos(angleRad) * lengthWorld,
-      lastPoint.y + Math.sin(angleRad) * lengthWorld,
-      0
+    const nextPoint = this.polylineDrawingService.calculateNextPoint(
+      lastPoint,
+      lengthMeters,
+      angleDeg,
+      this.WORLD_UNITS_PER_METER
     );
 
     this.polylinePoints.push(nextPoint);
 
     if (this.previewPolylineSegment) {
       this.canvasSceneService.scene.remove(this.previewPolylineSegment);
-      this.previewPolylineSegment.geometry.dispose();
-
-      const material = this.previewPolylineSegment.material;
-      if (Array.isArray(material)) {
-        material.forEach(m => m.dispose());
-      } else {
-        material.dispose();
-      }
-
+      this.canvasSelectionService.disposeObject(this.previewPolylineSegment);
       this.previewPolylineSegment = null;
     }
 
@@ -3273,62 +2281,17 @@ export class Canvas implements OnDestroy, AfterViewInit {
     });
   }
 
-  private buildArcFromCenter(
-    start: THREE.Vector3,
-    end: THREE.Vector3,
-    center: THREE.Vector3,
-    direction: 'CW' | 'CCW'
-  ): {
-    center: THREE.Vector3;
-    points: THREE.Vector3[];
-    sweepAngle: number;
-  } {
-    const startAngle = Math.atan2(
-      start.y - center.y,
-      start.x - center.x
-    );
+  private setDrawingMode(
+    mode: 'Line' | 'Circle' | 'Curve' | 'Arc' | 'Clothoid' | 'Polyline'
+  ): void {
+    this.isDrawingLine = mode === 'Line';
+    this.isDrawingCircle = mode === 'Circle';
+    this.isDrawingCurve = mode === 'Curve';
+    this.isDrawingArc = mode === 'Arc';
+    this.isDrawingClothoid = mode === 'Clothoid';
+    this.isDrawingPolyline = mode === 'Polyline';
 
-    const endAngle = Math.atan2(
-      end.y - center.y,
-      end.x - center.x
-    );
-
-    let sweepAngle = endAngle - startAngle;
-
-    if (direction === 'CCW') {
-      while (sweepAngle <= 0) {
-        sweepAngle += Math.PI * 2;
-      }
-    }
-
-    if (direction === 'CW') {
-      while (sweepAngle >= 0) {
-        sweepAngle -= Math.PI * 2;
-      }
-    }
-
-    const radius = center.distanceTo(start);
-    const segmentCount = 64;
-    const points: THREE.Vector3[] = [];
-
-    for (let i = 0; i <= segmentCount; i++) {
-      const t = i / segmentCount;
-      const angle = startAngle + sweepAngle * t;
-
-      points.push(
-        new THREE.Vector3(
-          center.x + Math.cos(angle) * radius,
-          center.y + Math.sin(angle) * radius,
-          0.2
-        )
-      );
-    }
-
-    return {
-      center,
-      points,
-      sweepAngle
-    };
+    this.eventService.updateCanvasStatus({ mode });
   }
 
   private updateArcGeometry(arc: THREE.Line): void {
@@ -3341,7 +2304,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
     const centerPoint = arc.userData['centerPoint'] as THREE.Vector3;
     const direction = arc.userData['direction'] as 'CW' | 'CCW';
 
-    const arcData = this.buildArcFromCenter(
+    const arcData = this.railwayGeometryService.buildArcFromCenter(
       startPoint,
       endPoint,
       centerPoint,
@@ -3362,169 +2325,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
     this.updateArcGeometry(this.selectedAsset);
   }
 
-  private updateArcEndpoint(
-    arc: THREE.Line,
-    endKind: 'start' | 'end',
-    newPoint: THREE.Vector3
-  ): void {
-    if (endKind === 'start') {
-      arc.userData['startPoint'] = newPoint.clone();
-    }
-
-    if (endKind === 'end') {
-      arc.userData['endPoint'] = newPoint.clone();
-    }
-
-    this.updateArcGeometry(arc);
-  }
-
-  private computeCircleTangentCandidates(
-    center1: THREE.Vector3,
-    radius1: number,
-    center2: THREE.Vector3,
-    radius2: number
-  ): {
-    p1: THREE.Vector3;
-    p2: THREE.Vector3;
-    type: 'external' | 'internal';
-  }[] {
-    const candidates: {
-      p1: THREE.Vector3;
-      p2: THREE.Vector3;
-      type: 'external' | 'internal';
-    }[] = [];
-
-    const dx = center2.x - center1.x;
-    const dy = center2.y - center1.y;
-
-    const distanceSquared = dx * dx + dy * dy;
-
-    if (distanceSquared === 0) {
-      return candidates;
-    }
-
-    /*
-      sign =  1 gives external tangents
-      sign = -1 gives internal tangents
-    */
-    const tangentModes = [
-      { sign: 1, type: 'external' as const },
-      { sign: -1, type: 'internal' as const }
-    ];
-
-    for (const mode of tangentModes) {
-      const radiusDifference = radius1 - mode.sign * radius2;
-
-      const hSquared = distanceSquared - radiusDifference * radiusDifference;
-
-      if (hSquared < 0) {
-        continue;
-      }
-
-      const h = Math.sqrt(Math.max(0, hSquared));
-
-      for (const side of [-1, 1]) {
-        const nx =
-          (dx * radiusDifference - side * dy * h) / distanceSquared;
-
-        const ny =
-          (dy * radiusDifference + side * dx * h) / distanceSquared;
-
-        const p1 = new THREE.Vector3(
-          center1.x + radius1 * nx,
-          center1.y + radius1 * ny,
-          0
-        );
-
-        const p2 = new THREE.Vector3(
-          center2.x + mode.sign * radius2 * nx,
-          center2.y + mode.sign * radius2 * ny,
-          0
-        );
-
-        candidates.push({
-          p1,
-          p2,
-          type: mode.type
-        });
-      }
-    }
-
-    return candidates;
-  }
-
-  private findBestTangentBetweenArcs(
-    arcA: THREE.Line,
-    arcB: THREE.Line
-  ): {
-    p1: THREE.Vector3;
-    p2: THREE.Vector3;
-    type: 'external' | 'internal';
-  } | null {
-    const centerA = arcA.userData['centerPoint'] as THREE.Vector3;
-    const centerB = arcB.userData['centerPoint'] as THREE.Vector3;
-
-    const radiusA = arcA.userData['radius'] as number;
-    const radiusB = arcB.userData['radius'] as number;
-
-    if (
-      !centerA ||
-      !centerB ||
-      !radiusA ||
-      !radiusB ||
-      !this.pendingTransitionArcAEndKind ||
-      !this.pendingTransitionArcBEndKind
-    ) {
-      return null;
-    }
-
-    const selectedPointA =
-      this.pendingTransitionArcAEndKind === 'start'
-        ? arcA.userData['startPoint'] as THREE.Vector3
-        : arcA.userData['endPoint'] as THREE.Vector3;
-
-    const selectedPointB =
-      this.pendingTransitionArcBEndKind === 'start'
-        ? arcB.userData['startPoint'] as THREE.Vector3
-        : arcB.userData['endPoint'] as THREE.Vector3;
-
-    if (!selectedPointA || !selectedPointB) {
-      return null;
-    }
-
-    const candidates = this.computeCircleTangentCandidates(
-      centerA,
-      radiusA,
-      centerB,
-      radiusB
-    );
-
-    if (candidates.length === 0) {
-      return null;
-    }
-
-    let bestCandidate: {
-      p1: THREE.Vector3;
-      p2: THREE.Vector3;
-      type: 'external' | 'internal';
-    } | null = null;
-
-    let bestScore = Infinity;
-
-    for (const candidate of candidates) {
-      const score =
-        candidate.p1.distanceTo(selectedPointA) +
-        candidate.p2.distanceTo(selectedPointB);
-
-      if (score < bestScore) {
-        bestScore = score;
-        bestCandidate = candidate;
-      }
-    }
-
-    return bestCandidate;
-  }
-
+  
   private createTangentBetweenSelectedArcs(): void {
     const selectedArcs = this.selectedAssets.filter(
       (obj): obj is THREE.Line =>
@@ -3546,8 +2347,8 @@ export class Canvas implements OnDestroy, AfterViewInit {
     const arc1End = (arc1.userData['endPoint'] as THREE.Vector3).clone();
     const arc2Start = (arc2.userData['startPoint'] as THREE.Vector3).clone();
 
-    const tangent1 = this.getArcTangentAtPoint(arc1, arc1End, 'end');
-    const tangent2 = this.getArcTangentAtPoint(arc2, arc2Start, 'start');
+    const tangent1 = this.railwayGeometryService.getArcTangentAtPoint(arc1, arc1End, 'end');
+    const tangent2 = this.railwayGeometryService.getArcTangentAtPoint(arc2, arc2Start, 'start');
 
     if (!tangent1 || !tangent2) {
       this.notificationService.notify({
@@ -3575,12 +2376,12 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
     connectorDirection.normalize();
 
-    const angleToArc1 = this.getSmallestAngleBetweenVectorsDeg(
+    const angleToArc1 = this.railwayGeometryService.getSmallestAngleBetweenVectorsDeg(
       connectorDirection,
       tangent1
     );
 
-    const angleToArc2 = this.getSmallestAngleBetweenVectorsDeg(
+    const angleToArc2 = this.railwayGeometryService.getSmallestAngleBetweenVectorsDeg(
       connectorDirection,
       tangent2
     );
@@ -3621,128 +2422,6 @@ export class Canvas implements OnDestroy, AfterViewInit {
       angleToArc1,
       angleToArc2
     });
-  }
-
-  private getArcEndInfo(
-    arc: THREE.Line,
-    endKind: 'start' | 'end'
-  ): GeometryEndInfo | null {
-    if (arc.userData['type'] !== 'DrawnArc') {
-      return null;
-    }
-
-    const point =
-      endKind === 'start'
-        ? arc.userData['startPoint'] as THREE.Vector3
-        : arc.userData['endPoint'] as THREE.Vector3;
-
-    const radius = arc.userData['radius'] as number;
-    const direction = arc.userData['direction'] as 'CW' | 'CCW';
-
-    if (!point || !radius || !direction) {
-      return null;
-    }
-
-    const tangent = this.getArcTangentAtPoint(arc, point, endKind);
-
-    if (!tangent) {
-      return null;
-    }
-
-    const tangentAngle = Math.atan2(tangent.y, tangent.x);
-
-    return {
-      object: arc,
-      point: point.clone(),
-      endKind,
-      tangentAngle,
-      curvature: 1 / radius,
-      direction
-    };
-  }
-
-  private getArcTangentAtPoint(
-    arc: THREE.Line,
-    point: THREE.Vector3,
-    pointKind: 'start' | 'end'
-  ): THREE.Vector3 | null {
-    const center = arc.userData['centerPoint'] as THREE.Vector3;
-    const direction = arc.userData['direction'] as 'CW' | 'CCW';
-
-    if (!center || !direction) {
-      return null;
-    }
-
-    const radiusVector = point
-      .clone()
-      .sub(center);
-
-    radiusVector.z = 0;
-
-    if (radiusVector.length() === 0) {
-      return null;
-    }
-
-    radiusVector.normalize();
-
-    let tangent: THREE.Vector3;
-
-    if (direction === 'CCW') {
-      tangent = new THREE.Vector3(
-        -radiusVector.y,
-        radiusVector.x,
-        0
-      );
-    } else {
-      tangent = new THREE.Vector3(
-        radiusVector.y,
-        -radiusVector.x,
-        0
-      );
-    }
-
-    // At the start of the second arc, the incoming tangent direction is opposite
-    // of the arc's forward tangent.
-    if (pointKind === 'start') {
-      tangent.multiplyScalar(-1);
-    }
-
-    tangent.normalize();
-
-    return tangent;
-  }
-  private getSmallestAngleBetweenVectorsDeg(
-    a: THREE.Vector3,
-    b: THREE.Vector3
-  ): number {
-    const aNorm = a.clone().normalize();
-    const bNorm = b.clone().normalize();
-
-    const dot = THREE.MathUtils.clamp(aNorm.dot(bNorm), -1, 1);
-
-    const angleRad = Math.acos(dot);
-    const angleDeg = angleRad * 180 / Math.PI;
-
-    return Math.min(angleDeg, 180 - angleDeg);
-  }
-
-  private getEndDirectionFromPoints(points: THREE.Vector3[]): THREE.Vector3 | null {
-    if (points.length < 2) {
-      return null;
-    }
-
-    const lastPoint = points[points.length - 1];
-    const previousPoint = points[points.length - 2];
-
-    const direction = new THREE.Vector3().subVectors(lastPoint, previousPoint);
-    direction.z = 0;
-
-    if (direction.length() < 0.001) {
-      return null;
-    }
-
-    direction.normalize();
-    return direction;
   }
 
   private updatePreviewLine(startPoint: THREE.Vector3, endPoint: THREE.Vector3): void {
@@ -4019,12 +2698,12 @@ export class Canvas implements OnDestroy, AfterViewInit {
       return;
     }
 
-    const arcInfoA = this.getArcEndInfo(
+    const arcInfoA = this.railwayGeometryService.getArcEndInfo(
       this.pendingTransitionArcA,
       this.pendingTransitionArcAEndKind
     );
 
-    const arcInfoB = this.getArcEndInfo(
+    const arcInfoB = this.railwayGeometryService.getArcEndInfo(
       this.pendingTransitionArcB,
       this.pendingTransitionArcBEndKind
     );
@@ -4063,10 +2742,12 @@ export class Canvas implements OnDestroy, AfterViewInit {
 
     const transitionDirection = arcInfoA.direction;
 
-    const fittedTransition = this.fitTransitionPointsBetweenArcEnds(
+    const fittedTransition = this.railwayGeometryService.fitTransitionPointsBetweenArcEnds(
       arcInfoA,
       arcInfoB,
-      this.transitionCurveTypeInput
+      this.transitionCurveTypeInput,
+      Number(this.clothoidLengthInput),
+      this.WORLD_UNITS_PER_METER
     );
 
     if (!fittedTransition || fittedTransition.points.length < 2) {
@@ -4086,7 +2767,8 @@ export class Canvas implements OnDestroy, AfterViewInit {
       transitionPoints[transitionPoints.length - 1] = arcInfoB.point.clone();
     }
 
-    const transitionEndDirection = this.getEndDirectionFromPoints(transitionPoints);
+    const transitionEndDirection =
+     this.railwayGeometryService.getEndDirectionFromPoints(transitionPoints);
 
     const arcBTargetDirection = new THREE.Vector3(
       Math.cos(arcInfoB.tangentAngle),
@@ -4095,7 +2777,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
     );
 
     if (transitionEndDirection) {
-      const endTangentMismatchDeg = this.getSmallestAngleBetweenVectorsDeg(
+      const endTangentMismatchDeg = this.railwayGeometryService.getSmallestAngleBetweenVectorsDeg(
         transitionEndDirection,
         arcBTargetDirection
       );
@@ -4281,22 +2963,8 @@ export class Canvas implements OnDestroy, AfterViewInit {
     this.currentSnapPoint = null;
     this.isSnapLabelVisible = false;
 
-    if (this.snapMarker) {
-      this.canvasSceneService.scene.remove(this.snapMarker);
-      this.snapMarker.geometry.dispose();
-
-      const material = this.snapMarker.material;
-
-      if (Array.isArray(material)) {
-        material.forEach((m) => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.snapMarker = null;
-    }
-
-    this.cdr.detectChanges();
+    this.disposePreviewObject(this.snapMarker);
+    this.snapMarker = null;
   }
 
 
@@ -4307,14 +2975,14 @@ export class Canvas implements OnDestroy, AfterViewInit {
     const lengthWorld = Math.sqrt(dx * dx + dy * dy);
     const lengthMeters = this.worldUnitsToMeters(lengthWorld);
 
-    const absoluteAngleDeg = this.getAbsoluteAngleDeg(start, end);
+    const absoluteAngleDeg = this.railwayGeometryService.getAbsoluteAngleDeg(start, end);
 
     let displayAngleDeg = absoluteAngleDeg;
 
     // First line: angle is relative to canvas horizontal axis.
     // Next lines: angle is relative to previous line direction.
     if (this.previousLineAngleDeg !== null) {
-      displayAngleDeg = this.normalizeRelativeAngle(
+      displayAngleDeg = this.railwayGeometryService.normalizeRelativeAngle(
         absoluteAngleDeg - this.previousLineAngleDeg
       );
     }
@@ -4329,19 +2997,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
   }
 
   private removePreviewLine(): void {
-    if (!this.previewLine) return;
-
-    this.canvasSceneService.scene.remove(this.previewLine);
-    this.previewLine.geometry.dispose();
-
-    const material = this.previewLine.material;
-
-    if (Array.isArray(material)) {
-      material.forEach((m) => m.dispose());
-    } else {
-      material.dispose();
-    }
-
+    this.disposePreviewObject(this.previewLine);
     this.previewLine = null;
   }
 
@@ -4357,7 +3013,7 @@ export class Canvas implements OnDestroy, AfterViewInit {
     this.lineStartPoint.clone();
 
   const createdLineAngleDeg =
-    this.getAbsoluteAngleDeg(
+    this.railwayGeometryService.getAbsoluteAngleDeg(
       startPoint,
       endPoint
     );
@@ -4404,12 +3060,14 @@ export class Canvas implements OnDestroy, AfterViewInit {
    * junctions for a 3-direction turnout.
    */
   const startDirectionCount =
-    this.countTrackDirectionsAtPoint(
+    this.switchesDrawingService.countTrackDirectionsAtPoint(
+      this.canvasSceneService.scene,
       startPoint
     );
 
   const endDirectionCount =
-    this.countTrackDirectionsAtPoint(
+    this.switchesDrawingService.countTrackDirectionsAtPoint(
+      this.canvasSceneService.scene,
       endPoint
     );
 
@@ -4484,98 +3142,9 @@ export class Canvas implements OnDestroy, AfterViewInit {
   this.cdr.detectChanges();
 }
 
-  private countTrackDirectionsAtPoint(
-  junctionPoint: THREE.Vector3,
-  tolerance = 0.5
-): number {
-
-  let directionCount = 0;
-
-  this.canvasSceneService.scene.traverse((object) => {
-
-    if (!(object instanceof THREE.Line)) {
-      return;
-    }
-
-    if (object.userData['type'] !== 'DrawnLine') {
-      return;
-    }
-
-    const startPoint =
-      object.userData['startPoint'] as THREE.Vector3 | undefined;
-
-    const endPoint =
-      object.userData['endPoint'] as THREE.Vector3 | undefined;
-
-    if (!startPoint || !endPoint) {
-      return;
-    }
-
-    const segment =
-      endPoint.clone().sub(startPoint);
-
-    const segmentLengthSquared =
-      segment.lengthSq();
-
-    if (segmentLengthSquared === 0) {
-      return;
-    }
-
-    // Find where the junction lies on this line
-    const t = THREE.MathUtils.clamp(
-      junctionPoint
-        .clone()
-        .sub(startPoint)
-        .dot(segment) /
-        segmentLengthSquared,
-      0,
-      1
-    );
-
-    const pointOnLine =
-      startPoint
-        .clone()
-        .add(
-          segment.clone().multiplyScalar(t)
-        );
-
-    if (
-      pointOnLine.distanceTo(junctionPoint) >
-      tolerance
-    ) {
-      return;
-    }
-
-    /*
-     * At the start/end of a line:
-     * only one direction leaves the junction.
-     *
-     * In the middle of a line:
-     * there are two directions.
-     */
-    const endpointTolerance = 0.01;
-
-    if (
-      junctionPoint.distanceTo(startPoint) <=
-      endpointTolerance
-    ) {
-      directionCount += 1;
-    }
-    else if (
-      junctionPoint.distanceTo(endPoint) <=
-      endpointTolerance
-    ) {
-      directionCount += 1;
-    }
-    else {
-      directionCount += 2;
-    }
-  });
-
-  return directionCount;
-}
 
 public confirmSwitchPlacement(): void {
+
   if (
     !this.pendingSwitchMainLine ||
     !this.pendingSwitchBranchLine ||
@@ -4584,207 +3153,16 @@ public confirmSwitchPlacement(): void {
     return;
   }
 
-  const switchPoint =
-    this.pendingSwitchPoint.clone();
+  const switchGroup = this.switchesDrawingService.createSwitch(
+    this.canvasSceneService.scene,
+    this.pendingSwitchMainLine,
+    this.pendingSwitchBranchLine,
+    this.pendingSwitchPoint.clone()
+  );
 
-  const mainStart =
-    this.pendingSwitchMainLine.userData['startPoint'] as THREE.Vector3;
-
-  const mainEnd =
-    this.pendingSwitchMainLine.userData['endPoint'] as THREE.Vector3;
-
-  const branchStart =
-    this.pendingSwitchBranchLine.userData['startPoint'] as THREE.Vector3;
-
-  const branchEnd =
-    this.pendingSwitchBranchLine.userData['endPoint'] as THREE.Vector3;
-
-  if (
-    !mainStart ||
-    !mainEnd ||
-    !branchStart ||
-    !branchEnd
-  ) {
+  if (!switchGroup) {
     return;
   }
-
-  /*
-   * Determine the direction of the main track
-   * away from the switch point.
-   */
-  const mainDirection =
-    mainEnd
-      .clone()
-      .sub(mainStart)
-      .normalize();
-
-  /*
-   * Branch line was created starting from the switch,
-   * so this gives its outgoing direction.
-   */
-  const branchDirection =
-    branchEnd
-      .clone()
-      .sub(branchStart)
-      .normalize();
-
-  const symbolLength = 12;
-
-  const mainSymbolEnd =
-    switchPoint
-      .clone()
-      .add(
-        mainDirection
-          .clone()
-          .multiplyScalar(symbolLength)
-      );
-
-  const branchSymbolEnd =
-    switchPoint
-      .clone()
-      .add(
-        branchDirection
-          .clone()
-          .multiplyScalar(symbolLength)
-      );
-
-  const shadedLength = 4;
-
-  const mainShadeEnd =
-    switchPoint
-      .clone()
-      .add(
-        mainDirection
-          .clone()
-          .multiplyScalar(shadedLength)
-      );
-
-  const branchShadeEnd =
-    switchPoint
-      .clone()
-      .add(
-        branchDirection
-          .clone()
-          .multiplyScalar(shadedLength)
-      );
-
-  const material =
-    new THREE.LineBasicMaterial({
-      color: 0xffffff,
-      depthTest: false
-    });
-
-  const switchGroup =
-    new THREE.Group();
-
-  switchGroup.userData = {
-    type: 'Switch',
-    layerType: 'Switch',
-    layer: 'Switches',
-    source: 'DrawnSwitch',
-    draggable: true,
-    id: crypto.randomUUID()
-  };
-
-  const shadeShape = new THREE.Shape();
-
-shadeShape.moveTo(
-  switchPoint.x,
-  switchPoint.y
-);
-
-shadeShape.lineTo(
-  mainShadeEnd.x,
-  mainShadeEnd.y
-);
-
-shadeShape.lineTo(
-  branchShadeEnd.x,
-  branchShadeEnd.y
-);
-
-shadeShape.closePath();
-
-const shadeGeometry =
-  new THREE.ShapeGeometry(
-    shadeShape
-  );
-
-const shadeMaterial =
-  new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    side: THREE.DoubleSide,
-    depthTest: false
-  });
-
-const shadeMesh =
-  new THREE.Mesh(
-    shadeGeometry,
-    shadeMaterial
-  );
-
-shadeMesh.position.z = 0.8;
-shadeMesh.renderOrder = 450;
-
-switchGroup.add(shadeMesh);
-
-  /*
-   * Main direction of switch
-   */
-  const mainGeometry =
-    new THREE.BufferGeometry()
-      .setFromPoints([
-        new THREE.Vector3(
-          switchPoint.x,
-          switchPoint.y,
-          1
-        ),
-        new THREE.Vector3(
-          mainSymbolEnd.x,
-          mainSymbolEnd.y,
-          1
-        )
-      ]);
-
-  const mainLine =
-    new THREE.Line(
-      mainGeometry,
-      material.clone()
-    );
-
-  /*
-   * Diverging direction of switch
-   */
-  const branchGeometry =
-    new THREE.BufferGeometry()
-      .setFromPoints([
-        new THREE.Vector3(
-          switchPoint.x,
-          switchPoint.y,
-          1
-        ),
-        new THREE.Vector3(
-          branchSymbolEnd.x,
-          branchSymbolEnd.y,
-          1
-        )
-      ]);
-
-  const branchLine =
-    new THREE.Line(
-      branchGeometry,
-      material.clone()
-    );
-
-  mainLine.renderOrder = 500;
-  branchLine.renderOrder = 500;
-
-  switchGroup.add(mainLine);
-  switchGroup.add(branchLine);
-
-  this.canvasSceneService.scene.add(
-    switchGroup
-  );
 
   this.switchPopupVisible = false;
 
@@ -4792,14 +3170,9 @@ switchGroup.add(shadeMesh);
   this.pendingSwitchBranchLine = null;
   this.pendingSwitchPoint = null;
 
-
-  CreateSwitch("aa",switchPoint.x,switchPoint.y);
-  
-  console.log(
-    'DRAWN SWITCH CREATED',
-    switchGroup
-  );
+  console.log('DRAWN SWITCH CREATED', switchGroup);
 }
+
 
 public cancelSwitchPlacement(): void {
   this.switchPopupVisible = false;
@@ -4875,32 +3248,6 @@ public cancelSwitchPlacement(): void {
     console.log('LINE DRAWING MODE OFF');
   }
 
-  private getAbsoluteAngleDeg(start: THREE.Vector3, end: THREE.Vector3): number {
-    const dx = end.x - start.x;
-    const dy = end.y - start.y;
-
-    let angleDeg = Math.atan2(dy, dx) * 180 / Math.PI;
-
-    if (angleDeg < 0) {
-      angleDeg += 360;
-    }
-
-    return angleDeg;
-  }
-
-  private normalizeRelativeAngle(angleDeg: number): number {
-    let normalized = angleDeg;
-
-    while (normalized > 180) {
-      normalized -= 360;
-    }
-
-    while (normalized <= -180) {
-      normalized += 360;
-    }
-
-    return normalized;
-  }
   /*public confirmLineLength(): void {
     if (!this.lineStartPoint || !this.lineDirectionPoint) {
       return;
@@ -4997,7 +3344,7 @@ public cancelSwitchPlacement(): void {
     const matchingObjects: THREE.Object3D[] = [];
 
     this.canvasSceneService.scene.traverse((object) => {
-      if (this.isObjectInLayer(object, layerName)) {
+      if (this.canvasSelectionService.isObjectInLayer(object, layerName)) {
         matchingObjects.push(object);
       }
     });
@@ -5014,7 +3361,10 @@ public cancelSwitchPlacement(): void {
     }
 
     matchingObjects.forEach((object) => {
-      this.applyLayerHighlight(object);
+      this.canvasSelectionService.applyLayerHighlight(
+        object,
+        this.highlightedObjects
+      );
     });
 
     this.notificationService.notify({
@@ -5026,188 +3376,14 @@ public cancelSwitchPlacement(): void {
     console.log(`${matchingObjects.length} ${layerName} object(s) highlighted`);
   }
 
-  private highlightSelectedImportedElement(
-    object: THREE.Object3D
-  ): void {
-    this.clearSelectedImportedElementHighlight();
-
-    object.traverse((child) => {
-      const renderable = child as THREE.Line | THREE.Mesh;
-
-      const material =
-        renderable.material as
-        | THREE.Material
-        | THREE.Material[]
-        | undefined;
-
-      if (!material) {
-        return;
-      }
-
-      const materials = Array.isArray(material)
-        ? material
-        : [material];
-
-      materials.forEach((mat: any) => {
-        if (!mat.color) {
-          return;
-        }
-
-        mat.userData = mat.userData || {};
-
-        if (!mat.userData['selectionOriginalColor']) {
-          mat.userData['selectionOriginalColor'] =
-            mat.color.clone();
-        }
-
-        mat.color.setHex(0xffff00);
-        mat.needsUpdate = true;
-      });
-    });
-
-    this.selectedImportedElement = object;
-
-    console.log('IMPORTED ELEMENT SELECTED:', {
-      type: object.userData?.['type'],
-      id:
-        object.userData?.['id'] ??
-        object.userData?.['name']
-    });
-  }
-
-  private clearSelectedImportedElementHighlight(): void {
-    if (!this.selectedImportedElement) {
-      return;
-    }
-
-    this.selectedImportedElement.traverse((child) => {
-      const renderable = child as THREE.Line | THREE.Mesh;
-
-      const material =
-        renderable.material as
-        | THREE.Material
-        | THREE.Material[]
-        | undefined;
-
-      if (!material) {
-        return;
-      }
-
-      const materials = Array.isArray(material)
-        ? material
-        : [material];
-
-      materials.forEach((mat: any) => {
-        const originalColor =
-          mat.userData?.['selectionOriginalColor'];
-
-        if (!mat.color || !originalColor) {
-          return;
-        }
-
-        mat.color.copy(originalColor);
-        mat.needsUpdate = true;
-
-        delete mat.userData['selectionOriginalColor'];
-      });
-    });
-
-    this.selectedImportedElement = null;
-  }
-
-  private isObjectInLayer(object: THREE.Object3D, layerName: string): boolean {
-    const type =
-      object.userData?.['layerType'] ??
-      object.userData?.['type'];
-
-    if (!type) return false;
-
-    switch (layerName) {
-      case 'Tracks':
-      return (
-        type === 'Track' ||
-        type === 'Tracks' ||
-        type === 'BackendTrack' ||
-        type === 'DrawnLine' ||
-        type === 'DrawnCurve' ||
-        type === 'DrawnArc' ||
-        type === 'DrawnTransitionCurve' ||
-        type === 'DrawnClothoid'
-      );
-
-      case 'Switches':
-        return type === 'Switch';
-
-      case 'Signals':
-        return type === 'Signal' || type === 'ETCSmarker';
-
-      case 'Balises':
-        return type === 'BaliseGroup';
-
-      /*
-      case 'Timing Points':
-        return type === 'TimingPoint';
   
-      case 'Segment Profiles':
-        return type === 'SegmentProfile';
-      */
-      default:
-        return false;
-    }
-  }
-
-  private applyLayerHighlight(object: THREE.Object3D): void {
-    object.traverse((child) => {
-      const mesh = child as THREE.Mesh;
-
-      const material = mesh.material as THREE.Material | THREE.Material[] | undefined;
-
-      if (!material) return;
-
-      const materials = Array.isArray(material) ? material : [material];
-
-      materials.forEach((mat: any) => {
-        if (!mat.color) return;
-
-        mat.userData = mat.userData || {};
-
-        if (!mat.userData['originalColor']) {
-          mat.userData['originalColor'] = mat.color.clone();
-        }
-
-        mat.color.setHex(0x00aaff);
-        mat.needsUpdate = true;
-      });
-    });
-
-    this.highlightedObjects.push(object);
-  }
-
   private clearLayerHighlights(): void {
-    this.highlightedObjects.forEach((object) => {
-      object.traverse((child) => {
-        const mesh = child as THREE.Mesh;
-
-        const material = mesh.material as THREE.Material | THREE.Material[] | undefined;
-
-        if (!material) return;
-
-        const materials = Array.isArray(material) ? material : [material];
-
-        materials.forEach((mat: any) => {
-          if (!mat.color) return;
-
-          if (mat.userData?.['originalColor']) {
-            mat.color.copy(mat.userData['originalColor']);
-            mat.needsUpdate = true;
-          }
-        });
-      });
-    });
+    this.canvasSelectionService.clearLayerHighlights(
+      this.highlightedObjects
+    );
 
     this.highlightedObjects = [];
   }
-
   private getCanvasCenterWorldPoint(): THREE.Vector3 {
     const canvas = this.canvasRef.nativeElement;
     const rect = canvas.getBoundingClientRect();
@@ -5219,6 +3395,25 @@ public cancelSwitchPlacement(): void {
 
     return this.getWorldPoint(fakeEvent);
   }
+
+  
+private rotateSelectedLabel(degrees: number): void {
+  if (
+    !(this.selectedAsset instanceof THREE.Sprite) ||
+    this.selectedAsset.userData['isAssetLabel'] !== true
+  ) {
+    return;
+  }
+
+  const label = this.selectedAsset;
+  const material = label.material as THREE.SpriteMaterial;
+
+  material.rotation += THREE.MathUtils.degToRad(degrees);
+
+  label.userData['labelRotation'] = material.rotation;
+  material.needsUpdate = true;
+}
+
 
   private getAssetUnderMouse(event: PointerEvent): THREE.Object3D | null {
     const canvas = this.canvasRef.nativeElement;
@@ -5240,6 +3435,21 @@ public cancelSwitchPlacement(): void {
       this.canvasSceneService.scene.children,
       true
     );
+
+    
+    // Give ID labels priority over their parent railway symbols.
+    // This allows clicking AX001, BG001, etc. independently.
+
+    const labelHit = intersects.find(
+      hit =>
+        hit.object instanceof THREE.Sprite &&
+        hit.object.userData['isAssetLabel'] === true
+    );
+
+    if (labelHit) {
+      return labelHit.object;
+    }
+
 
     for (const hit of intersects) {
       let obj: THREE.Object3D | null = hit.object;
@@ -5325,29 +3535,7 @@ public cancelSwitchPlacement(): void {
     return intersects[0].object as THREE.Mesh;
   }
 
-  private getAssetScale(svgSrc: string): number {
-    if (svgSrc.includes('AxleCounter')) return 0.35;
-    if (svgSrc.includes('BaliseGroup')) return 0.45;
-    if (svgSrc.includes('ETCSmarker')) return 0.35;
-    if (svgSrc.includes('TimingPoint')) return 0.3;
-    if (svgSrc.includes('BufferStop')) return 0.4;
-
-    return 0.4;
-  }
-
-  private resizeLineEnd(line: THREE.Line, newEndPoint: THREE.Vector3): void {
-    const startPoint = line.userData['startPoint'] as THREE.Vector3;
-
-    const geometry = new THREE.BufferGeometry().setFromPoints([
-      startPoint,
-      newEndPoint
-    ]);
-
-    line.geometry.dispose();
-    line.geometry = geometry;
-
-    line.userData['endPoint'] = newEndPoint.clone();
-  }
+  
   onCanvasScroll(event: Event): void {
     /*const scrollElement = event.target as HTMLDivElement;
 
@@ -5405,359 +3593,91 @@ public cancelSwitchPlacement(): void {
       this.scrollWrapper.nativeElement.style.cursor = 'grab';
     }
   }
-  private addSvgToCanvas(svgSrc: string, point: THREE.Vector3): void {
-  addIcon(
-    this.canvasSceneService.scene,
-    svgSrc,
-    2,
-    point,
-    0,
-    this.notificationService,
-    (mesh: THREE.Group) => {
+  
+  private addSvgToCanvas(
+    svgSrc: string,
+    point: THREE.Vector3
+  ): void {
 
-      // CanvasItem already assigned the real asset type
-      // e.g. BaliseGroup, ETCSmarker, AxleCounter
-      const layerType = mesh.userData['type'];
+    this.canvasAssetService.addSvgToCanvas(
+      this.canvasSceneService.scene,
+      svgSrc,
+      point,
+      (mesh: THREE.Group) => {
+        this.selectedAsset = mesh;
+      }
+    );
 
-      // Keep real type separately for Layers
-      mesh.userData['layerType'] = layerType;
-
-      // KEEP existing interaction behaviour
-      mesh.userData['draggable'] = true;
-      mesh.userData['type'] = 'DroppedAsset';
-
-      // Store original physical/base scale
-      mesh.userData['baseScale'] = mesh.scale.clone();
-
-      this.selectedAsset = mesh;
-
-      console.log(
-        'ASSET ADDED:',
-        mesh.userData['type'],
-        'LAYER TYPE:',
-        mesh.userData['layerType']
-      );
-    },
-    true
-  );
-}
+  }
 
   private resizeSelectedAsset(currentPoint: THREE.Vector3): void {
     if (!this.selectedAsset) return;
 
-    const currentDistance = currentPoint.distanceTo(this.resizeCenter);
-
-    if (this.resizeStartDistance === 0) return;
-
-    const rawScaleFactor = currentDistance / this.resizeStartDistance;
-
-    const minResizeFactor = 0.05;
-    const maxResizeFactor = 10;
-
-    const scaleFactor = THREE.MathUtils.clamp(
-      rawScaleFactor,
-      minResizeFactor,
-      maxResizeFactor
+    this.canvasSelectionService.resizeSelectedAsset(
+      this.selectedAsset,
+      currentPoint,
+      this.resizeCenter,
+      this.resizeStartDistance,
+      this.resizeStartScale
     );
 
-    let newScaleX = this.resizeStartScale.x * scaleFactor;
-    let newScaleY = this.resizeStartScale.y * scaleFactor;
-    let newScaleZ = this.resizeStartScale.z * scaleFactor;
-
-    // Do not shrink below original physical/base scale
-    const baseScale = this.selectedAsset.userData['baseScale'] as THREE.Vector3 | undefined;
-
-    if (baseScale) {
-      const signX = Math.sign(newScaleX) || 1;
-      const signY = Math.sign(newScaleY) || 1;
-      const signZ = Math.sign(newScaleZ) || 1;
-
-      newScaleX = signX * Math.max(Math.abs(newScaleX), Math.abs(baseScale.x));
-      newScaleY = signY * Math.max(Math.abs(newScaleY), Math.abs(baseScale.y));
-      newScaleZ = signZ * Math.max(Math.abs(newScaleZ), Math.abs(baseScale.z));
-    }
-
-    this.selectedAsset.scale.set(newScaleX, newScaleY, newScaleZ);
-
-    this.selectedAsset.updateMatrixWorld(true);
     this.showSelectionBox(this.selectedAsset);
   }
 
   private showSelectionBox(asset: THREE.Object3D): void {
+    // Remove previous rectangle and handles
     this.clearSelectionBox();
 
-    const scene = this.canvasSceneService.scene;
-    const originalRotationZ = asset.rotation.z;
+    // Create new selection visuals
+    const result = this.canvasSelectionService.showSelectionBox(
+      asset,
+      this.canvasSceneService.scene
+    );
 
-    // Use the asset origin as the rotation pivot
-    const pivot = asset.position.clone();
-
-    // Temporarily remove rotation to calculate the unrotated bounding box
-    asset.rotation.z = 0;
-    asset.updateMatrixWorld(true);
-
-    const box = new THREE.Box3().setFromObject(asset);
-
-    // Restore rotation
-    asset.rotation.z = originalRotationZ;
-    asset.updateMatrixWorld(true);
-
-    if (box.isEmpty()) return;
-
-    const padding = 2;
-
-    const minX = box.min.x - padding;
-    const maxX = box.max.x + padding;
-    const minY = box.min.y - padding;
-    const maxY = box.max.y + padding;
-
-    // Unrotated world corners
-    const unrotatedCorners = [
-      new THREE.Vector3(minX, minY, 0),
-      new THREE.Vector3(maxX, minY, 0),
-      new THREE.Vector3(maxX, maxY, 0),
-      new THREE.Vector3(minX, maxY, 0),
-    ];
-
-    // Rotate corners around the same pivot as the asset
-    const rotatedCorners = unrotatedCorners.map((corner) => {
-      return corner
-        .clone()
-        .sub(pivot)
-        .applyAxisAngle(new THREE.Vector3(0, 0, 1), originalRotationZ)
-        .add(pivot);
-    });
-
-    const selectionPoints = [
-      rotatedCorners[0],
-      rotatedCorners[1],
-      rotatedCorners[2],
-      rotatedCorners[3],
-      rotatedCorners[0],
-    ];
-
-    const geometry = new THREE.BufferGeometry().setFromPoints(selectionPoints);
-
-    const material = new THREE.LineDashedMaterial({
-      color: 0x00aaff,
-      linewidth: 2,
-      dashSize: 1,
-      gapSize: 0.6,
-      depthTest: false,
-    });
-
-    const selectionLine = new THREE.Line(geometry, material);
-    selectionLine.renderOrder = 999;
-    selectionLine.computeLineDistances();
-
-    scene.add(selectionLine);
-    this.selectionBox = selectionLine;
-
-    // Resize handles
-    this.resizeHandles = [];
-
-    rotatedCorners.forEach((corner) => {
-      const handleGeometry = new THREE.BoxGeometry(1.2, 1.2, 0.1);
-      const handleMaterial = new THREE.MeshBasicMaterial({
-        color: 0x00aaff,
-        depthTest: false,
-      });
-
-      const handle = new THREE.Mesh(handleGeometry, handleMaterial);
-      handle.position.copy(corner);
-      handle.renderOrder = 1000;
-      handle.userData['isResizeHandle'] = true;
-
-      scene.add(handle);
-      this.resizeHandles.push(handle);
-    });
-
-    // Green rotate handle above the top edge
-    const topLeft = rotatedCorners[3];
-    const topRight = rotatedCorners[2];
-
-    const topMid = new THREE.Vector3()
-      .addVectors(topLeft, topRight)
-      .multiplyScalar(0.5);
-
-    const topDirection = new THREE.Vector3()
-      .subVectors(topRight, topLeft)
-      .normalize();
-
-    const outwardDirection = new THREE.Vector3(
-      -topDirection.y,
-      topDirection.x,
-      0
-    ).normalize();
-
-    const rotateDistance = 5;
-
-    const rotatePosition = topMid
-      .clone()
-      .add(outwardDirection.multiplyScalar(rotateDistance));
-
-    const rotateGeometry = new THREE.CircleGeometry(1.1, 32);
-    const rotateMaterial = new THREE.MeshBasicMaterial({
-      color: 0x8ccf22,
-      depthTest: false,
-    });
-
-    this.rotateHandle = new THREE.Mesh(rotateGeometry, rotateMaterial);
-    this.rotateHandle.position.copy(rotatePosition);
-    this.rotateHandle.renderOrder = 1000;
-    this.rotateHandle.userData['isRotateHandle'] = true;
-
-    scene.add(this.rotateHandle);
-  }
-
-  private createResizeHandles(min: THREE.Vector3, max: THREE.Vector3): void {
-    const handleSize = 0.35;
-
-    const handleMaterial = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8
-    });
-
-    const handleGeometry = new THREE.PlaneGeometry(handleSize, handleSize);
-
-    const positions = [
-      { name: 'top-left', x: min.x, y: max.y },
-      { name: 'top-right', x: max.x, y: max.y },
-      { name: 'bottom-right', x: max.x, y: min.y },
-      { name: 'bottom-left', x: min.x, y: min.y }
-    ];
-
-    positions.forEach((pos) => {
-      const handle = new THREE.Mesh(handleGeometry, handleMaterial.clone());
-
-      handle.position.set(pos.x, pos.y, 0.3);
-      handle.userData['type'] = 'ResizeHandle';
-      handle.userData['handle'] = pos.name;
-
-      this.resizeHandles.push(handle);
-      this.canvasSceneService.scene.add(handle);
-    });
-  }
-
-  private createRotateHandle(min: THREE.Vector3, max: THREE.Vector3): void {
-    const centerX = (min.x + max.x) / 2;
-    const rotateY = max.y + 2;
-
-    const geometry = new THREE.CircleGeometry(1.5, 32);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0x9acd32
-    });
-
-    this.rotateHandle = new THREE.Mesh(geometry, material);
-
-    this.rotateHandle.position.set(centerX, rotateY, 0.3);
-    this.rotateHandle.userData['type'] = 'RotateHandle';
-
-    this.canvasSceneService.scene.add(this.rotateHandle);
-
-    const lineGeometry = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(centerX, max.y, 0.25),
-      new THREE.Vector3(centerX, rotateY, 0.25)
-    ]);
-
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x38bdf8
-    });
-
-    const rotateLine = new THREE.Line(lineGeometry, lineMaterial);
-    rotateLine.userData['type'] = 'RotateHandleLine';
-
-    this.resizeHandles.push(rotateLine as unknown as THREE.Mesh);
-    this.canvasSceneService.scene.add(rotateLine);
+    // Store references for further interactions
+    this.selectionBox = result.selectionBox;
+    this.resizeHandles = result.resizeHandles;
+    this.rotateHandle = result.rotateHandle;
   }
 
   private clearSelectionBox(): void {
-    if (this.selectionBox) {
-      this.canvasSceneService.scene.remove(this.selectionBox);
-      this.selectionBox.geometry.dispose();
+  this.canvasSelectionService.clearSelectionBox(
+    this.canvasSceneService.scene,
+    this.selectionBox,
+    this.resizeHandles,
+    this.rotateHandle
+  );
 
-      const material = this.selectionBox.material;
-      if (Array.isArray(material)) {
-        material.forEach((m) => m.dispose());
-      } else {
-        material.dispose();
-      }
+  this.selectionBox = null;
+  this.resizeHandles = [];
+  this.rotateHandle = null;
+}
 
-      this.selectionBox = null;
-    }
-
-    this.resizeHandles.forEach((handle) => {
-      this.canvasSceneService.scene.remove(handle);
-
-      if (handle.geometry) {
-        handle.geometry.dispose();
-      }
-
-      const material = handle.material;
-      if (Array.isArray(material)) {
-        material.forEach((m) => m.dispose());
-      } else if (material) {
-        material.dispose();
-      }
-    });
-
-    this.resizeHandles = [];
-
-    if (this.rotateHandle) {
-      this.canvasSceneService.scene.remove(this.rotateHandle);
-      this.rotateHandle.geometry.dispose();
-
-      const material = this.rotateHandle.material;
-      if (Array.isArray(material)) {
-        material.forEach((m) => m.dispose());
-      } else {
-        material.dispose();
-      }
-
-      this.rotateHandle = null;
-    }
-  }
-
-  private getResizeHandleUnderMouse(event: PointerEvent): THREE.Object3D | null {
-    const canvas = this.canvasRef.nativeElement;
-    const rect = canvas.getBoundingClientRect();
-
-    const mouse = new THREE.Vector2(
-      ((event.clientX - rect.left) / rect.width) * 2 - 1,
-      -((event.clientY - rect.top) / rect.height) * 2 + 1
+  private getResizeHandleUnderMouse(
+    event: PointerEvent
+  ): THREE.Object3D | null {
+    return this.canvasSelectionService.getResizeHandleUnderMouse(
+      event,
+      this.canvasRef.nativeElement,
+      this.canvasSceneService.camera,
+      this.resizeHandles
     );
-
-    const raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, this.canvasSceneService.camera);
-
-    const intersects = raycaster.intersectObjects(this.resizeHandles, true);
-
-    if (intersects.length === 0) {
-      return null;
-    }
-
-    return intersects[0].object;
   }
 
-  private getRotateHandleUnderMouse(event: PointerEvent): THREE.Object3D | null {
-    if (!this.rotateHandle) return null;
-
-    const canvas = this.canvasRef.nativeElement;
-    const rect = canvas.getBoundingClientRect();
-
-    const pointer = new THREE.Vector2(
-      ((event.clientX - rect.left) / rect.width) * 2 - 1,
-      -((event.clientY - rect.top) / rect.height) * 2 + 1
+  private getRotateHandleUnderMouse(
+    event: PointerEvent
+  ): THREE.Object3D | null {
+    return this.canvasSelectionService.getRotateHandleUnderMouse(
+      event,
+      this.canvasRef.nativeElement,
+      this.canvasSceneService.camera,
+      this.rotateHandle
     );
-
-    const raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(pointer, this.canvasSceneService.camera);
-
-    const intersects = raycaster.intersectObject(this.rotateHandle, true);
-
-    return intersects.length > 0 ? this.rotateHandle : null;
   }
 
+  
   private deleteSelectedAsset(): void {
+
     const assetsToDelete =
       this.selectedAssets.length > 0
         ? [...this.selectedAssets]
@@ -5770,213 +3690,77 @@ public cancelSwitchPlacement(): void {
       return;
     }
 
+    // Clear selection visuals
     this.clearSelectionBox();
     this.clearCurveHandles();
+
+    // Reset curve state
     this.selectedCurve = null;
     this.isDraggingCurveHandle = false;
     this.activeCurveHandleKind = null;
 
-    assetsToDelete.forEach((asset) => {
-      const objectToDelete = this.getDeletableRoot(asset);
+    // Delete assets through the service
+    this.canvasAssetService.deleteAssets(
+      assetsToDelete,
+      this.canvasSceneService.scene
+    );
 
-      const canvasItem = objectToDelete.userData?.['canvasItem'];
-
-      if (canvasItem && typeof canvasItem.Delete === 'function') {
-        canvasItem.Delete();
-      }
-
-      if (objectToDelete.parent) {
-        objectToDelete.parent.remove(objectToDelete);
-      } else {
-        this.canvasSceneService.scene.remove(objectToDelete);
-      }
-
-      this.disposeObject(objectToDelete);
-    });
-
+    // Reset asset selection
     this.selectedAsset = null;
     this.selectedAssets = [];
+
+    // Reset interaction state
     this.isDraggingAsset = false;
     this.isResizingAsset = false;
     this.isRotatingAsset = false;
     this.activeResizeHandle = null;
 
-    console.log('SELECTED ASSETS DELETED:', assetsToDelete.length);
   }
 
-  private duplicateSelectedAsset(): void {
-    if (!this.selectedAsset) {
-      console.log('No selected asset to duplicate');
-      return;
-    }
+  
+private duplicateSelectedAsset(): void {
 
-    const objectToDuplicate = this.getDeletableRoot(this.selectedAsset);
-
-    const duplicate = this.cloneObjectForCanvas(objectToDuplicate);
-
-    // Move duplicate slightly so user can see it
-    duplicate.position.x += 5;
-    duplicate.position.y -= 5;
-
-    // Give duplicated object a new identity
-    duplicate.userData = {
-      ...duplicate.userData,
-      id: crypto.randomUUID(),
-      draggable: true,
-    };
-
-    // Important: do NOT keep old backend/canvasItem reference
-    this.removeCanvasItemReferences(duplicate);
-
-    this.canvasSceneService.scene.add(duplicate);
-
-    // Select duplicate immediately
-    this.selectedAsset = duplicate;
-    this.clearSelectionBox();
-    this.showSelectionBox(duplicate);
-
-    console.log('SELECTED ASSET DUPLICATED');
+  if (!this.selectedAsset) {
+    console.log('No selected asset to duplicate');
+    return;
   }
 
-  private cloneObjectForCanvas(object: THREE.Object3D): THREE.Object3D {
-    const originalUserData = new Map<THREE.Object3D, any>();
+  const duplicate = this.canvasAssetService.duplicateAsset(
+    this.selectedAsset,
+    this.canvasSceneService.scene
+  );
 
-    // 1. Temporarily remove circular userData before cloning
-    object.traverse((child) => {
-      originalUserData.set(child, child.userData);
+  // Select the newly duplicated asset
+  this.selectedAsset = duplicate;
 
-      child.userData = {
-        draggable: child.userData?.['draggable'] ?? false,
-        type: child.userData?.['type'],
-        isResizeHandle: child.userData?.['isResizeHandle'],
-        isRotateHandle: child.userData?.['isRotateHandle'],
-      };
-    });
+  // Update the selection box
+  this.clearSelectionBox();
+  this.showSelectionBox(duplicate);
 
-    // 2. Now clone safely
-    const clone = object.clone(true);
+}
+  
+ 
+private mirrorSelectedAsset(
+  axis: 'horizontal' | 'vertical'
+): void {
 
-    // 3. Restore original userData on original object
-    object.traverse((child) => {
-      const savedUserData = originalUserData.get(child);
-      child.userData = savedUserData ?? {};
-    });
-
-    // 4. Clean duplicate userData and clone geometry/materials
-    clone.traverse((child) => {
-      const mesh = child as THREE.Mesh;
-
-      if (mesh.geometry) {
-        mesh.geometry = mesh.geometry.clone();
-      }
-
-      const material = mesh.material;
-
-      if (Array.isArray(material)) {
-        mesh.material = material.map((m) => m.clone());
-      } else if (material) {
-        mesh.material = material.clone();
-      }
-
-      child.userData = {
-        ...child.userData,
-        id: crypto.randomUUID(),
-        draggable: true,
-      };
-
-      delete child.userData['canvasItem'];
-      delete child.userData['notificationService'];
-    });
-
-    return clone;
+  if (!this.selectedAsset) {
+    console.log('No selected asset to mirror');
+    return;
   }
 
-  private removeCanvasItemReferences(object: THREE.Object3D): void {
-    object.traverse((child) => {
-      if (!child.userData) return;
+  const mirroredAsset = this.canvasAssetService.mirrorAsset(
+    this.selectedAsset,
+    this.canvasSceneService.scene,
+    axis
+  );
 
-      delete child.userData['canvasItem'];
-      delete child.userData['notificationService'];
+  // Update selected asset
+  this.selectedAsset = mirroredAsset;
 
-      child.userData['id'] = crypto.randomUUID();
-      child.userData['draggable'] = true;
-    });
-  }
-
-  private getDeletableRoot(object: THREE.Object3D): THREE.Object3D {
-    let current: THREE.Object3D | null = object;
-
-    while (current) {
-      if (current.userData?.['canvasItem']) {
-        return current;
-      }
-
-      if (current.parent === this.canvasSceneService.scene) {
-        return current;
-      }
-
-      current = current.parent;
-    }
-
-    return object;
-  }
-
-  private disposeObject(object: THREE.Object3D): void {
-    object.traverse((child) => {
-      const mesh = child as THREE.Mesh;
-
-      if (mesh.geometry) {
-        mesh.geometry.dispose();
-      }
-
-      const material = mesh.material;
-
-      if (Array.isArray(material)) {
-        material.forEach((m) => m.dispose());
-      } else if (material) {
-        material.dispose();
-      }
-    });
-  }
-
-  private mirrorSelectedAsset(axis: 'horizontal' | 'vertical'): void {
-    if (!this.selectedAsset) {
-      console.log('No selected asset to mirror');
-      return;
-    }
-
-    const objectToMirror = this.getDeletableRoot(this.selectedAsset);
-
-    // Keep object visually in the same place after flipping
-    const beforeBox = new THREE.Box3().setFromObject(objectToMirror);
-    const beforeCenter = new THREE.Vector3();
-    beforeBox.getCenter(beforeCenter);
-
-    if (axis === 'horizontal') {
-      objectToMirror.scale.y *= -1;
-    }
-
-    if (axis === 'vertical') {
-      objectToMirror.scale.x *= -1;
-    }
-
-    objectToMirror.updateMatrixWorld(true);
-
-    const afterBox = new THREE.Box3().setFromObject(objectToMirror);
-    const afterCenter = new THREE.Vector3();
-    afterBox.getCenter(afterCenter);
-
-    // Shift object back so the center stays fixed
-    const correction = beforeCenter.clone().sub(afterCenter);
-    objectToMirror.position.add(correction);
-
-    objectToMirror.updateMatrixWorld(true);
-
-    this.selectedAsset = objectToMirror;
-    this.showSelectionBox(objectToMirror);
-
-    console.log(`SELECTED ASSET MIRRORED: ${axis}`);
-  }
+  // Refresh the selection box
+  this.showSelectionBox(mirroredAsset);
+}
 
   private drawRinfSections(
     sections: Array<{
@@ -6128,32 +3912,23 @@ public cancelSwitchPlacement(): void {
     );
   }
 
-  private distanceMeters(
-    a: { latitude: number; longitude: number },
-    b: { latitude: number; longitude: number }
-  ): number {
-    const earthRadius = 6371000;
+  private disposePreviewObject(
+    object: THREE.Line | THREE.Mesh | null
+  ): void {
+    if (!object) {
+      return;
+    }
 
-    const lat1 = THREE.MathUtils.degToRad(a.latitude);
-    const lat2 = THREE.MathUtils.degToRad(b.latitude);
+    this.canvasSceneService.scene.remove(object);
+    object.geometry.dispose();
 
-    const deltaLat =
-      THREE.MathUtils.degToRad(b.latitude - a.latitude);
+    const material = object.material;
 
-    const deltaLon =
-      THREE.MathUtils.degToRad(b.longitude - a.longitude);
-
-    const value =
-      Math.sin(deltaLat / 2) ** 2 +
-      Math.cos(lat1) *
-      Math.cos(lat2) *
-      Math.sin(deltaLon / 2) ** 2;
-
-    return (
-      2 *
-      earthRadius *
-      Math.atan2(Math.sqrt(value), Math.sqrt(1 - value))
-    );
+    if (Array.isArray(material)) {
+      material.forEach((m) => m.dispose());
+    } else {
+      material.dispose();
+    }
   }
 
   ngAfterViewInit() {
