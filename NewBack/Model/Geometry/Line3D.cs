@@ -2,11 +2,23 @@
 
 namespace GeoModel.Geometry
 {
+    /// <summary>
+    /// Represents a straight line segment in three-dimensional space.
+    /// </summary>
     public class Line3D : Curve3D
     {
+        /// <summary>
+        /// Gets the starting point of the line segment.
+        /// </summary>
         public override Point3d Start { get; }
+        /// <summary>
+        /// Gets the ending point of the line segment.
+        /// </summary>
         public override Point3d End { get; }
 
+        /// <summary>
+        /// Gets the Euclidean length of the line segment.
+        /// </summary>
         public override double Length
         {
             get
@@ -22,12 +34,26 @@ namespace GeoModel.Geometry
                 );
             }
         }
+        /// <summary>
+        /// Initializes a new line segment using its start and end points.
+        /// </summary>
+        /// <param name="start">The starting point of the line.</param>
+        /// <param name="end">The ending point of the line.</param>
 
         public Line3D(Point3d start, Point3d end)
         {
             Start = start;
             End = end;
         }
+
+        /// <summary>
+        /// Calculates a point at the specified distance from the start of the line.
+        /// </summary>
+        /// <param name="distance">The distance measured along the line.</param>
+        /// <returns>The point at the specified distance.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Thrown when the distance is negative or greater than the line length.
+        /// </exception>
 
         public override Point3d PointAt(double distance)
         {
@@ -42,6 +68,14 @@ namespace GeoModel.Geometry
                 Start.Z + (End.Z - Start.Z) * t
             );
         }
+
+        /// <summary>
+        /// Calculates the unit direction vector of the line.
+        /// </summary>
+        /// <param name="distance">
+        /// The distance along the line at which the tangent is requested.
+        /// </param>
+        /// <returns>The normalized direction vector of the line.</returns>
         public override Point3d TangentAt(double distance)
         {
             double length = Length;
@@ -52,6 +86,15 @@ namespace GeoModel.Geometry
                 (End.Z - Start.Z) / length
             );
         }
+
+        /// <summary>
+        /// Finds the closest point on the line segment to the specified point.
+        /// </summary>
+        /// <param name="point">The point used for the closest-point calculation.</param>
+        /// <returns>
+        /// The closest point, its distance from the input point,
+        /// and its distance along the line.
+        /// </returns>
         public override ClosestPointResult FindClosestPoint(Point3d point)
         {
             double dx = End.X - Start.X;
@@ -96,6 +139,13 @@ namespace GeoModel.Geometry
                 DistanceAlongCurve = t * Length
             };
         }
+
+        /// <summary>
+        /// Calculates the Euclidean distance between two points in three-dimensional space.
+        /// </summary>
+        /// <param name="a">The first point.</param>
+        /// <param name="b">The second point.</param>
+        /// <returns>The distance between the two points.</returns>
         private double Distance(Point3d a, Point3d b)
         {
             double dx = a.X - b.X;
@@ -107,6 +157,11 @@ namespace GeoModel.Geometry
                 dy * dy +
                 dz * dz);
         }
+
+        /// <summary>
+        /// Creates a new line segment with the start and end points swapped.
+        /// </summary>
+        /// <returns>A new line segment in the opposite direction.</returns>
         public override Curve3D Reverse()
         {
             return new Line3D(End, Start);
