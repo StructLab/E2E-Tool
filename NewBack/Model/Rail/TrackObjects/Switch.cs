@@ -1,6 +1,7 @@
 ﻿using GeoModel.Geometry;
 using GeoModel.Rail;
 using GeoModel.Rail.TrackObjects;
+using Model.Rail.Concepts;
 
 namespace Model.Rail.TrackObjects
 {
@@ -12,14 +13,18 @@ namespace Model.Rail.TrackObjects
         public Track? MainTrack { get; private set; }
         public Track? LeftTrack { get; private set; }
         public Track? RightTrack { get; private set; }
-        public Switch(Point3d location) : base(string.Empty, location,0)
+        public RailModel RailModel { get; private set; }
+        public Switch(Point3d location,RailModel railModel) : base(string.Empty, location,0)
         {
             Location = location;
+            RailModel = railModel;
+
+            ConnectToTracks();
         }
 
-        public void ConnectToTracks(IEnumerable<Track> allTracks)
+        public void ConnectToTracks()
         {
-            ConnectedTracks = allTracks
+            ConnectedTracks = RailModel.Tracks
                 .Where(track =>
                     track.Geometry.Start.Equals(Location) ||
                     track.Geometry.End.Equals(Location))
@@ -129,6 +134,24 @@ namespace Model.Rail.TrackObjects
                 angle += 2 * Math.PI;
 
             return angle;
+        }
+        public void CreateTVPS()
+        {
+            var axles = ConnectedTracks
+                .SelectMany(x => x.Objects.OfType<AxleCounter>())
+                .OrderBy(x=>Math.Abs(x.OffsetOnTrack - x.Track.GetDistance(this.Location))).ToList();
+
+            var first3 = axles.Take(3);
+
+            var tvps = new TVPS(RailModel);
+
+            tvps.AxleCounters.AddRange(first3);
+
+            var avalaibleTVPS = this.RailModel.TVPS.Where(x => x.AxleCounters.Except(first3).Count() == 0);
+
+            if (avalaibleTVPS.Any()) return;
+
+            this.RailModel.TVPS.Add(tvps);
         }
     }
 }

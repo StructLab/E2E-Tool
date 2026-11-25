@@ -19,7 +19,6 @@ namespace GeoModel.Rail
 
         public double Length => Geometry.Length;
         private readonly List<TrackObject> _objects = new();
-
         public IReadOnlyList<TrackObject> Objects => _objects;
         internal void AddObject(TrackObject obj)
         {

@@ -1,4 +1,6 @@
-﻿namespace GeoModel.Rail.TrackObjects
+﻿using GeoModel.Geometry;
+
+namespace GeoModel.Rail.TrackObjects
 {
     public class Signal : TrackObject
     {
@@ -8,6 +10,16 @@
             double distance)
             : base(id, track, distance)
         {
+        }
+
+        public Signal(
+          string id,
+          Point3d location,
+          double rotation,
+          RailModel railModel)
+          : base(id, location, rotation)
+        {
+            railModel.AttachTrackObject(this);
         }
     }
 }

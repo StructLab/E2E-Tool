@@ -9,10 +9,10 @@ namespace Model.Geometry
         // 3D distance from the requested point to the curve
         public double Distance { get; set; }
 
-        // Distance from the beginning of this curve
+        // OffsetOnTrack from the beginning of this curve
         public double DistanceAlongCurve { get; set; }
 
-        // Distance from beginning of the whole PolyLine3D
+        // OffsetOnTrack from beginning of the whole PolyLine3D
         public double DistanceAlongTrack { get; set; }
     }
 }

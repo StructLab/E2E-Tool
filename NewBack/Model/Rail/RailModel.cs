@@ -2,12 +2,16 @@
 using GeoModel.Rail.TrackObjects;
 using Graph;
 using Model.Graph;
+using Model.Rail.Concepts;
+using VDS.RDF;
 
 namespace GeoModel.Rail
 {
     public class RailModel
     {
-        public List<Track> Tracks { get; } = new();
+        public List<Track> Tracks { get; set; } = new();
+        public List<TVPS> TVPS { get; set; } = new();
+        public UndirectedWeightedGraphT<IGraphNode> Graph { get; set; }
 
         public void AddTrack(Track track)
         {
@@ -63,12 +67,11 @@ namespace GeoModel.Rail
 
             return closestTrack;
         }
-        public UndirectedWeightedGraphT<IGraphNode> BuildTrackGraph(
-        IEnumerable<Track> tracks)
+        public void BuildTrackGraph()
         {
             var graph = new UndirectedWeightedGraphT<IGraphNode>();
 
-            foreach (var track in tracks)
+            foreach (var track in Tracks)
             {
                 // Add track itself
                 graph.AdjacencyList.TryAdd(
@@ -85,7 +88,7 @@ namespace GeoModel.Rail
 
                 // Sort objects according to their position on the track
                 var objects = track.Objects
-                    .OrderBy(x => x.Distance)
+                    .OrderBy(x => x.OffsetOnTrack)
                     .ToList();
 
                 // Connect objects along the track
@@ -94,13 +97,12 @@ namespace GeoModel.Rail
                     var a = objects[i];
                     var b = objects[i + 1];
 
-                    double distance = b.Distance - a.Distance;
+                    double distance = b.OffsetOnTrack - a.OffsetOnTrack;
 
                     graph.AddEdgeTwoWay(a, b, distance);
                 }
             }
-
-            return graph;
+            Graph = graph;
         }
     }
 }

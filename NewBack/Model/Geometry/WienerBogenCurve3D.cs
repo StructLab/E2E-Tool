@@ -32,7 +32,7 @@ namespace GeoModel.Geometry
     /// </summary>
     public class WienerBogenCurve3D : TransitionCurve3D
     {
-        // Distance between the middle of the two rail heads: 1500 mm (for the standard gauge 1435 mm).
+        // OffsetOnTrack between the middle of the two rail heads: 1500 mm (for the standard gauge 1435 mm).
         private const double GaugeMillimetres = 1500.0;
 
         private readonly double _cant;

@@ -35,7 +35,7 @@ namespace Model.Graph
                 var end = new TrackEndpoint(track, false);
 
                 var objects = track.Objects
-                    .OrderBy(x => x.Distance)
+                    .OrderBy(x => x.OffsetOnTrack)
                     .ToList();
 
                 trackNodes[track] = (start, end, objects);
@@ -66,7 +66,7 @@ namespace Model.Graph
                     graph.AddEdgeTwoWay(
                         start,
                         objects[0],
-                        objects[0].Distance);
+                        objects[0].OffsetOnTrack);
 
                     // -------------------------------------------------
                     // Object -> Object
@@ -78,7 +78,7 @@ namespace Model.Graph
                         var next = objects[i + 1];
 
                         double distance =
-                            next.Distance - current.Distance;
+                            next.OffsetOnTrack - current.OffsetOnTrack;
 
                         graph.AddEdgeTwoWay(
                             current,
@@ -93,7 +93,7 @@ namespace Model.Graph
                     graph.AddEdgeTwoWay(
                         objects[^1],
                         end,
-                        track.Geometry.Length - objects[^1].Distance);
+                        track.Geometry.Length - objects[^1].OffsetOnTrack);
                 }
                 else
                 {
@@ -189,7 +189,7 @@ namespace Model.Graph
                 new List<(IGraphNode, double)>());
 
             var objects = track.Objects
-                .OrderBy(x => x.Distance)
+                .OrderBy(x => x.OffsetOnTrack)
                 .ToList();
 
             // No objects on the track
@@ -214,7 +214,7 @@ namespace Model.Graph
                 graph.AddEdgeTwoWay(
                     start,
                     objects[0],
-                    objects[0].Distance);
+                    objects[0].OffsetOnTrack);
 
                 // Object -> object
                 for (int i = 0; i < objects.Count - 1; i++)
@@ -225,14 +225,14 @@ namespace Model.Graph
                     graph.AddEdgeTwoWay(
                         current,
                         next,
-                        next.Distance - current.Distance);
+                        next.OffsetOnTrack - current.OffsetOnTrack);
                 }
 
                 // Last object -> end
                 graph.AddEdgeTwoWay(
                     objects[^1],
                     end,
-                    track.Geometry.Length - objects[^1].Distance);
+                    track.Geometry.Length - objects[^1].OffsetOnTrack);
             }
 
             // Connect the new track to existing tracks
@@ -323,13 +323,13 @@ namespace Model.Graph
             graph.AddEdgeTwoWay(
                 previous,
                 obj,
-                obj.Distance - GetDistance(previous));
+                obj.OffsetOnTrack - GetDistance(previous));
 
             // Connect object -> next
             graph.AddEdgeTwoWay(
                 obj,
                 next,
-                GetDistance(next) - obj.Distance);
+                GetDistance(next) - obj.OffsetOnTrack);
         }
 
         private static double GetDistance(IGraphNode node)
@@ -342,7 +342,7 @@ namespace Model.Graph
                         : endpoint.Track.Geometry.Length,
 
                 TrackObject trackObject =>
-                    trackObject.Distance,
+                    trackObject.OffsetOnTrack,
 
                 _ => throw new InvalidOperationException(
                     $"Unsupported graph node type: {node.GetType().Name}")

@@ -15,4 +15,13 @@
     <None Include="C:\Users\k7ada\OneDrive - Lawcon Consulting Ltd\All\Code\GeoModel\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="dotNetRdf" Version="3.5.2" />
+    <PackageReference Include="netDxf" Version="2023.11.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>

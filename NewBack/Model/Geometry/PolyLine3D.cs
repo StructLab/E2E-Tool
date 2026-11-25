@@ -7,6 +7,11 @@ namespace GeoModel.Geometry
     /// </summary>
     public class PolyLine3D
     {
+        public PolyLine3D(List<Curve3D> Segments)
+        {
+            this.Segments = Segments;
+            Chain();
+        }
         /// <summary>
         /// Gets the collection of curve segments that form the polyline.
         /// </summary>

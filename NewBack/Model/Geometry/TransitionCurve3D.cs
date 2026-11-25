@@ -111,7 +111,7 @@ namespace GeoModel.Geometry
         }
 
         /// <summary>
-        /// Distance in the x/y plane between the end point we were given and the end point the formula gives.
+        /// OffsetOnTrack in the x/y plane between the end point we were given and the end point the formula gives.
         /// It should be (almost) zero. If it is large, the data or the inputs do not fit together.
         /// </summary>
         public double EndGapMeters
