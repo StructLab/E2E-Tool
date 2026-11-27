@@ -1,0 +1,7 @@
+.value-box { padding: 6px 8px; border-radius: 4px; background: rgba(128,128,128,0.12); font-size: 13px; word-break: break-word; }
+.field-input { width: 100%; box-sizing: border-box; padding: 6px 8px; font-size: 13px; }
+.field-input:disabled { opacity: 0.6; }
+.list-box { display: flex; flex-direction: column; gap: 4px; }
+.list-item { padding: 4px 8px; border-radius: 4px; background: rgba(128,128,128,0.12); font-size: 13px; }
+.list-empty { font-size: 12px; opacity: 0.6; }
+.check-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }

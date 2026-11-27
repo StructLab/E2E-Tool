@@ -4,7 +4,7 @@
   <div class="sidebar-section properties-section">
     <div class="section-title">PROPERTIES</div>
 
-    @if (!selectedObject) {
+    @if (selectedId() === null) {
       <div class="empty-properties">
         <div class="empty-main-text">No object selected</div>
         <div class="empty-sub-text">
@@ -15,6 +15,41 @@
           <span class="empty-icon">⌖</span>
         </div>
       </div>
+    } @else {
+      <div class="object-name">{{ selectedDisplayId() !== '' ? selectedDisplayId() : selectedType() }}</div>
+      <div class="object-info">{{ selectedType() }} · id {{ selectedId() }}</div>
+
+      @if (loading()) {
+        <div class="empty-sub-text">Loading properties...</div>
+      } @else if (errorText() !== '') {
+        <div class="empty-sub-text">{{ errorText() }}</div>
+      } @else if (properties().length === 0) {
+        <div class="empty-sub-text">This object has no properties.</div>
+      } @else {
+        @for (property of properties(); track $index) {
+          <div class="field-group">
+            <label class="field-label">{{ property.propertyName }}</label>
+
+            @switch (property.propertyType) {
+              @case ('enum') {
+                <app-enum-property [property]="property"
+                                   (valueChanged)="onValueChanged(property, $event)" />
+              }
+              @case ('list') {
+                <app-list-property [property]="property" />
+              }
+              @case ('boolean') {
+                <app-boolean-property [property]="property"
+                                      (valueChanged)="onValueChanged(property, $event)" />
+              }
+              @default {
+                <app-string-property [property]="property"
+                                     (valueChanged)="onValueChanged(property, $event)" />
+              }
+            }
+          </div>
+        }
+      }
     }
   </div>
 

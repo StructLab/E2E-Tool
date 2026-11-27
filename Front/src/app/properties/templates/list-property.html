@@ -1,0 +1,7 @@
+<div class="list-box">
+  @for (item of property().propertyValues; track $index) {
+    <div class="list-item">{{ item }}</div>
+  } @empty {
+    <div class="list-empty">(empty)</div>
+  }
+</div>

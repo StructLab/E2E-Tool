@@ -9,7 +9,7 @@
   right: 0;
   bottom: 150px;
 
-  width: 220px;
+  width: 280px;
 
   display: flex;
   flex-direction: column;
@@ -37,11 +37,14 @@
 }
 
 .properties-section {
-  flex: 0 0 42%;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .general-section {
-  flex: 1;
+  flex: 0 0 auto;
+  max-height: 24%;
   overflow-y: auto;
 }
 
@@ -128,4 +131,68 @@
   font-size: 11px;
 
   box-sizing: border-box;
+}
+
+/* Object name and description */
+.object-name {
+  color: #e2e8f0;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.object-info {
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+/* Editable fields */
+.field-input {
+  min-height: 32px;
+  padding: 0 10px;
+
+  background: #0d141c;
+  border: 1px solid #334155;
+  border-radius: 6px;
+
+  color: #e2e8f0;
+  font-size: 11px;
+  font-family: inherit;
+
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  min-height: 32px;
+  color: #cbd5e1;
+  font-size: 11px;
+}
+
+.field-box-readonly {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.field-hint {
+  color: #64748b;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.optional-tag {
+  margin-left: 6px;
+  color: #64748b;
+  font-weight: 400;
 }

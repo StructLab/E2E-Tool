@@ -1,0 +1,5 @@
+@if (property().editable) {
+  <input class="field-input" type="text" [value]="text()" (input)="onTyped($event)" />
+} @else {
+  <div class="value-box">{{ text() }}</div>
+}

@@ -76,6 +76,14 @@ triggerMirrorSelected(axis: 'horizontal' | 'vertical'): void {
   this.mirrorSelectedSource.next(axis);
 }
 
+// The canvas tells the right panel which object is selected (or null when nothing is selected).
+private objectSelectedSource = new BehaviorSubject<{ id: string; type: string; displayId?: string } | null>(null);
+objectSelected$ = this.objectSelectedSource.asObservable();
+
+selectObject(selected: { id: string; type: string; displayId?: string } | null): void {
+  this.objectSelectedSource.next(selected);
+}
+
 private selectionStateSource = new Subject<boolean>();
 selectionState$ = this.selectionStateSource.asObservable();
 

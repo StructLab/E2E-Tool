@@ -867,6 +867,14 @@ public iconScalePercent = 100;
           this.selectedAssets = [asset];
           this.selectedAsset = asset;
 
+          // Tell the right panel which object was selected (it shows the properties).
+          this.eventService.selectObject({
+            id: String(asset.userData['id'] ?? ''),
+            displayId: String(asset.userData['displayId'] ?? ''),
+            // Dropped symbols have type "DroppedAsset"; their real kind (BaliseGroup, ...) is in layerType.
+            type: String(asset.userData['layerType'] ?? asset.userData['type'] ?? '')
+          });
+
           // If selected object is a curve, show only curve handles.
           // Do NOT show blue selection rectangle and do NOT start normal dragging.
           if (asset.userData['type'] === 'DrawnCurve') {
@@ -930,6 +938,7 @@ public iconScalePercent = 100;
 
         // Empty canvas click clears selection
         this.selectedAsset = null;
+        this.eventService.selectObject(null);
         this.canvasSelectionService.clearSelectedImportedElementHighlight();
         this.selectedAssets = [];
         this.clearSelectionBox();

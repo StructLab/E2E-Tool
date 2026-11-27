@@ -1,0 +1,1681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rdf:RDF [
+	<!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+	<!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+	<!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+	<!ENTITY era 'http://data.europa.eu/949/'>
+	<!ENTITY concepts 'http://data.europa.eu/949/concepts/'>
+]>
+<rdf:RDF xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:era="http://data.europa.eu/949/" xmlns:concepts="http://data.europa.eu/949/concepts/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/069bfe6d-3b97-4068-8394-c90a3794c643">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/25554e34-01f5-4ec8-9256-a74b7067d8f2">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">79798</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">79798</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/3c74d3dd-5812-4ef4-870e-3f6704ed3936">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">34343</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">34343</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/42a8a43f-fd5f-43cd-b6bf-5c567fb68ac4">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/54b4776d-ab0f-40d8-913f-2c15aa68cf30">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/5d27801e-3110-43e9-bcb4-7d2ac251deaa">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/74853011-9be3-4ee6-8e12-25990390bf2b">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">64900</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">64900</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/77891057-9bed-43b5-99f7-f7ce569fc21f">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">119535</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">119535</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/8f1c5027-bd4d-456b-944f-e13f16f836bd">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">44828</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">44828</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/906f3d10-b32f-4542-a93b-d6b689f035d2">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">50417</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">50417</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/9ac0b8ef-fdeb-4fee-b0c3-e6eca14678ad">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">83533</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">83533</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/a2bbd3a1-5e4a-44a7-a05f-326ad8435c26">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">107706</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">107706</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/a7b941e6-7769-421d-a8b3-4dbb6a972f04">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">163096</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">163096</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/a97b48c5-33fb-431d-9bcf-63f5ba3c6a64">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">44021</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">44021</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/af7cedde-0adf-4230-b1ca-6dd244dcb8e5">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/b8eebdf9-e814-481c-85b2-9745ff92b941">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">25168</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">25168</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/ca5e3585-d4a6-4f74-834b-849612b12c6a">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/cf990172-b79d-4ee0-91ce-b730b81c5b32">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">42818</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">42818</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/e2f76cc0-58cc-4af9-99a1-f302ca020709">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">112087</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">112087</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/e99edbdb-f28c-4654-bb8f-019ac21d11bb">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/f0b5307b-088d-4118-a8e3-695281b39516">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/f34ab9c5-987d-443e-baec-fcfd1b8c1f37">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CantSamplePoint rdf:about="http://data.europa.eu/949/cantSamplePoint/fee1d7a2-152a-41e5-ac86-14a259a94210">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointCant rdf:datatype="&xsd;int">0</era:samplePointCant>
+  </era:CantSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/2f031955-93aa-4cd7-b398-0d6f6abe6a50">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/3a09105f-6d68-4514-acb9-32c43ba97bd4">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">25168</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">25168</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">75843</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/41ed4fe3-402b-43c6-91e0-2849112b3d90">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">43598</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/4a933cca-48db-4b8d-8c63-6635db1883f8">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">44828</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">44828</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/53eda8d9-bd9c-4e73-b743-099085450db4">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">-42153</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/593be9a7-7b1f-4af0-a107-0d2ab5f29fe0">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">163096</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">163096</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">-42740</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/59ff8e7d-a5b8-4f0e-ba4f-ad68e9601173">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/6f9e82e0-6fc6-4ba8-879e-80ae637639b1">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">83533</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">83533</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">58986</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/800cd651-ca4a-4a57-ae2e-58e4f8def798">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/8161435b-558f-4599-a1e2-1b1d46f88b7d">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">39156</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/9d52527b-ec43-47d2-a677-74da6a74fb50">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">79798</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">79798</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">118217</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/b00acdee-738d-4d96-b0e7-36e3d83d415d">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">-139386</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/c4917e06-f7f8-41d9-a80c-ba62b3089d4b">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">50417</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">50417</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/d3bfeea2-689b-444b-bb6c-217db93346e9">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">112087</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">112087</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">43223</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/dbd98d5b-2299-4c59-82a9-1bdfaf819d8e">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">34343</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">34343</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">154587</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/dd2a0473-eb31-4b0c-874b-d3d63f5fcdfc">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">42818</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">42818</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">-100690</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/de341a91-bb37-4ec9-8ab0-8428caa283aa">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">44021</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">44021</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">55829</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/e55352d3-4615-455d-9551-3ded8fd66348">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/e9a23ecd-2079-4412-ad34-4514a020b97d">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">-118606</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/ecde1ba3-3945-493f-9968-9dc364dee493">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">119535</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">119535</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">-38628</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/f7188a75-dfa6-43cf-85e6-d0cdb8d433b8">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/fcc01964-e4fa-4a79-95b4-7652a0d6481b">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">107706</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">107706</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:CurveSamplePoint rdf:about="http://data.europa.eu/949/curveSamplePoint/fe6ba024-ca91-415c-835a-80f88495e953">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">64900</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">64900</era:pos>
+    <era:sampleCurveRadius rdf:datatype="&xsd;double">2147483647</era:sampleCurveRadius>
+  </era:CurveSamplePoint>
+  <era:FunctionalArea rdf:about="http://data.europa.eu/949/functionalArea/cbdb997f-ab78-4056-bc11-19202f32f499">
+    <era:faVersionTimestamp rdf:datatype="&xsd;dateTime">2026-09-21T09:37:27.3671601Z</era:faVersionTimestamp>
+    <era:switches rdf:resource="http://data.europa.eu/949/switch/W1" />
+    <era:switches rdf:resource="http://data.europa.eu/949/switch/W2" />
+    <era:switches rdf:resource="http://data.europa.eu/949/switch/W3" />
+    <era:switches rdf:resource="http://data.europa.eu/949/switch/W4" />
+    <era:switches rdf:resource="http://data.europa.eu/949/switch/W5" />
+    <era:topoArea rdf:resource="http://data.europa.eu/949/topoArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+  </era:FunctionalArea>
+  <era:FunctionalElementProjection rdf:about="http://data.europa.eu/949/functionalElementProjection/W1">
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:elementRef rdf:resource="http://data.europa.eu/949/functionalElementRef/W1" />
+    <era:x rdf:datatype="&xsd;double">151.5354664085684</era:x>
+    <era:y rdf:datatype="&xsd;double">118.8929874298452</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:FunctionalElementProjection>
+  <era:FunctionalElementProjection rdf:about="http://data.europa.eu/949/functionalElementProjection/W2">
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:elementRef rdf:resource="http://data.europa.eu/949/functionalElementRef/W2" />
+    <era:x rdf:datatype="&xsd;double">230.6719612889509</era:x>
+    <era:y rdf:datatype="&xsd;double">35.04286666073125</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:FunctionalElementProjection>
+  <era:FunctionalElementProjection rdf:about="http://data.europa.eu/949/functionalElementProjection/W3">
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:elementRef rdf:resource="http://data.europa.eu/949/functionalElementRef/W3" />
+    <era:x rdf:datatype="&xsd;double">87.2768071071707</era:x>
+    <era:y rdf:datatype="&xsd;double">92.05386554575784</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:FunctionalElementProjection>
+  <era:FunctionalElementProjection rdf:about="http://data.europa.eu/949/functionalElementProjection/W4">
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:elementRef rdf:resource="http://data.europa.eu/949/functionalElementRef/W4" />
+    <era:x rdf:datatype="&xsd;double">39.77411128895094</era:x>
+    <era:y rdf:datatype="&xsd;double">88.31486666073123</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:FunctionalElementProjection>
+  <era:FunctionalElementProjection rdf:about="http://data.europa.eu/949/functionalElementProjection/W5">
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:elementRef rdf:resource="http://data.europa.eu/949/functionalElementRef/W5" />
+    <era:x rdf:datatype="&xsd;double">108.1107612889509</era:x>
+    <era:y rdf:datatype="&xsd;double">10.50651666073125</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:FunctionalElementProjection>
+  <era:FunctionalElementRef rdf:about="http://data.europa.eu/949/functionalElementRef/W1">
+    <era:switch rdf:resource="http://data.europa.eu/949/switch/W1" />
+  </era:FunctionalElementRef>
+  <era:FunctionalElementRef rdf:about="http://data.europa.eu/949/functionalElementRef/W2">
+    <era:switch rdf:resource="http://data.europa.eu/949/switch/W2" />
+  </era:FunctionalElementRef>
+  <era:FunctionalElementRef rdf:about="http://data.europa.eu/949/functionalElementRef/W3">
+    <era:switch rdf:resource="http://data.europa.eu/949/switch/W3" />
+  </era:FunctionalElementRef>
+  <era:FunctionalElementRef rdf:about="http://data.europa.eu/949/functionalElementRef/W4">
+    <era:switch rdf:resource="http://data.europa.eu/949/switch/W4" />
+  </era:FunctionalElementRef>
+  <era:FunctionalElementRef rdf:about="http://data.europa.eu/949/functionalElementRef/W5">
+    <era:switch rdf:resource="http://data.europa.eu/949/switch/W5" />
+  </era:FunctionalElementRef>
+  <era:GeometryArea rdf:about="http://data.europa.eu/949/geometryArea/cbdb997f-ab78-4056-bc11-19202f32f499">
+    <era:alignment3d rdf:datatype="&xsd;boolean">false</era:alignment3d>
+    <era:gaVersionTimestamp rdf:datatype="&xsd;dateTime">2026-09-21T09:37:27.3525209Z</era:gaVersionTimestamp>
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:linearElementGeometries rdf:resource="http://data.europa.eu/949/linearElementGeometry/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:topoArea rdf:resource="http://data.europa.eu/949/topoArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+  </era:GeometryArea>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/08019d3a-ed44-45b2-968b-6676b80c8319">
+    <era:azimuth rdf:datatype="&xsd;double">90.96519809596964</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">42.818258</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">-100.69015375285407</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/33b6ac6b-3c85-469a-820c-75cdc70cf344">
+    <era:azimuth rdf:datatype="&xsd;double">239.38138907306057</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">-42.15337078326552</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/36acaf30-ecd8-4545-95aa-fb3368d0f96b">
+    <era:azimuth rdf:datatype="&xsd;double">129.45686570783914</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">83.533517</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">58.98640147464254</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/38c07208-a57c-44f8-b2ad-d8f41ec1999d">
+    <era:azimuth rdf:datatype="&xsd;double">118.41804175289462</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">119.53518200000002</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">-38.62880956174495</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/46429c4a-eb41-4276-9d2a-f19f15b6a7d3">
+    <era:azimuth rdf:datatype="&xsd;double">115.9535958812624</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">163.09695299999998</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">-42.7404647424472</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/6f6eaaaa-a5ea-448a-a274-6ef385cdab22">
+    <era:azimuth rdf:datatype="&xsd;double">72.61800765628124</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">25.168</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">75.8437702069824</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/7d88e43d-6c64-412b-8e6c-ca923717d256">
+    <era:azimuth rdf:datatype="&xsd;double">101.92979807108014</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">34.34347</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">154.58737312335802</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/8053c7f0-51bb-44f8-b8db-b7e563b4d32c">
+    <era:azimuth rdf:datatype="&xsd;double">87.3287439574591</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">-139.38691249196688</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/910277c7-8674-48b3-b89d-c029abe824c5">
+    <era:azimuth rdf:datatype="&xsd;double">52.375020200355664</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">43.598519225321226</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/9bc9e21e-cef3-4756-89c1-9a895a27b1ec">
+    <era:azimuth rdf:datatype="&xsd;double">87.5006867528727</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">44.021516</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">55.82957928541081</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/a42a2bc5-152e-464f-9eed-c9752af4adfe">
+    <era:azimuth rdf:datatype="&xsd;double">162.36324368719852</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">112.08712200000001</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">43.223798781126014</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/b4679f7f-33c8-4508-a15b-92f2ad579e9e">
+    <era:azimuth rdf:datatype="&xsd;double">70.02512055144075</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">79.798258</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">118.21798062765309</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/d0d23a96-99dc-4094-af63-6e5af0dee262">
+    <era:azimuth rdf:datatype="&xsd;double">57.89215754078583</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">39.156573390789205</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalArc rdf:about="http://data.europa.eu/949/horizontalArc/de92d1a5-2486-43c6-bf6b-b28773456201">
+    <era:azimuth rdf:datatype="&xsd;double">117.71453840523833</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:radius rdf:datatype="&xsd;double">-118.60685919151229</era:radius>
+  </era:HorizontalArc>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/11826604-1475-4fe2-9838-8507c93a3279">
+    <era:azimuth rdf:datatype="&xsd;double">89.225392</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/146b5c08-b1e5-45d0-843c-54cd13d4a681">
+    <era:azimuth rdf:datatype="&xsd;double">89.225877</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/2724a97d-71a3-4619-bfe5-3451383b787e">
+    <era:azimuth rdf:datatype="&xsd;double">89.341316</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">107.706</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/61a7141b-5c37-4928-bb37-e68553b80141">
+    <era:azimuth rdf:datatype="&xsd;double">89.226425</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/71a25f91-a21c-41a6-80d5-82733d9eedc0">
+    <era:azimuth rdf:datatype="&xsd;double">119.187344</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">44.828</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/8b36a6c9-5ad0-4311-b21e-6e3696a031ab">
+    <era:azimuth rdf:datatype="&xsd;double">89.226465</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">50.41799999999999</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/903d3d48-7438-491f-8801-f27933a1d4b7">
+    <era:azimuth rdf:datatype="&xsd;double">89.226554</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/e235b5b7-6ea7-43e2-bfe2-1da1a1cf5f28">
+    <era:azimuth rdf:datatype="&xsd;double">119.228231</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalLine rdf:about="http://data.europa.eu/949/horizontalLine/ffa10152-b4b4-4829-ac26-912cb1473cc7">
+    <era:azimuth rdf:datatype="&xsd;double">118.87921</era:azimuth>
+    <era:elementGeometryPos rdf:datatype="&xsd;double">64.9</era:elementGeometryPos>
+  </era:HorizontalLine>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/184b27b1-9fb4-43d4-bac1-24ba332c7f7b">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/910277c7-8674-48b3-b89d-c029abe824c5" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/221f6b65-61bc-41cc-a357-677c16c07620">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/8053c7f0-51bb-44f8-b8db-b7e563b4d32c" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/311a1564-1548-4549-ad24-cde30f2c966a">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/ffa10152-b4b4-4829-ac26-912cb1473cc7" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/33860c0a-cd6a-4a8f-aabc-467a4e312d47">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/2724a97d-71a3-4619-bfe5-3451383b787e" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/44a24fa0-18a8-48a9-a60a-3c981e9a2cb4">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/7d88e43d-6c64-412b-8e6c-ca923717d256" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/4802e4d5-da44-45d8-b95c-3937742d128a">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/9bc9e21e-cef3-4756-89c1-9a895a27b1ec" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/7b74813b-0764-49dc-9685-bc87354b9045">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/de92d1a5-2486-43c6-bf6b-b28773456201" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/8314bf9b-cd61-477e-a4d1-91ffecc7935b">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/146b5c08-b1e5-45d0-843c-54cd13d4a681" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/934166d6-8bd2-4675-8842-b770c7d77fa1">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/11826604-1475-4fe2-9838-8507c93a3279" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/aa266992-1c18-4aac-99e7-ce79007743e2">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/6f6eaaaa-a5ea-448a-a274-6ef385cdab22" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/c1f71fea-ab51-459e-8a68-0d3a43006e7d">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/8b36a6c9-5ad0-4311-b21e-6e3696a031ab" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/cab5c164-a64e-4f88-805b-4c1a24da0f21">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/38c07208-a57c-44f8-b2ad-d8f41ec1999d" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/cc25dda6-ac15-4995-989e-4f5a574de742">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/71a25f91-a21c-41a6-80d5-82733d9eedc0" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/d0fbd361-2820-43ba-8dfd-7a854c3b6b4e">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/b4679f7f-33c8-4508-a15b-92f2ad579e9e" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/de263769-63d5-4ea3-9ea5-41d0153a8ec1">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/903d3d48-7438-491f-8801-f27933a1d4b7" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/e077e125-ff41-43ba-90d4-99152b3a4716">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/e235b5b7-6ea7-43e2-bfe2-1da1a1cf5f28" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/e6efe057-bac1-4be1-ae41-1beaab37b86a">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/46429c4a-eb41-4276-9d2a-f19f15b6a7d3" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/ea7fd76e-581a-4b16-ae24-cd42793a0cdb">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/d0d23a96-99dc-4094-af63-6e5af0dee262" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/ed9c83d7-31cb-4220-9dfb-57508b092c26">
+    <era:horizontalSegmentLine rdf:resource="http://data.europa.eu/949/horizontalLine/61a7141b-5c37-4928-bb37-e68553b80141" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/ef8568f2-3597-4ce9-acc3-ccb369cb1d96">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/33b6ac6b-3c85-469a-820c-75cdc70cf344" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/f6b5d521-4966-4294-8763-597d2f4d697d">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/36acaf30-ecd8-4545-95aa-fb3368d0f96b" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/fc993c0f-7a9d-4bb4-aeb0-4b7aa6ec034f">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/a42a2bc5-152e-464f-9eed-c9752af4adfe" />
+  </era:HorizontalSegment>
+  <era:HorizontalSegment rdf:about="http://data.europa.eu/949/horizontalSegment/fe121e9f-45cd-49ca-9a67-305b0b2861d2">
+    <era:horizontalSegmentArc rdf:resource="http://data.europa.eu/949/horizontalArc/08019d3a-ed44-45b2-968b-6676b80c8319" />
+  </era:HorizontalSegment>
+  <era:Infrastructure rdf:about="http://data.europa.eu/949/infrastructure/079b14bf-de13-465c-99be-81fee251ae89">
+    <era:functionalAreas rdf:resource="http://data.europa.eu/949/functionalArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+    <era:geometryAreas rdf:resource="http://data.europa.eu/949/geometryArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+    <era:propertiesAreas rdf:resource="http://data.europa.eu/949/propertiesArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+    <era:sampledGeometryAreas rdf:resource="http://data.europa.eu/949/sampledGeometryArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+    <era:topoAreas rdf:resource="http://data.europa.eu/949/topoArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+  </era:Infrastructure>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">169531.51700000002</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/309696c3-bbec-4834-bff5-e70a0b6649d4">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">211069.953</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/7014c01c-d954-4d3e-a87a-450ea6259595">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">116278.79900000001</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">50411</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/953af1bd-d46c-4b39-9740-6af118a6945d">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">160535.18200000003</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/a6e789d4-eb66-473d-b1da-387e4cd9341a">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">94000.26699999999</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/b54522a3-bc56-4f5f-a4a7-8df93f49808e">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">116866.258</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/d3b9b27b-5a58-4dac-933d-7f9530eaefb4">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">94509.205</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/f6981389-768b-41e5-8f40-62344c88c694">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">93716.945</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElement rdf:about="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4">
+    <era:lengthOfNetLinearElement rdf:datatype="&xsd;double">156771.092</era:lengthOfNetLinearElement>
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+  </era:LinearElement>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/0c0e91e9-6955-4eb1-a49f-00bf6e2f8b86">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">25168</era:pos>
+    <era:x rdf:datatype="&xsd;double">133.010111</era:x>
+    <era:y rdf:datatype="&xsd;double">13.93684</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/1643556f-e944-4023-a59e-ef001b91c2cb">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">44828</era:pos>
+    <era:x rdf:datatype="&xsd;double">82.191511</era:x>
+    <era:y rdf:datatype="&xsd;double">87.803966</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/17ba4c04-82c7-414f-ac62-a4d399a03e73">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">79798</era:pos>
+    <era:x rdf:datatype="&xsd;double">115.295829</era:x>
+    <era:y rdf:datatype="&xsd;double">111.853962</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/18aad3e4-d2d2-4390-821a-fb5b210d714a">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">42818</era:pos>
+    <era:x rdf:datatype="&xsd;double">79.032711</era:x>
+    <era:y rdf:datatype="&xsd;double">105.748866</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/1a8c43c3-1a79-41cd-b188-f629bc343d36">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">39.774111</era:x>
+    <era:y rdf:datatype="&xsd;double">88.314865</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/1b5c08f4-f575-4e24-bf32-5ad275f8f235">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">112087</era:pos>
+    <era:x rdf:datatype="&xsd;double">249.287006</era:x>
+    <era:y rdf:datatype="&xsd;double">84.997682</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/2283943a-a21b-426f-873d-f3b149aab0ff">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">116866</era:pos>
+    <era:x rdf:datatype="&xsd;double">151.535466</era:x>
+    <era:y rdf:datatype="&xsd;double">118.892987</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/230ff57c-b7a3-4616-8a2d-e522dda6adee">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">94509</era:pos>
+    <era:x rdf:datatype="&xsd;double">174.561461</era:x>
+    <era:y rdf:datatype="&xsd;double">57.154066</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/233df7fb-6516-435a-bc86-f1f166705415">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">107706</era:pos>
+    <era:x rdf:datatype="&xsd;double">59.04891</era:x>
+    <era:y rdf:datatype="&xsd;double">9.942465</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/267b5a19-d723-4a48-8edf-a79e5dee51c1">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">169531</era:pos>
+    <era:x rdf:datatype="&xsd;double">230.671961</era:x>
+    <era:y rdf:datatype="&xsd;double">35.042866</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/33b10f6e-9a86-4156-9347-b75c470311d2">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">35.267261</era:x>
+    <era:y rdf:datatype="&xsd;double">117.323366</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/39397f1e-0b80-4f77-ac15-7662dac4b261">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">50418</era:pos>
+    <era:x rdf:datatype="&xsd;double">157.909461</era:x>
+    <era:y rdf:datatype="&xsd;double">17.367165</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/3c8febf5-e372-4151-90af-b806bebbf634">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">64900</era:pos>
+    <era:x rdf:datatype="&xsd;double">148.634461</era:x>
+    <era:y rdf:datatype="&xsd;double">71.454266</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/4c8b9544-1b44-47bc-8795-25544dd2efb1">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">34343</era:pos>
+    <era:x rdf:datatype="&xsd;double">119.553461</era:x>
+    <era:y rdf:datatype="&xsd;double">80.675216</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/4d7b4ded-3cbc-496e-af76-d2ccb26e0422">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">93716</era:pos>
+    <era:x rdf:datatype="&xsd;double">201.204461</era:x>
+    <era:y rdf:datatype="&xsd;double">17.951716</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/504e02a5-5519-4764-8e27-dc98cd0474c4">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">94000</era:pos>
+    <era:x rdf:datatype="&xsd;double">202.102461</era:x>
+    <era:y rdf:datatype="&xsd;double">11.775616</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/6fe9cca3-9e22-4d0d-8ad1-e58dd0b01452">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">211069</era:pos>
+    <era:x rdf:datatype="&xsd;double">230.671961</era:x>
+    <era:y rdf:datatype="&xsd;double">35.042865</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/87606986-5e9a-46f5-b1e7-5bc41f26c24e">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">108.110761</era:x>
+    <era:y rdf:datatype="&xsd;double">10.506515</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/91430399-0557-47bb-b14e-fd064bbfe9c4">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">83533</era:pos>
+    <era:x rdf:datatype="&xsd;double">232.398461</era:x>
+    <era:y rdf:datatype="&xsd;double">107.675616</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/a1ee3636-448c-4ef7-b08b-a9fa833afbde">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">39.774111</era:x>
+    <era:y rdf:datatype="&xsd;double">88.314866</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/b618690f-3d42-4024-b548-c4325735af56">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">87.276807</era:x>
+    <era:y rdf:datatype="&xsd;double">92.053865</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/bd6be410-679a-4370-9515-7ea819041d6d">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">151.535466</era:x>
+    <era:y rdf:datatype="&xsd;double">118.892987</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/bf215810-78b1-444e-828b-e2afeed95d53">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">36.218361</era:x>
+    <era:y rdf:datatype="&xsd;double">105.170366</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/bf7a8db5-f6e4-40db-8276-f0e9c8fb3de9">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">87.276807</era:x>
+    <era:y rdf:datatype="&xsd;double">92.053865</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/bfcab994-10d8-4ecc-9a6a-88862ae7433f">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">119535</era:pos>
+    <era:x rdf:datatype="&xsd;double">191.592961</era:x>
+    <era:y rdf:datatype="&xsd;double">33.686066</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/c73b5966-d35b-4b4c-81cb-2a693f755e70">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">50411</era:pos>
+    <era:x rdf:datatype="&xsd;double">87.276806</era:x>
+    <era:y rdf:datatype="&xsd;double">92.053864</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/c85a508c-f28b-412e-847e-1d86a97cd9f7">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">39.774111</era:x>
+    <era:y rdf:datatype="&xsd;double">88.314866</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/cdff852b-891a-4cd0-80cd-d2aa2c19b24b">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">156771</era:pos>
+    <era:x rdf:datatype="&xsd;double">108.110761</era:x>
+    <era:y rdf:datatype="&xsd;double">10.506516</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/d372e97a-2722-4e31-a837-58333359a066">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">163096</era:pos>
+    <era:x rdf:datatype="&xsd;double">185.443833</era:x>
+    <era:y rdf:datatype="&xsd;double">30.128118</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/e653fcc8-ba3f-41e3-b6f5-558a5419db79">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">116278</era:pos>
+    <era:x rdf:datatype="&xsd;double">151.535466</era:x>
+    <era:y rdf:datatype="&xsd;double">118.892987</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/f11bd94a-fcaa-414e-a34c-2b24da9997b8">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">160535</era:pos>
+    <era:x rdf:datatype="&xsd;double">230.671961</era:x>
+    <era:y rdf:datatype="&xsd;double">35.042865</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/f73f4618-98bd-4202-941a-1ac0d7026f1d">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">44021</era:pos>
+    <era:x rdf:datatype="&xsd;double">195.552961</era:x>
+    <era:y rdf:datatype="&xsd;double">119.488116</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementCoordinate rdf:about="http://data.europa.eu/949/linearElementCoordinate/f74642cc-36ed-4e06-ae5d-5c7a933058ca">
+    <era:accPos rdf:datatype="&xsd;unsignedInt">0</era:accPos>
+    <era:accX rdf:datatype="&xsd;double">0</era:accX>
+    <era:accY rdf:datatype="&xsd;double">0</era:accY>
+    <era:accZ rdf:datatype="&xsd;double">0</era:accZ>
+    <era:pos rdf:datatype="&xsd;double">0</era:pos>
+    <era:x rdf:datatype="&xsd;double">108.110761</era:x>
+    <era:y rdf:datatype="&xsd;double">10.506516</era:y>
+    <era:z rdf:datatype="&xsd;double">0</era:z>
+  </era:LinearElementCoordinate>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/2af6008a-9072-49fe-a550-5364da648297">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/934166d6-8bd2-4675-8842-b770c7d77fa1" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/4802e4d5-da44-45d8-b95c-3937742d128a" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/f6b5d521-4966-4294-8763-597d2f4d697d" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/fc993c0f-7a9d-4bb4-aeb0-4b7aa6ec034f" />
+            <rdf:rest rdf:resource="&rdf;nil" />
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/d72aa69a-4453-40e9-b351-e04e422d86a6" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/309696c3-bbec-4834-bff5-e70a0b6649d4">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/ea7fd76e-581a-4b16-ae24-cd42793a0cdb" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/cc25dda6-ac15-4995-989e-4f5a574de742" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/e6efe057-bac1-4be1-ae41-1beaab37b86a" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/c9366802-a116-4d56-bd98-cddb1c9b23e8" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/7014c01c-d954-4d3e-a87a-450ea6259595">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/de263769-63d5-4ea3-9ea5-41d0153a8ec1" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/0055be82-d165-492b-b221-6504fd496ecf" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/75a93da6-ae4d-45c0-8830-b01dd3db8319">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/184b27b1-9fb4-43d4-bac1-24ba332c7f7b" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/7b0bd453-9992-4337-9a02-5aa1c6950418" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/953af1bd-d46c-4b39-9740-6af118a6945d">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/e077e125-ff41-43ba-90d4-99152b3a4716" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/cab5c164-a64e-4f88-805b-4c1a24da0f21" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/ef471384-8554-4db1-9b8e-91ffc284ee8b" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/a6e789d4-eb66-473d-b1da-387e4cd9341a">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/ed9c83d7-31cb-4220-9dfb-57508b092c26" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/ba83755f-10b1-49ff-b8d8-c1d32ba38f71" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/b54522a3-bc56-4f5f-a4a7-8df93f49808e">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/8314bf9b-cd61-477e-a4d1-91ffecc7935b" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/fe121e9f-45cd-49ca-9a67-305b0b2861d2" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/d0fbd361-2820-43ba-8dfd-7a854c3b6b4e" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/a65de0ce-6171-4fc5-8142-f98881f1175d" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/d3b9b27b-5a58-4dac-933d-7f9530eaefb4">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/7b74813b-0764-49dc-9685-bc87354b9045" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/44a24fa0-18a8-48a9-a60a-3c981e9a2cb4" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/311a1564-1548-4549-ad24-cde30f2c966a" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/c6525b81-0267-463b-89f6-4cd6df65a7ec" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/f6981389-768b-41e5-8f40-62344c88c694">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/221f6b65-61bc-41cc-a357-677c16c07620" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/aa266992-1c18-4aac-99e7-ce79007743e2" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/c1f71fea-ab51-459e-8a68-0d3a43006e7d" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/1dc6ce10-8b32-44ee-9d89-015884758447" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementGeometry rdf:about="http://data.europa.eu/949/linearElementGeometry/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4">
+    <era:cantPoints rdf:resource="&rdf;nil" />
+    <era:horizontalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/ef8568f2-3597-4ce9-acc3-ccb369cb1d96" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/horizontalSegment/33860c0a-cd6a-4a8f-aabc-467a4e312d47" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:horizontalAlignments>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:verticalAlignments rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/verticalSegment/206a6fba-cc91-48e9-8c38-eecbd068a1ad" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:verticalAlignments>
+  </era:LinearElementGeometry>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/2af6008a-9072-49fe-a550-5364da648297">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/bd6be410-679a-4370-9515-7ea819041d6d" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/f73f4618-98bd-4202-941a-1ac0d7026f1d" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/91430399-0557-47bb-b14e-fd064bbfe9c4" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/1b5c08f4-f575-4e24-bf32-5ad275f8f235" />
+            <rdf:rest rdf:parseType="Resource">
+              <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/267b5a19-d723-4a48-8edf-a79e5dee51c1" />
+              <rdf:rest rdf:resource="&rdf;nil" />
+            </rdf:rest>
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/309696c3-bbec-4834-bff5-e70a0b6649d4">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/c85a508c-f28b-412e-847e-1d86a97cd9f7" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/1643556f-e944-4023-a59e-ef001b91c2cb" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/d372e97a-2722-4e31-a837-58333359a066" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/6fe9cca3-9e22-4d0d-8ad1-e58dd0b01452" />
+            <rdf:rest rdf:resource="&rdf;nil" />
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/7014c01c-d954-4d3e-a87a-450ea6259595">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/33b10f6e-9a86-4156-9347-b75c470311d2" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/e653fcc8-ba3f-41e3-b6f5-558a5419db79" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/7014c01c-d954-4d3e-a87a-450ea6259595" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/75a93da6-ae4d-45c0-8830-b01dd3db8319">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/1a8c43c3-1a79-41cd-b188-f629bc343d36" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/c73b5966-d35b-4b4c-81cb-2a693f755e70" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/953af1bd-d46c-4b39-9740-6af118a6945d">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/bf7a8db5-f6e4-40db-8276-f0e9c8fb3de9" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/bfcab994-10d8-4ecc-9a6a-88862ae7433f" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/f11bd94a-fcaa-414e-a34c-2b24da9997b8" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/953af1bd-d46c-4b39-9740-6af118a6945d" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/a6e789d4-eb66-473d-b1da-387e4cd9341a">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/f74642cc-36ed-4e06-ae5d-5c7a933058ca" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/504e02a5-5519-4764-8e27-dc98cd0474c4" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/b54522a3-bc56-4f5f-a4a7-8df93f49808e">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/bf215810-78b1-444e-828b-e2afeed95d53" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/18aad3e4-d2d2-4390-821a-fb5b210d714a" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/17ba4c04-82c7-414f-ac62-a4d399a03e73" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/2283943a-a21b-426f-873d-f3b149aab0ff" />
+            <rdf:rest rdf:resource="&rdf;nil" />
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/d3b9b27b-5a58-4dac-933d-7f9530eaefb4">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/b618690f-3d42-4024-b548-c4325735af56" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/4c8b9544-1b44-47bc-8795-25544dd2efb1" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/3c8febf5-e372-4151-90af-b806bebbf634" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/230ff57c-b7a3-4616-8a2d-e522dda6adee" />
+            <rdf:rest rdf:resource="&rdf;nil" />
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/f6981389-768b-41e5-8f40-62344c88c694">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/87606986-5e9a-46f5-b1e7-5bc41f26c24e" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/0c0e91e9-6955-4eb1-a49f-00bf6e2f8b86" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/39397f1e-0b80-4f77-ac15-7662dac4b261" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/4d7b4ded-3cbc-496e-af76-d2ccb26e0422" />
+            <rdf:rest rdf:resource="&rdf;nil" />
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/f6981389-768b-41e5-8f40-62344c88c694" />
+  </era:LinearElementProjection>
+  <era:LinearElementProjection rdf:about="http://data.europa.eu/949/linearElementProjection/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4">
+    <era:coordinates rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/a1ee3636-448c-4ef7-b08b-a9fa833afbde" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/233df7fb-6516-435a-bc86-f1f166705415" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/linearElementCoordinate/cdff852b-891a-4cd0-80cd-d2aa2c19b24b" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:coordinates>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+  </era:LinearElementProjection>
+  <era:Map rdf:about="http://data.europa.eu/949/map/8d1830bc-1109-4e99-a1b9-5e874684ec5a">
+    <era:areaId rdf:datatype="&xsd;string">8d1830bc-1109-4e99-a1b9-5e874684ec5a</era:areaId>
+    <era:epsg rdf:datatype="&xsd;unsignedInt">0</era:epsg>
+    <era:functionalElements rdf:resource="http://data.europa.eu/949/functionalElementProjection/W1" />
+    <era:functionalElements rdf:resource="http://data.europa.eu/949/functionalElementProjection/W2" />
+    <era:functionalElements rdf:resource="http://data.europa.eu/949/functionalElementProjection/W3" />
+    <era:functionalElements rdf:resource="http://data.europa.eu/949/functionalElementProjection/W4" />
+    <era:functionalElements rdf:resource="http://data.europa.eu/949/functionalElementProjection/W5" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:linearElementProjections rdf:resource="http://data.europa.eu/949/linearElementProjection/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:name rdf:datatype="&xsd;string">8d1830bc-1109-4e99-a1b9-5e874684ec5a</era:name>
+    <era:versionTimestamp rdf:datatype="&xsd;dateTime">2026-09-21T11:37:27.3752746+02:00</era:versionTimestamp>
+  </era:Map>
+  <era:MapSet rdf:about="http://data.europa.eu/949/mapSet/43d9c10a-f32f-4726-9ae4-1040db8613f8">
+    <era:maps rdf:resource="http://data.europa.eu/949/map/8d1830bc-1109-4e99-a1b9-5e874684ec5a" />
+  </era:MapSet>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-309696c3-bbec-4834-bff5-e70a0b6649d4">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-7014c01c-d954-4d3e-a87a-450ea6259595">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-953af1bd-d46c-4b39-9740-6af118a6945d">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-b54522a3-bc56-4f5f-a4a7-8df93f49808e">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/75a93da6-ae4d-45c0-8830-b01dd3db8319-953af1bd-d46c-4b39-9740-6af118a6945d">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/75a93da6-ae4d-45c0-8830-b01dd3db8319-d3b9b27b-5a58-4dac-933d-7f9530eaefb4">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-309696c3-bbec-4834-bff5-e70a0b6649d4">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-75a93da6-ae4d-45c0-8830-b01dd3db8319">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-a6e789d4-eb66-473d-b1da-387e4cd9341a">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:NetRelation rdf:about="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-f6981389-768b-41e5-8f40-62344c88c694">
+    <era:elementA rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:elementB rdf:resource="http://data.europa.eu/949/linearElement/f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:isOnOriginOfElementA rdf:datatype="&xsd;boolean">false</era:isOnOriginOfElementA>
+    <era:isOnOriginOfElementB rdf:datatype="&xsd;boolean">true</era:isOnOriginOfElementB>
+  </era:NetRelation>
+  <era:PropertiesArea rdf:about="http://data.europa.eu/949/propertiesArea/cbdb997f-ab78-4056-bc11-19202f32f499">
+    <era:defaultMaxCurrent rdf:datatype="&xsd;unsignedInt">220</era:defaultMaxCurrent>
+    <era:defaultVoltage rdf:resource="http://data.europa.eu/949/concepts/energy-supply-systems/AC10" />
+    <era:gauge rdf:resource="http://data.europa.eu/949/concepts/nominal-track-gauges/10" />
+    <era:paVersionTimestamp rdf:datatype="&xsd;dateTime">2026-09-21T09:37:27.3675376Z</era:paVersionTimestamp>
+    <era:topoArea rdf:resource="http://data.europa.eu/949/topoArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+  </era:PropertiesArea>
+  <era:SampledGeometryArea rdf:about="http://data.europa.eu/949/sampledGeometryArea/cbdb997f-ab78-4056-bc11-19202f32f499">
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:sampledLinearElementGeometries rdf:resource="http://data.europa.eu/949/sampledLinearElementGeometry/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:sgaVersionTimestamp rdf:datatype="&xsd;dateTime">2026-09-21T09:37:27.3624895Z</era:sgaVersionTimestamp>
+    <era:topoArea rdf:resource="http://data.europa.eu/949/topoArea/cbdb997f-ab78-4056-bc11-19202f32f499" />
+  </era:SampledGeometryArea>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/2af6008a-9072-49fe-a550-5364da648297">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/f34ab9c5-987d-443e-baec-fcfd1b8c1f37" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/a97b48c5-33fb-431d-9bcf-63f5ba3c6a64" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/9ac0b8ef-fdeb-4fee-b0c3-e6eca14678ad" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/e2f76cc0-58cc-4af9-99a1-f302ca020709" />
+            <rdf:rest rdf:resource="&rdf;nil" />
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/e55352d3-4615-455d-9551-3ded8fd66348" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/de341a91-bb37-4ec9-8ab0-8428caa283aa" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/6f9e82e0-6fc6-4ba8-879e-80ae637639b1" />
+          <rdf:rest rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/d3bfeea2-689b-444b-bb6c-217db93346e9" />
+            <rdf:rest rdf:resource="&rdf;nil" />
+          </rdf:rest>
+        </rdf:rest>
+      </rdf:rest>
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/03748d03-e8f0-4ff4-b721-432fc15c31cc" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/309696c3-bbec-4834-bff5-e70a0b6649d4">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/af7cedde-0adf-4230-b1ca-6dd244dcb8e5" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/8f1c5027-bd4d-456b-944f-e13f16f836bd" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/a7b941e6-7769-421d-a8b3-4dbb6a972f04" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/8161435b-558f-4599-a1e2-1b1d46f88b7d" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/4a933cca-48db-4b8d-8c63-6635db1883f8" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/593be9a7-7b1f-4af0-a107-0d2ab5f29fe0" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/ef28bb0b-e5bc-4dbe-9788-9041502072e5" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/7014c01c-d954-4d3e-a87a-450ea6259595">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/fee1d7a2-152a-41e5-ac86-14a259a94210" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/2f031955-93aa-4cd7-b398-0d6f6abe6a50" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/f76ccbac-4157-4b59-b37b-2a3dc4de6adb" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/75a93da6-ae4d-45c0-8830-b01dd3db8319">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/5d27801e-3110-43e9-bcb4-7d2ac251deaa" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/41ed4fe3-402b-43c6-91e0-2849112b3d90" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/5527feca-95d1-4266-b367-6a223b026676" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/953af1bd-d46c-4b39-9740-6af118a6945d">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/069bfe6d-3b97-4068-8394-c90a3794c643" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/77891057-9bed-43b5-99f7-f7ce569fc21f" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/800cd651-ca4a-4a57-ae2e-58e4f8def798" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/ecde1ba3-3945-493f-9968-9dc364dee493" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/4d815ac0-820c-4501-b23f-32a4598b8768" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/a6e789d4-eb66-473d-b1da-387e4cd9341a">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/54b4776d-ab0f-40d8-913f-2c15aa68cf30" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/f7188a75-dfa6-43cf-85e6-d0cdb8d433b8" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/93d78f27-c07b-4754-9d05-46995661323c" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/b54522a3-bc56-4f5f-a4a7-8df93f49808e">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/f0b5307b-088d-4118-a8e3-695281b39516" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/cf990172-b79d-4ee0-91ce-b730b81c5b32" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/25554e34-01f5-4ec8-9256-a74b7067d8f2" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/59ff8e7d-a5b8-4f0e-ba4f-ad68e9601173" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/dd2a0473-eb31-4b0c-874b-d3d63f5fcdfc" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/9d52527b-ec43-47d2-a677-74da6a74fb50" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/029ea170-5926-4547-b558-217f8a10b6ed" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/d3b9b27b-5a58-4dac-933d-7f9530eaefb4">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/e99edbdb-f28c-4654-bb8f-019ac21d11bb" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/3c74d3dd-5812-4ef4-870e-3f6704ed3936" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/74853011-9be3-4ee6-8e12-25990390bf2b" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/e9a23ecd-2079-4412-ad34-4514a020b97d" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/dbd98d5b-2299-4c59-82a9-1bdfaf819d8e" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/fe6ba024-ca91-415c-835a-80f88495e953" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/31b093e6-95a0-4992-b17a-b302d9ec7a03" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/f6981389-768b-41e5-8f40-62344c88c694">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/ca5e3585-d4a6-4f74-834b-849612b12c6a" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/b8eebdf9-e814-481c-85b2-9745ff92b941" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/906f3d10-b32f-4542-a93b-d6b689f035d2" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/b00acdee-738d-4d96-b0e7-36e3d83d415d" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/3a09105f-6d68-4514-acb9-32c43ba97bd4" />
+        <rdf:rest rdf:parseType="Resource">
+          <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/c4917e06-f7f8-41d9-a80c-ba62b3089d4b" />
+          <rdf:rest rdf:resource="&rdf;nil" />
+        </rdf:rest>
+      </rdf:rest>
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/ab35d8f5-0c1b-4f69-b2f8-72f6b14c871f" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SampledLinearElementGeometry rdf:about="http://data.europa.eu/949/sampledLinearElementGeometry/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4">
+    <era:cants rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/42a8a43f-fd5f-43cd-b6bf-5c567fb68ac4" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/cantSamplePoint/a2bbd3a1-5e4a-44a7-a05f-326ad8435c26" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:cants>
+    <era:curves rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/53eda8d9-bd9c-4e73-b743-099085450db4" />
+      <rdf:rest rdf:parseType="Resource">
+        <rdf:first rdf:resource="http://data.europa.eu/949/curveSamplePoint/fcc01964-e4fa-4a79-95b4-7652a0d6481b" />
+        <rdf:rest rdf:resource="&rdf;nil" />
+      </rdf:rest>
+    </era:curves>
+    <era:linearElement rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:slopes rdf:parseType="Resource">
+      <rdf:first rdf:resource="http://data.europa.eu/949/slopeSamplePoint/fd8c7938-a432-4c49-9456-6174d3c3f540" />
+      <rdf:rest rdf:resource="&rdf;nil" />
+    </era:slopes>
+  </era:SampledLinearElementGeometry>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/029ea170-5926-4547-b558-217f8a10b6ed">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/03748d03-e8f0-4ff4-b721-432fc15c31cc">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/31b093e6-95a0-4992-b17a-b302d9ec7a03">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/4d815ac0-820c-4501-b23f-32a4598b8768">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/5527feca-95d1-4266-b367-6a223b026676">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/93d78f27-c07b-4754-9d05-46995661323c">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/ab35d8f5-0c1b-4f69-b2f8-72f6b14c871f">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/ef28bb0b-e5bc-4dbe-9788-9041502072e5">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/f76ccbac-4157-4b59-b37b-2a3dc4de6adb">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:SlopeSamplePoint rdf:about="http://data.europa.eu/949/slopeSamplePoint/fd8c7938-a432-4c49-9456-6174d3c3f540">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:pos rdf:datatype="&xsd;unsignedInt">0</era:pos>
+    <era:samplePointSlope rdf:datatype="&xsd;int">0</era:samplePointSlope>
+  </era:SlopeSamplePoint>
+  <era:Switch rdf:about="http://data.europa.eu/949/switch/W1">
+    <era:leftBranch rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:name rdf:datatype="&xsd;string">W1</era:name>
+    <era:reversalTime rdf:datatype="&xsd;unsignedInt">10</era:reversalTime>
+    <era:rightBranch rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-7014c01c-d954-4d3e-a87a-450ea6259595" />
+  </era:Switch>
+  <era:Switch rdf:about="http://data.europa.eu/949/switch/W2">
+    <era:leftBranch rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:name rdf:datatype="&xsd;string">W2</era:name>
+    <era:reversalTime rdf:datatype="&xsd;unsignedInt">10</era:reversalTime>
+    <era:rightBranch rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-953af1bd-d46c-4b39-9740-6af118a6945d" />
+  </era:Switch>
+  <era:Switch rdf:about="http://data.europa.eu/949/switch/W3">
+    <era:leftBranch rdf:resource="http://data.europa.eu/949/netRelation/75a93da6-ae4d-45c0-8830-b01dd3db8319-d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:name rdf:datatype="&xsd;string">W3</era:name>
+    <era:reversalTime rdf:datatype="&xsd;unsignedInt">10</era:reversalTime>
+    <era:rightBranch rdf:resource="http://data.europa.eu/949/netRelation/75a93da6-ae4d-45c0-8830-b01dd3db8319-953af1bd-d46c-4b39-9740-6af118a6945d" />
+  </era:Switch>
+  <era:Switch rdf:about="http://data.europa.eu/949/switch/W4">
+    <era:leftBranch rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:name rdf:datatype="&xsd;string">W4</era:name>
+    <era:reversalTime rdf:datatype="&xsd;unsignedInt">10</era:reversalTime>
+    <era:rightBranch rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-309696c3-bbec-4834-bff5-e70a0b6649d4" />
+  </era:Switch>
+  <era:Switch rdf:about="http://data.europa.eu/949/switch/W5">
+    <era:leftBranch rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:name rdf:datatype="&xsd;string">W5</era:name>
+    <era:reversalTime rdf:datatype="&xsd;unsignedInt">10</era:reversalTime>
+    <era:rightBranch rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+  </era:Switch>
+  <era:TopoArea rdf:about="http://data.europa.eu/949/topoArea/cbdb997f-ab78-4056-bc11-19202f32f499">
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/2af6008a-9072-49fe-a550-5364da648297" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:linearElements rdf:resource="http://data.europa.eu/949/linearElement/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4" />
+    <era:name rdf:datatype="&xsd;string">unnamed</era:name>
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-7014c01c-d954-4d3e-a87a-450ea6259595" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/2af6008a-9072-49fe-a550-5364da648297-b54522a3-bc56-4f5f-a4a7-8df93f49808e" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/75a93da6-ae4d-45c0-8830-b01dd3db8319-953af1bd-d46c-4b39-9740-6af118a6945d" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/75a93da6-ae4d-45c0-8830-b01dd3db8319-d3b9b27b-5a58-4dac-933d-7f9530eaefb4" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-309696c3-bbec-4834-bff5-e70a0b6649d4" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-75a93da6-ae4d-45c0-8830-b01dd3db8319" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-a6e789d4-eb66-473d-b1da-387e4cd9341a" />
+    <era:netRelations rdf:resource="http://data.europa.eu/949/netRelation/fc4fb69b-51fa-4d74-8e6f-9fb64ac2e0d4-f6981389-768b-41e5-8f40-62344c88c694" />
+    <era:taVersionTimestamp rdf:datatype="&xsd;dateTime">2026-09-21T09:37:27.3370376Z</era:taVersionTimestamp>
+  </era:TopoArea>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/0e5937bc-dadc-4a6d-8a3b-dfc4e89210fa">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/37cc3b72-618b-49db-853c-d2a48773f14c">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/5b9a5fb0-4c3a-44f3-a501-17d4cff5f676">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/65e9d6cb-a8d9-4ba6-b054-b32a19f35b05">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/66657ce3-54d4-4d8e-b948-aee9956e77c1">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/858dead4-7b05-429f-94a7-0ab8268e5207">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/cdd8e455-d8b4-464e-83eb-f6835d4471d3">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/ef6bf61c-de13-4686-93c8-775ac11184a7">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/f604dba0-3e4e-4f83-a84d-8af32bd3b592">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalLine rdf:about="http://data.europa.eu/949/verticalLine/fac98fe0-342d-419a-82c7-68d5771b4893">
+    <era:elementGeometryPos rdf:datatype="&xsd;double">0</era:elementGeometryPos>
+    <era:slope rdf:datatype="&xsd;int">0</era:slope>
+  </era:VerticalLine>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/0055be82-d165-492b-b221-6504fd496ecf">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/fac98fe0-342d-419a-82c7-68d5771b4893" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/1dc6ce10-8b32-44ee-9d89-015884758447">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/66657ce3-54d4-4d8e-b948-aee9956e77c1" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/206a6fba-cc91-48e9-8c38-eecbd068a1ad">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/cdd8e455-d8b4-464e-83eb-f6835d4471d3" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/7b0bd453-9992-4337-9a02-5aa1c6950418">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/5b9a5fb0-4c3a-44f3-a501-17d4cff5f676" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/a65de0ce-6171-4fc5-8142-f98881f1175d">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/0e5937bc-dadc-4a6d-8a3b-dfc4e89210fa" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/ba83755f-10b1-49ff-b8d8-c1d32ba38f71">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/858dead4-7b05-429f-94a7-0ab8268e5207" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/c6525b81-0267-463b-89f6-4cd6df65a7ec">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/ef6bf61c-de13-4686-93c8-775ac11184a7" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/c9366802-a116-4d56-bd98-cddb1c9b23e8">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/65e9d6cb-a8d9-4ba6-b054-b32a19f35b05" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/d72aa69a-4453-40e9-b351-e04e422d86a6">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/f604dba0-3e4e-4f83-a84d-8af32bd3b592" />
+  </era:VerticalSegment>
+  <era:VerticalSegment rdf:about="http://data.europa.eu/949/verticalSegment/ef471384-8554-4db1-9b8e-91ffc284ee8b">
+    <era:verticalSegmentLine rdf:resource="http://data.europa.eu/949/verticalLine/37cc3b72-618b-49db-853c-d2a48773f14c" />
+  </era:VerticalSegment>
+</rdf:RDF>

@@ -680,3 +680,26 @@ export async function LoadTracks(): Promise<TrackDto[]> {
 
     return await response.json() as TrackDto[];
 }
+
+// Asks the back end for the property list of one object.
+// The route name is a guess until the back end exists: change the URL here when Khaled tells it.
+export async function GetObjectProperties(id: string, type: string): Promise<any[]> {
+    try {
+        const query = new URLSearchParams({ id, type });
+
+        const response = await fetch(`${endPoint}/properties?${query.toString()}`, {
+            method: 'GET',
+        });
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        return result;
+
+    } catch (error) {
+        console.error('Failed to load properties:', error);
+        throw error;
+    }
+}

@@ -1,0 +1,6 @@
+<select class="field-input" [disabled]="!property().editable" (change)="onPicked($event)">
+  <option value="" [selected]="current() === ''">- select -</option>
+  @for (choice of property().enumValues; track choice) {
+    <option [value]="choice" [selected]="current() === choice">{{ choice }}</option>
+  }
+</select>
